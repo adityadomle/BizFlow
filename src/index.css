@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+
+/* ...your custom styles below... */
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 100px;
