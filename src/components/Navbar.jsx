@@ -1,18 +1,20 @@
 import React, { useState } from 'react'
+import { Link, useLocation } from 'react-router-dom';
 import { HiMenu, HiX } from 'react-icons/hi'
 import { motion } from "framer-motion";
 import { fadeIn} from "../utils/motion";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [activeLink, setActiveLink] = useState('#home')
+  const location = useLocation();
+  const [activeLink, setActiveLink] = useState(location.pathname);
 
   const navLinks = [
-    { href: "#home", label: "Home" },
-    { href: "#about", label: "About Us" },
-    { href: "#services", label: "Our Service" },
-    { href: "#testimonials", label: "Testimonials" },
-  ]
+    { to: "/", label: "Home" },
+    { to: "/services", label: "Our Service" },
+    { to: "/pricing", label: "Pricing" },
+    // Add more routes/pages as needed
+  ];
 
   return (
     <motion.nav 
@@ -56,16 +58,19 @@ const Navbar = () => {
           className="hidden md:flex items-center gap-10"
         >
           {navLinks.map((link, index) => (
-            <motion.a 
+            <motion.div
               key={index}
               variants={fadeIn('down', 0.1 * (index + 1))}
-              href={link.href}
-              onClick={() => setActiveLink(link.href)}
-              className={`text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-blue-600 after:transition-all
-                ${activeLink === link.href ? 'text-blue-600 after:w-full  ' : 'text-gray-600 hover:text-gray-900'}`}
             >
-              {link.label}
-            </motion.a>
+              <Link
+                to={link.to}
+                onClick={() => setActiveLink(link.to)}
+                className={`text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-blue-600 after:transition-all
+                  ${activeLink === link.to ? 'text-blue-600 after:w-full  ' : 'text-gray-600 hover:text-gray-900'}`}
+              >
+                {link.label}
+              </Link>
+            </motion.div>
           ))}
         </motion.div>
 
@@ -76,7 +81,7 @@ const Navbar = () => {
           whileTap={{ scale: 0.95 }}
           className="hidden md:block bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 text-sm font-medium transition-all hover:shadow-lg hover:shadow-blue-100"
         >
-          <a href="#newsletter">Get in touch</a>
+          <Link to="/" className="block w-full h-full">Get in touch</Link>
         </motion.button>
       </div>
 
@@ -93,19 +98,22 @@ const Navbar = () => {
             className="container mx-auto px-4 space-y-4"
           >
             {navLinks.map((link, index) => (
-              <motion.a
+              <motion.div
                 key={index}
                 variants={fadeIn('right', 0.1 * (index + 1))}
-                href={link.href}
-                onClick={() => {
-                  setActiveLink(link.href);
-                  setIsMenuOpen(false);
-                }}
-                className={`block text-sm font-medium py-2
-                  ${activeLink === link.href ? 'text-blue-600' : 'text-gray-600 hover:text-gray-900'}`}
               >
-                {link.label}
-              </motion.a>
+                <Link
+                  to={link.to}
+                  onClick={() => {
+                    setActiveLink(link.to);
+                    setIsMenuOpen(false);
+                  }}
+                  className={`block text-sm font-medium py-2
+                    ${activeLink === link.to ? 'text-blue-600' : 'text-gray-600 hover:text-gray-900'}`}
+                >
+                  {link.label}
+                </Link>
+              </motion.div>
             ))}
             <motion.button 
               variants={fadeIn('up', 0.4)}
@@ -113,7 +121,7 @@ const Navbar = () => {
               whileTap={{ scale: 0.98 }}
               className="w-full bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 text-sm font-medium transition-all hover:shadow-lg hover:shadow-blue-100"
             >
-              Get in touch
+              <Link to="/" className="block w-full h-full">Get in touch</Link>
             </motion.button>
           </motion.div>
         </motion.div>
