@@ -100,7 +100,7 @@ const ServicesSection = () => {
             key={index}
             variants={fadeIn('up', 0.3 * (index + 1))}
             whileHover={{ scale: 1.05 }}
-            className="bg-white max-w-72 cursor-pointer rounded-2xl p-6 hover:shadow-xl transition-shadow duration-300"
+            className="bg-white max-w-xs cursor-pointer rounded-2xl p-6 hover:shadow-xl transition-shadow duration-300"
           >
             <motion.div 
               variants={fadeIn('down', 0.4 * (index + 1))}
@@ -135,4 +135,4 @@ const ServicesSection = () => {
   )
 }
 
-export default ServicesSection 
+export default ServicesSection

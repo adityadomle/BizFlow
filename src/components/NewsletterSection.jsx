@@ -1,9 +1,27 @@
-import React from 'react'
+import React ,  { useState } from 'react'
 import { HiArrowRight } from 'react-icons/hi'
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { fadeIn, textVariant } from "../utils/motion";
 
 const NewsletterSection = () => {
+  const [email, setEmail] = useState('');
+  const [showPopup, setShowPopup] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!email.trim()) {
+      alert('Please enter your email address.');
+      return;
+    }
+
+    console.log('Email submitted:', email);
+
+    setShowPopup(true);
+    setEmail('');
+
+    setTimeout(() => setShowPopup(false), 3000);
+  };
   return (
     <section id="newsletter" className="section-container px-4 md:px-0">
       <motion.div 
@@ -44,26 +62,46 @@ const NewsletterSection = () => {
               variants={fadeIn('left', 0.5)}
               className="w-full md:w-auto"
             >
-              <motion.div 
-                variants={fadeIn('up', 0.6)}
-                className="flex flex-col sm:flex-row gap-4 sm:gap-0"
+              <form
+                onSubmit={handleSubmit}
+                className="flex flex-col sm:flex-row gap-4 sm:gap-0 relative"
               >
+               
                 <motion.input
                   variants={fadeIn('right', 0.7)}
                   type="email"
+                  aria-label="Email address"
                   placeholder="Enter your email address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="w-full sm:w-auto md:w-80 px-4 sm:px-6 py-3 sm:py-4 rounded-xl sm:rounded-l-xl sm:rounded-r-none focus:outline-none focus:ring-2 focus:ring-green-500 bg-white"
                 />
                 <motion.button 
+                  type="submit"
                   variants={fadeIn('left', 0.7)}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-full sm:w-auto cursor-pointer bg-green-500 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-l-none sm:rounded-r-xl hover:bg-green-600 transition-colors flex items-center justify-center sm:justify-start gap-2"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full sm:w-auto cursor-pointer bg-blue-500 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-l-none sm:rounded-r-xl hover:bg-green-600 transition-colors flex items-center justify-center sm:justify-start gap-2"
                 >
                   <span>Discover</span>
                   <HiArrowRight className="w-5 h-5" />
                 </motion.button>
-              </motion.div>
+                <AnimatePresence>
+                  {showPopup && (
+                    <motion.div
+                       initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      transition={{ duration: 0.3 }}
+                      className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-blue-500 text-white px-4 py-2 rounded-lg shadow-lg"
+                    >
+                      ✅ Email Sent! 
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </form>
             </motion.div>
           </div>
         </div>

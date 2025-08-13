@@ -1,24 +1,24 @@
 import React from 'react'
-import { FaFacebookF, FaTwitter, FaLinkedinIn } from 'react-icons/fa'
+import { FaFacebookF, FaTwitter, FaLinkedinIn  } from 'react-icons/fa'
 import { motion } from "framer-motion";
 import { fadeIn, textVariant } from "../utils/motion";
 
 const Footer = () => {
   const footerLinks = {
     company: [
-      { name: 'About', href: '#' },
+      { name: 'About', href: '#about' },
       { name: 'Terms of Use', href: '#' },
       { name: 'Privacy Policy', href: '#' },
       { name: 'How it Works', href: '#' },
       { name: 'Contact Us', href: '#' },
     ],
     getHelp: [
-      { name: 'Support Carrer', href: '#' },
+      { name: 'Support Career', href: '#' },
       { name: '24h Service', href: '#' },
       { name: 'Quick Chat', href: '#' },
     ],
     support: [
-      { name: 'FAQ', href: '#' },
+      { name: 'FAQs', href: '#' },
       { name: 'Policy', href: '#' },
       { name: 'Business', href: '#' },
     ],
@@ -65,24 +65,34 @@ const Footer = () => {
             >
               <motion.a 
                 whileHover={{ scale: 1.1 }}
-                href="#" 
-                className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center text-gray-600 hover:bg-blue-600 hover:text-white transition-colors"
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center text-gray-600 hover:bg-blue-600 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <FaFacebookF className="w-5 h-5" />
               </motion.a>
               <motion.a 
                 whileHover={{ scale: 1.1 }}
-                href="#" 
-                className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center text-gray-600 hover:bg-blue-400 hover:text-white transition-colors"
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Twitter"
+                className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center text-gray-600 hover:bg-blue-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400"
               >
                 <FaTwitter className="w-5 h-5" />
               </motion.a>
               <motion.a 
                 whileHover={{ scale: 1.1 }}
-                href="#" 
-                className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center text-gray-600 hover:bg-blue-700 hover:text-white transition-colors"
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center text-gray-600 hover:bg-blue-700 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-700"
               >
                 <FaLinkedinIn className="w-5 h-5" />
+
               </motion.a>
             </motion.div>
           </motion.div>
@@ -100,23 +110,23 @@ const Footer = () => {
                 >
                   <motion.h3 
                     variants={textVariant(0.2)}
-                    className="text-lg font-medium mb-4"
+                    className="text-lg font-medium mb-4 capitalize"
                   >
-                    {category.charAt(0).toUpperCase() + category.slice(1)}
+                    {category}
                   </motion.h3>
                   <motion.ul 
                     variants={fadeIn('up', 0.4)}
                     className="space-y-3"
                   >
-                    {links.map((link, index) => (
+                    {links.map((link) => (
                       <motion.li 
-                        key={index}
-                        variants={fadeIn('up', 0.1 * (index + 1))}
+                        key={`${category}-${link.name}`}
+                        variants={fadeIn('up', 0.1)}
                       >
                         <motion.a 
                           whileHover={{ x: 5 }}
                           href={link.href} 
-                          className="text-gray-600 hover:text-gray-900"
+                          className="text-gray-600 hover:text-gray-900 transition-colors focus:outline-none focus:ring-1 focus:ring-gray-400 rounded"
                         >
                           {link.name}
                         </motion.a>
@@ -133,4 +143,4 @@ const Footer = () => {
   )
 }
 
-export default Footer
+export default Footer;

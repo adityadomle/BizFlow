@@ -14,12 +14,12 @@ const PricingSection = () => {
       variants={fadeIn('up', 0.2)}
       initial="hidden"
       whileInView="show"
-      className="py-20 px-4"
+      className="py-20 px-4 bg-gray-50 "
     >
       <div className="max-w-6xl mx-auto">
         <motion.h2 
           variants={textVariant(0.3)}
-          className="text-3xl md:text-4xl font-bold text-center mb-16"
+          className="rounded-lg py-5 text-3xl md:text-4xl font-bold text-center mb-16"
         >
           Pricing
         </motion.h2>
@@ -31,7 +31,7 @@ const PricingSection = () => {
           {/* Starter Plan */}
           <motion.div 
             variants={fadeIn('right', 0.5)}
-            className="bg-white p-8 rounded-lg shadow-lg"
+            className="py-20 px-4 bg-gradient-to-r from-pink-200 to-blue-100 p-8 rounded-lg shadow-lg"
           >
             <motion.h3 
               variants={fadeIn('up', 0.6)}
@@ -50,7 +50,7 @@ const PricingSection = () => {
           {/* Business Plan */}
           <motion.div 
             variants={fadeIn('left', 0.5)}
-            className="bg-white p-8 rounded-lg shadow-lg"
+            className="py-20 px-4 bg-gradient-to-r from-pink-200 to-blue-100 p-8 rounded-lg shadow-lg"
           >
             <motion.h3 
               variants={fadeIn('up', 0.6)}
@@ -117,7 +117,7 @@ const PricingSection = () => {
           </motion.div>
         </motion.div>
       </div>
-    </motion.section>
+    </motion.section>  
   )
 }
 
