@@ -81,9 +81,7 @@ const NewsletterSection = () => {
                   variants={fadeIn('left', 0.7)}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full sm:w-auto cursor-pointer bg-blue-500 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-l-none sm:rounded-r-xl hover:bg-green-600 transition-colors flex items-center justify-center sm:justify-start gap-2"
+                  className="w-full sm:w-auto cursor-pointer bg-emerald-400 text-white transition-all duration-300 ease-in-out  px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-l-none sm:rounded-r-xl hover:bg-emerald-300 hover:scale-105 hover:shadow-[0_0_15px_#a7f3d0] flex items-center justify-center sm:justify-start gap-2"
                 >
                   <span>Discover</span>
                   <HiArrowRight className="w-5 h-5" />

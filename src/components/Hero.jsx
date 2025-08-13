@@ -1,7 +1,7 @@
 import  { useState } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeIn, textVariant } from "../utils/motion";
-import heroImage from '../assets/hero-image.png';
+
 
 const Hero = () => {
   const [email, setEmail] = useState("");
@@ -29,25 +29,6 @@ const Hero = () => {
       formData.append("access_key", import.meta.env.VITE_WEB3FORMS_KEY || "");
       formData.append("email", email);
 
-      const res = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: formData
-      });
-
-      const data = await res.json();
-
-      if (data.success) {
-        setShowPopup(true);
-        setTimeout(() => setShowPopup(false), 3000);
-        setEmail("");
-      } else {
-        setErrorMsg("Failed to send email. Please try again.");
-      }
-    } catch (error) {
-      console.error("Error sending email:", error);
-      setErrorMsg("Something went wrong. Please try again.");
-    }
-  };
 
   return (
     <section id="home" className="flex flex-col md:flex-row justify-between items-center px-4 sm:px-6 lg:px-8 pt-44 pb-16 container mx-auto">
@@ -61,7 +42,7 @@ const Hero = () => {
           </div>
         </motion.div>
 
-        <motion.h1 
+        <motion.h1
           variants={textVariant(0.3)}
           initial="hidden"
           whileInView="show"
@@ -84,13 +65,7 @@ const Hero = () => {
           Get the most accurate leads, sales people training and conversions, tools and more — all within the same one billing.
         </motion.p>
 
-        {/* Email Input & Button */}
-        <motion.div 
-          variants={fadeIn('up', 0.5)}
-          initial="hidden"
-        whileInView="show"
-         className="flex gap-3 max-w-md relative -mt-1"
-       >
+
           <input
             type="email"
             value={email}
@@ -100,7 +75,7 @@ const Hero = () => {
               ${errorMsg ? "border-red-500 focus:border-red-500 focus:ring-red-100" : "border-gray-200 focus:border-blue-600 focus:ring-2 focus:ring-blue-100"}`}
           />
           <button
-            onClick={handleSend}
+
             className="bg-blue-600 text-white px-8 py-4 rounded-xl hover:bg-blue-700 cursor-pointer transition-all hover:shadow-lg hover:shadow-blue-100 active:scale-95"
           >
             →
@@ -114,7 +89,7 @@ const Hero = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3 }}
-                className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg text-sm"
+
               >
                 ✅ Email Sent!
               </motion.div>
@@ -128,8 +103,6 @@ const Hero = () => {
         )}
       </div>
 
-      {/* Right Column */}
-      <motion.div 
         variants={fadeIn('left', 0.5)}
         initial="hidden"
         whileInView="show"
@@ -148,3 +121,4 @@ const Hero = () => {
 };
 
 export default Hero;
+

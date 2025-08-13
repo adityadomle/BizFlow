@@ -110,7 +110,7 @@ const PricingSection = () => {
               variants={fadeIn('up', 1.3)}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors cursor-pointer"
+              className="bg-pink-200 text-white px-6 py-3 rounded-lg transition-all duration-300 ease-in-out hover:bg-pink-300 hover:scale-105 hover:shadow-[0_0_15px_#f9a8d4] cursor-pointer"
             >
               Get Started
             </motion.button>

@@ -12,6 +12,18 @@ dist
 dist-ssr
 *.local
 
+# Environment variables and sensitive data
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*.local
+
+# Analytics configuration (contains sensitive IDs)
+src/config/analytics.local.js
+src/config/analytics.prod.js
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
