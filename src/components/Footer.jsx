@@ -6,25 +6,25 @@ import { fadeIn, textVariant } from "../utils/motion";
 const Footer = () => {
   const footerLinks = {
     company: [
-      { name: 'About', href: '#about' },
-      { name: 'Terms of Use', href: '#' },
-      { name: 'Privacy Policy', href: '#' },
-      { name: 'How it Works', href: '#' },
-      { name: 'Contact Us', href: '#' },
+      { name: 'About', href: '/#about' },
+      { name: 'Terms of Use', href: '/terms-of-use' },
+      { name: 'Privacy Policy', href: '/privacy-policy' },
+      { name: 'How it Works', href: '/#services' },
+      { name: 'Contact Us', href: '/contact' },
     ],
     getHelp: [
-      { name: 'Support Career', href: '#' },
-      { name: '24h Service', href: '#' },
-      { name: 'Quick Chat', href: '#' },
+      { name: 'Support Career', href: '/support-career' },
+      { name: '24h Service', href: '/#services' },
+      { name: 'Quick Chat', href: '/quick-chat' },
     ],
     support: [
-      { name: 'FAQs', href: '#' },
-      { name: 'Policy', href: '#' },
-      { name: 'Business', href: '#' },
+      { name: 'FAQs', href: '/faqs' },
+      { name: 'Policy', href: '/policy' },
+      { name: 'Business', href: '/business-support' },
     ],
     contact: [
-      { name: 'WhatsApp', href: '#' },
-      { name: 'Support 24', href: '#' },
+      { name: 'WhatsApp', href: '/contact/whatsapp' },
+      { name: 'Support 24', href: '/contact/support-24' },
     ],
   }
 
