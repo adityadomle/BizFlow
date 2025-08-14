@@ -1,4 +1,4 @@
-import React ,  { useState } from 'react'
+import { useState } from 'react'
 import { HiArrowRight } from 'react-icons/hi'
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeIn, textVariant } from "../utils/motion";
@@ -45,13 +45,13 @@ const NewsletterSection = () => {
             >
               <motion.h2 
                 variants={textVariant(0.3)}
-                className="text-2xl sm:text-3xl md:text-4xl font-medium mb-4"
+                className="text-2xl sm:text-3xl md:text-4xl font-medium mb-4 text-heading-color transition-colors duration-300"
               >
                 Subscribe newsletter
               </motion.h2>
               <motion.p 
                 variants={fadeIn('up', 0.6)}
-                className="text-blue-100 text-sm sm:text-base"
+                className="text-text-color text-sm sm:text-base transition-colors duration-300"
               >
                 Best cooks and best delivery guys all at your service. Hot tasty food
               </motion.p>
@@ -74,7 +74,7 @@ const NewsletterSection = () => {
                   placeholder="Enter your email address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full sm:w-auto md:w-80 px-4 sm:px-6 py-3 sm:py-4 rounded-xl sm:rounded-l-xl sm:rounded-r-none focus:outline-none focus:ring-2 focus:ring-green-500 bg-white"
+                  className="w-full sm:w-auto md:w-80 px-4 sm:px-6 py-3 sm:py-4 rounded-xl sm:rounded-l-xl sm:rounded-r-none focus:outline-none focus:ring-2 focus:ring-green-500 bg-white transition-colors duration-300"
                 />
                 <motion.button 
                   type="submit"

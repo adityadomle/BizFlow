@@ -16,7 +16,7 @@ const PurposeSection = () => {
   ];
 
   return (
-    <section id="about" className="w-full bg-gray-50 py-16 px-4 md:px-8">
+    <section id="about" className="w-full bg-background-color py-16 px-4 md:px-8 transition-colors duration-300">
       <div className="max-w-6xl mx-auto">
         <motion.div 
           variants={fadeIn('right', 0.2)}
@@ -27,13 +27,13 @@ const PurposeSection = () => {
           <motion.div variants={fadeIn('right', 0.3)}>
             <motion.div 
               variants={fadeIn('up', 0.4)}
-              className="text-sm text-purple-600 font-medium mb-2"
+              className="text-sm text-purple-600 font-medium mb-2 transition-colors duration-300"
             >
               ACHIEVE MORE
             </motion.div>
             <motion.h2 
               variants={textVariant(0.5)}
-              className="text-3xl md:w-4/5 md:text-4xl font-bold text-gray-900"
+              className="text-3xl md:w-4/5 md:text-4xl font-bold text-heading-color transition-colors duration-300"
             >
               Purpose of a convoy is to keep your team
             </motion.h2>
@@ -58,13 +58,13 @@ const PurposeSection = () => {
                 <motion.div variants={fadeIn('left', 0.4 * (index + 1))}>
                   <motion.h3 
                     variants={textVariant(0.3)}
-                    className="text-xl font-semibold text-gray-900 mb-2"
+                    className="text-xl font-semibold text-heading-color mb-2 transition-colors duration-300"
                   >
                     {feature.title}
                   </motion.h3>
                   <motion.p 
                     variants={fadeIn('up', 0.4)}
-                    className="text-gray-600"
+                    className="text-text-color transition-colors duration-300"
                   >
                     {feature.description}
                   </motion.p>

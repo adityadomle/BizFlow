@@ -55,13 +55,13 @@ const TestimonialsSection = () => {
       >
         <motion.h2 
           variants={textVariant(0.2)}
-          className="text-3xl md:text-4xl font-bold mb-4"
+          className="text-3xl md:text-4xl font-bold mb-4 transition-colors duration-300 text-heading-color"
         >
           What our happy client say
         </motion.h2>
         <motion.p 
           variants={fadeIn('up', 0.4)}
-          className="text-gray-600"
+          className="text-text-color transition-colors duration-300"
         >
           Things that make it the best place to start trading
         </motion.p>
@@ -95,7 +95,7 @@ const TestimonialsSection = () => {
             <SwiperSlide key={testimonial.id} className='h-full md:py-12 py-4'>
               <motion.div 
                 variants={fadeIn('up', 0.3 * (index + 1))}
-                className="text-center bg-white p-4 rounded-lg shadow-md h-full flex flex-col"
+                className="text-center p-4 rounded-lg shadow-md h-full flex flex-col card-bg card-border"
               >
                 <motion.div 
                   variants={fadeIn('down', 0.4 * (index + 1))}
@@ -116,7 +116,7 @@ const TestimonialsSection = () => {
                     <motion.span 
                       key={starIndex} 
                       variants={fadeIn('up', 0.1 * starIndex)}
-                      className="text-blue-600"
+                      className="text-accent-color"
                     >
                       ★
                     </motion.span>
@@ -124,13 +124,13 @@ const TestimonialsSection = () => {
                 </motion.div>
                 <motion.h3 
                   variants={textVariant(0.3)}
-                  className="font-semibold text-xl mb-3"
+                  className="font-semibold text-xl mb-3 transition-colors duration-300 text-heading-color"
                 >
                   {testimonial.name}
                 </motion.h3>
                 <motion.p 
                   variants={fadeIn('up', 0.6 * (index + 1))}
-                  className="text-gray-600"
+                  className="text-text-color transition-colors duration-300"
                 >
                   {testimonial.text}
                 </motion.p>
@@ -148,7 +148,7 @@ const TestimonialsSection = () => {
             variants={fadeIn('right', 0.8)}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="swiper-button-prev-custom w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-blue-500 hover:text-white cursor-pointer transition-colors"
+            className="swiper-button-prev-custom w-12 h-12 rounded-full border border-border-color flex items-center justify-center hover:bg-accent-color hover:text-white cursor-pointer transition-colors card-border"
           >
             <BsChevronLeft className="w-6 h-6" />
           </motion.button>
@@ -156,7 +156,7 @@ const TestimonialsSection = () => {
             variants={fadeIn('left', 0.8)}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="swiper-button-next-custom w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-blue-500 hover:text-white cursor-pointer transition-colors"
+            className="swiper-button-next-custom w-12 h-12 rounded-full border border-border-color flex items-center justify-center hover:bg-accent-color hover:text-white cursor-pointer transition-colors card-border"
           >
             <BsChevronRight className="w-6 h-6" />
           </motion.button>

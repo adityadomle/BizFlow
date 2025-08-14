@@ -37,14 +37,14 @@ const ScheduleSection = () => {
           </motion.span>
           <motion.h2 
             variants={textVariant(0.5)}
-            className="text-3xl md:text-4xl font-bold text-navy-900 mt-4 mb-6"
+            className="text-3xl md:text-4xl font-bold text-heading-color mt-4 mb-6"
           >
             Streamline Your Business <br />
             With Smart Scheduling Solutions
           </motion.h2>
           <motion.p 
             variants={fadeIn('up', 0.6)}
-            className="text-gray-600 mb-8"
+            className="text-text-color mb-8"
           >
             Take control of your time and boost productivity with our intelligent scheduling system. Automate appointments, manage team availability, and deliver exceptional customer experiences through seamless calendar management.
           </motion.p>

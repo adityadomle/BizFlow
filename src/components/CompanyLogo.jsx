@@ -8,8 +8,8 @@ const CompanyLogo = () => {
   const logos = [slack, amazon, woocommerce, meundies, sitepoint];
 
   return (
-   <div className="w-full container mx-auto py-20 overflow-hidden flex flex-col sm:flex-row sm:items-center items-start">
-  <div className="w-[300px] shrink-0 px-8 text-gray-600 border-l-4 border-blue-500 bg-white py-2 z-10 sm:text-base text-xl font-semibold sm:text-left mb-8 sm:mb-0">
+   <div className="w-full container mx-auto py-20 overflow-hidden flex flex-col sm:flex-row sm:items-center items-start transition-colors duration-300 bg-background-color">
+  <div className="w-[300px] shrink-0 px-8 text-text-color border-l-4 border-accent-color card py-2 z-10 sm:text-base text-xl font-semibold sm:text-left mb-8 sm:mb-0 transition-colors duration-300">
     Proud partner at <br /> Hubspot & Segment
   </div>
 
@@ -39,4 +39,4 @@ const CompanyLogo = () => {
   );
 };
 
-export default CompanyLogo; 
+export default CompanyLogo;
