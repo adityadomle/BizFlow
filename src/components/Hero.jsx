@@ -22,7 +22,7 @@ const Hero = () => {
   };
 
   return (
-    <section id="home" className="flex flex-col md:flex-row justify-between items-center px-4 sm:px-6 lg:px-8 pt-44 pb-16 container mx-auto">
+    <section data-tour="hero" id="home" className="flex flex-col md:flex-row justify-between items-center px-4 sm:px-6 lg:px-8 pt-44 pb-16 container mx-auto">
       {/* Left Column */}
       <div className="w-full md:w-1/2 space-y-6 pt-24 md:pt-0">
         <motion.div variants={fadeIn('right', 0.2)} initial="hidden" whileInView="show">

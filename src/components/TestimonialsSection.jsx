@@ -48,7 +48,7 @@ const testimonials = [
 
 const TestimonialsSection = () => {
   return (
-    <section id="testimonials" className="py-16 px-4 max-w-7xl mx-auto">
+    <section data-tour="testimonials" id="testimonials" className="py-16 px-4 max-w-7xl mx-auto">
       <motion.div 
         variants={fadeIn('up', 0.3)}
         className="text-center mb-12"

@@ -16,6 +16,7 @@ import NewsletterSection from "./components/NewsletterSection";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import NotFound from "./components/NotFound";
+import UserTourGuide from "./components/UserTourGuide";
 
 // Pages
 import Partner from "./pages/Partner";
@@ -28,6 +29,7 @@ import useScrollTracking from './utils/useScrollTracking';
 import useTimeTracking from './utils/useTimeTracking';
 import { trackPageView } from './utils/analytics';
 import { useEffect } from "react";
+import Contact from "./components/Contact";
 
 function App() {
   // Initialize analytics tracking hooks
@@ -82,11 +84,15 @@ function App() {
             />
             <Route path="/partner" element={<Partner />} />
             <Route path="/analytics" element={<AnalyticsDashboard />} />
+            <Route path="/contact" element={<Contact />} />
+
+
             <Route path="*" element={<NotFound />} />
           </Routes>
 
           <Footer />
-           <ScrollToTop />
+          <ScrollToTop />
+          <UserTourGuide />
         </div>
       </main>
     </Router>

@@ -23,7 +23,7 @@ const NewsletterSection = () => {
     setTimeout(() => setShowPopup(false), 3000);
   };
   return (
-    <section id="newsletter" className="section-container px-4 md:px-0">
+    <section data-tour="newsletter" id="newsletter" className="section-container px-4 md:px-0">
       <motion.div 
         variants={fadeIn('up', 0.2)}
         initial="hidden"

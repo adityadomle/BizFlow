@@ -45,6 +45,7 @@ const FeaturesSection = () => {
 
   return (
     <motion.section
+      data-tour="features"
       variants={fadeIn('up', 0.2)}
       initial="hidden"
       whileInView="show"

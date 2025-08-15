@@ -34,7 +34,11 @@ const ServicesSection = () => {
   ]
 
   return (
+
     <section id="services" className="py-20 container mx-auto px-4 sm:px-6 lg:px-8 transition-colors duration-300">
+
+    <section data-tour="services" id="services" className="py-20 container mx-auto px-4 sm:px-6 lg:px-8">
+
      <motion.div 
       variants={fadeIn('up', 0.3)}
       className='flex flex-col md:flex-row items-center justify-between gap-12 lg:gap-24'
