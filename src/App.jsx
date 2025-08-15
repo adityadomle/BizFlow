@@ -28,6 +28,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import useScrollTracking from './utils/useScrollTracking';
 import useTimeTracking from './utils/useTimeTracking';
 import { trackPageView } from './utils/analytics';
+import { scrollToTop } from './utils/scrollUtils';
 import { useEffect } from "react";
 import Contact from "./components/Contact";
 
@@ -36,12 +37,17 @@ function App() {
   useScrollTracking();
   useTimeTracking();
 
-  // Track page views on route changes
+  // Track page views on route changes and handle scroll behavior
   useEffect(() => {
     const currentPath = window.location.pathname;
     const pageName = currentPath === '/' ? 'Home' : currentPath.charAt(1).toUpperCase() + currentPath.slice(2);
     trackPageView(pageName);
-  }, []);
+    
+    // Scroll to top for analytics page to prevent header overlap
+    if (currentPath === '/analytics') {
+      scrollToTop();
+    }
+  }, [window.location.pathname]);
 
   return (
     <Router>

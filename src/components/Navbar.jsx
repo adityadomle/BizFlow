@@ -4,11 +4,12 @@ import { motion } from "framer-motion";
 import { fadeIn } from "../utils/motion";
 import { trackButtonClick } from "../utils/analytics";
 import { HashLink } from "react-router-hash-link";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("#home");
+  const navigate = useNavigate();
 
   const navLinks = [
     { href: "/", label: "Home" },
@@ -18,6 +19,15 @@ const Navbar = () => {
     { href: "/analytics", label: "Analytics" },
     { href: "/contact", label: "Contact" },
   ];
+
+  // Handle analytics navigation with scroll to top
+  const handleAnalyticsClick = () => {
+    navigate('/analytics');
+    // Ensure page scrolls to top when navigating to analytics
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
+  };
 
   // Scroll spy logic
   useEffect(() => {
@@ -106,10 +116,25 @@ const Navbar = () => {
               >
                 {link.label}
               </HashLink>
+            ) : link.href === "/analytics" ? (
+              <button
+                key={index}
+                onClick={() => {
+                  handleAnalyticsClick();
+                  setActiveLink(link.href);
+                }}
+                className={`text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-blue-600 after:transition-all ${
+                  window.location.pathname === link.href
+                    ? "text-blue-600 after:w-full"
+                    : "text-gray-600 hover:text-gray-900"
+                }`}
+              >
+                {link.label}
+              </button>
             ) : (
               <Link
                 key={index}
-                to={link.href} // Use the standard `to` prop
+                to={link.href}
                 onClick={() => setActiveLink(link.href)}
                 className={`text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-blue-600 after:transition-all ${
                   window.location.pathname === link.href
@@ -166,6 +191,23 @@ const Navbar = () => {
                 >
                   {link.label}
                 </HashLink>
+              ) : link.href === "/analytics" ? (
+                <button
+                  key={index}
+                  onClick={() => {
+                    handleAnalyticsClick();
+                    setActiveLink(link.href);
+                    setIsMenuOpen(false);
+                  }}
+                  className={`block text-sm font-medium py-2 cursor-pointer text-left
+                    ${
+                      window.location.pathname === link.href
+                        ? "text-blue-600"
+                        : "text-gray-600 hover:text-gray-900"
+                    }`}
+                >
+                  {link.label}
+                </button>
               ) : (
                 <Link
                   key={index}
