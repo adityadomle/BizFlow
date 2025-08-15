@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { fadeIn, textVariant } from "../utils/motion";
 
 const NewsletterSection = () => {
+  
   const [email, setEmail] = useState('');
   const [showPopup, setShowPopup] = useState(false);
 
@@ -23,6 +24,7 @@ const NewsletterSection = () => {
     setTimeout(() => setShowPopup(false), 3000);
   };
   return (
+    <section id="contacts">
     <section data-tour="newsletter" id="newsletter" className="section-container px-4 md:px-0">
       <motion.div 
         variants={fadeIn('up', 0.2)}
@@ -113,7 +115,10 @@ const NewsletterSection = () => {
         `}
       </style>
     </section>
+    </section>
   )
+ 
 }
+
 
 export default NewsletterSection

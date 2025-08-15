@@ -10,7 +10,7 @@ const Footer = () => {
       { name: 'Terms of Use', href: '/terms-of-use' },
       { name: 'Privacy Policy', href: '/privacy-policy' },
       { name: 'How it Works', href: '/#SCHEDULE' },
-      { name: 'Contact Us', href: '/contact' },
+      { name: 'Contact Us', href: '#contacts' },
     ],
     getHelp: [
       { name: 'Support Career', href: '/support-career' },
