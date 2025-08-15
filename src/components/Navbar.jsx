@@ -22,7 +22,7 @@ const Navbar = () => {
   // Scroll spy logic
   useEffect(() => {
     const sections = document.querySelectorAll("section[id]");
-    const options = { threshold: 0.6 }; // Section is considered active if 60% visible
+    const options = { threshold: 0.6 };
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -40,7 +40,6 @@ const Navbar = () => {
   }, []);
 
   return (
-
     <motion.nav
       variants={fadeIn("down", 0.2)}
       initial="hidden"
@@ -66,7 +65,7 @@ const Navbar = () => {
           </div>
           <motion.span
             whileHover={{ scale: 1.02 }}
-            className="text-xl font-bold text-gray-800 hover:text-blue-600 transition-colors"
+            className="text-4xl font-bold text-gray-800 hover:text-blue-600 transition-colors"
           >
             BizFlow
           </motion.span>
@@ -79,11 +78,7 @@ const Navbar = () => {
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         >
-          {isMenuOpen ? (
-            <HiX className="h-6 w-6" />
-          ) : (
-            <HiMenu className="h-6 w-6" />
-          )}
+          {isMenuOpen ? <HiX className="h-6 w-6" /> : <HiMenu className="h-6 w-6" />}
         </motion.button>
 
         {/* Navigation Links - Desktop */}
@@ -98,7 +93,7 @@ const Navbar = () => {
                 smooth
                 to={link.href}
                 onClick={() => setActiveLink(link.href)}
-                className={`text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-blue-600 after:transition-all ${
+                className={`text-base sm:text-xl md:text-xl lg:text-xl xl:text-base font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-blue-600 after:transition-all ${
                   activeLink === link.href
                     ? "text-blue-600 after:w-full"
                     : "text-gray-600 hover:text-gray-900"
@@ -109,9 +104,9 @@ const Navbar = () => {
             ) : (
               <Link
                 key={index}
-                to={link.href} // Use the standard `to` prop
+                to={link.href}
                 onClick={() => setActiveLink(link.href)}
-                className={`text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-blue-600 after:transition-all ${
+                className={` text-base sm:text-xl md:text-xl lg:text-xl xl:text-base font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-blue-600 after:transition-all ${
                   window.location.pathname === link.href
                     ? "text-blue-600 after:w-full"
                     : "text-gray-600 hover:text-gray-900"
@@ -129,7 +124,7 @@ const Navbar = () => {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => trackButtonClick("Navbar CTA Button")}
-          className="hidden md:block bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 text-sm font-medium transition-all hover:shadow-lg hover:shadow-blue-100"
+          className="hidden md:block bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 text-base font-medium transition-all hover:shadow-lg hover:shadow-blue-100"
         >
           <a href="#newsletter">Get in touch</a>
         </motion.button>
@@ -143,10 +138,7 @@ const Navbar = () => {
           animate="show"
           className="md:hidden bg-white border-t border-gray-100 py-4"
         >
-          <motion.div
-            variants={fadeIn("down", 0.3)}
-            className="container mx-auto px-4 space-y-6"
-          >
+          <motion.div variants={fadeIn("down", 0.3)} className="container mx-auto px-4 space-y-6">
             {navLinks.map((link, index) =>
               link.href.includes("/#") ? (
                 <HashLink
@@ -157,11 +149,8 @@ const Navbar = () => {
                     setActiveLink(link.href);
                     setIsMenuOpen(false);
                   }}
-                  className={`block text-sm font-medium py-2 cursor-pointer
-                  ${
-                    activeLink === link.href
-                      ? "text-blue-600"
-                      : "text-gray-600 hover:text-gray-900"
+                  className={`block text-base sm:text-lg md:text-lg lg:text-lg xl:text-xl font-medium py-2 cursor-pointer ${
+                    activeLink === link.href ? "text-blue-600" : "text-gray-600 hover:text-gray-900"
                   }`}
                 >
                   {link.label}
@@ -174,12 +163,11 @@ const Navbar = () => {
                     setActiveLink(link.href);
                     setIsMenuOpen(false);
                   }}
-                  className={`block text-sm font-medium py-2 cursor-pointer
-                    ${
-                      window.location.pathname === link.href
-                        ? "text-blue-600"
-                        : "text-gray-600 hover:text-gray-900"
-                    }`}
+                  className={`block text-base sm:text-lg md:text-lg lg:text-lg xl:text-base font-medium py-2 cursor-pointer ${
+                    window.location.pathname === link.href
+                      ? "text-blue-600"
+                      : "text-gray-600 hover:text-gray-900"
+                  }`}
                 >
                   {link.label}
                 </Link>
