@@ -39,6 +39,7 @@ const Navbar = () => {
     };
   }, []);
 
+
   return (
 
     <motion.nav
@@ -64,12 +65,14 @@ const Navbar = () => {
               className="w-4 h-4 bg-red-500 rounded-full -ml-2 hover:opacity-75 transition-opacity"
             ></motion.div>
           </div>
-          <motion.span
-            whileHover={{ scale: 1.02 }}
-            className="text-xl font-bold text-gray-800 hover:text-blue-600 transition-colors"
-          >
-            BizFlow
-          </motion.span>
+          <Link to="/">
+            <motion.span
+              whileHover={{ scale: 1.02 }}
+              className="text-xl font-bold text-gray-800 hover:text-blue-600 transition-colors"
+            >
+              BizFlow
+            </motion.span>
+          </Link>
         </motion.div>
 
         {/* Mobile Menu Button */}
@@ -98,11 +101,10 @@ const Navbar = () => {
                 smooth
                 to={link.href}
                 onClick={() => setActiveLink(link.href)}
-                className={`text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-blue-600 after:transition-all ${
-                  activeLink === link.href
-                    ? "text-blue-600 after:w-full"
-                    : "text-gray-600 hover:text-gray-900"
-                }`}
+                className={`text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-blue-600 after:transition-all ${activeLink === link.href
+                  ? "text-blue-600 after:w-full"
+                  : "text-gray-600 hover:text-gray-900"
+                  }`}
               >
                 {link.label}
               </HashLink>
@@ -111,11 +113,10 @@ const Navbar = () => {
                 key={index}
                 to={link.href} // Use the standard `to` prop
                 onClick={() => setActiveLink(link.href)}
-                className={`text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-blue-600 after:transition-all ${
-                  window.location.pathname === link.href
-                    ? "text-blue-600 after:w-full"
-                    : "text-gray-600 hover:text-gray-900"
-                }`}
+                className={`text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-blue-600 after:transition-all ${window.location.pathname === link.href
+                  ? "text-blue-600 after:w-full"
+                  : "text-gray-600 hover:text-gray-900"
+                  }`}
               >
                 {link.label}
               </Link>
@@ -158,11 +159,10 @@ const Navbar = () => {
                     setIsMenuOpen(false);
                   }}
                   className={`block text-sm font-medium py-2 cursor-pointer
-                  ${
-                    activeLink === link.href
+                  ${activeLink === link.href
                       ? "text-blue-600"
                       : "text-gray-600 hover:text-gray-900"
-                  }`}
+                    }`}
                 >
                   {link.label}
                 </HashLink>
@@ -175,10 +175,9 @@ const Navbar = () => {
                     setIsMenuOpen(false);
                   }}
                   className={`block text-sm font-medium py-2 cursor-pointer
-                    ${
-                      window.location.pathname === link.href
-                        ? "text-blue-600"
-                        : "text-gray-600 hover:text-gray-900"
+                    ${window.location.pathname === link.href
+                      ? "text-blue-600"
+                      : "text-gray-600 hover:text-gray-900"
                     }`}
                 >
                   {link.label}
