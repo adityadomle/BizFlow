@@ -40,7 +40,7 @@ const Hero = () => {
           whileInView="show"
           className="text-4xl md:text-5xl lg:text-6xl  font-bold leading-tight text-heading-color transition-colors duration-300"
         >
-           We boost the growth for{' '}
+          We boost the growth for{' '}
           <span className="text-blue-600 relative inline-block">
             Startup to Fortune 500
             <span className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-200/60"></span>
@@ -50,7 +50,7 @@ const Hero = () => {
         </motion.h1>
 
 
-        <motion.p 
+        <motion.p
           variants={fadeIn('up', 0.4)}
           initial="hidden"
           whileInView="show"
