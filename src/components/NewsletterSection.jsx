@@ -1,4 +1,4 @@
-import React ,  { useState } from 'react'
+import React, { useState } from 'react'
 import { HiArrowRight } from 'react-icons/hi'
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeIn, textVariant } from "../utils/motion";
@@ -23,8 +23,8 @@ const NewsletterSection = () => {
     setTimeout(() => setShowPopup(false), 3000);
   };
   return (
-    <section data-tour="newsletter" id="newsletter" className="section-container px-4 md:px-0">
-      <motion.div 
+    <section id="newsletter" className="section-container px-4 md:px-0">
+      <motion.div
         variants={fadeIn('up', 0.2)}
         initial="hidden"
         whileInView="show"
@@ -32,24 +32,24 @@ const NewsletterSection = () => {
       >
         <div className="relative md:px-16 px-6 py-16 md:py-24">
           {/* Background Gradient */}
-          <motion.div 
+          <motion.div
             variants={fadeIn('left', 0.4)}
             className="absolute top-0 right-0 w-1/2 h-full bg-blue-700 clip-path-slant hidden md:block"
           ></motion.div>
-          
+
           <div className="relative flex flex-col lg:flex-row items-center justify-between gap-8 md:gap-12">
             {/* Left Content */}
-            <motion.div 
+            <motion.div
               variants={fadeIn('right', 0.5)}
               className="text-white max-w-lg text-center md:text-left"
             >
-              <motion.h2 
+              <motion.h2
                 variants={textVariant(0.3)}
                 className="text-2xl sm:text-3xl md:text-4xl font-medium mb-4"
               >
                 Subscribe newsletter
               </motion.h2>
-              <motion.p 
+              <motion.p
                 variants={fadeIn('up', 0.6)}
                 className="text-blue-100 text-sm sm:text-base"
               >
@@ -58,7 +58,7 @@ const NewsletterSection = () => {
             </motion.div>
 
             {/* Email Form */}
-            <motion.div 
+            <motion.div
               variants={fadeIn('left', 0.5)}
               className="w-full md:w-auto"
             >
@@ -66,7 +66,7 @@ const NewsletterSection = () => {
                 onSubmit={handleSubmit}
                 className="flex flex-col sm:flex-row gap-4 sm:gap-0 relative"
               >
-               
+
                 <motion.input
                   variants={fadeIn('right', 0.7)}
                   type="email"
@@ -76,7 +76,7 @@ const NewsletterSection = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full sm:w-auto md:w-80 px-4 sm:px-6 py-3 sm:py-4 rounded-xl sm:rounded-l-xl sm:rounded-r-none focus:outline-none focus:ring-2 focus:ring-green-500 bg-white"
                 />
-                <motion.button 
+                <motion.button
                   type="submit"
                   variants={fadeIn('left', 0.7)}
                   whileHover={{ scale: 1.05 }}
@@ -89,13 +89,13 @@ const NewsletterSection = () => {
                 <AnimatePresence>
                   {showPopup && (
                     <motion.div
-                       initial={{ opacity: 0, y: 10 }}
+                      initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
                       transition={{ duration: 0.3 }}
                       className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-blue-500 text-white px-4 py-2 rounded-lg shadow-lg"
                     >
-                      ✅ Email Sent! 
+                      ✅ Email Sent!
                     </motion.div>
                   )}
                 </AnimatePresence>

@@ -11,7 +11,6 @@ const PricingSection = () => {
 
   return (
     <motion.section 
-      data-tour="pricing"
       variants={fadeIn('up', 0.2)}
       initial="hidden"
       whileInView="show"
