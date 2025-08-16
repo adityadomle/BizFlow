@@ -17,6 +17,7 @@ const Navbar = () => {
     { href: "/#testimonials", label: "Testimonials" },
     { href: "/analytics", label: "Analytics" },
     { href: "/contact", label: "Contact" },
+    { href: "/contributors", label: "Contributors"}
   ];
 
   // Scroll spy logic
@@ -46,7 +47,7 @@ const Navbar = () => {
       initial="hidden"
       whileInView="show"
       viewport={{ once: true }}
-      className="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-sm z-50 border-b border-gray-100 shadow-sm"
+      className="fixed top-0 inset-x-0 bg-white/90 backdrop-blur-sm z-50 border-b border-gray-100 shadow-sm"
     >
       <div className="w-full flex justify-between items-center container mx-auto px-4 sm:px-6 lg:px-8 md:h-20 h-16">
         {/* Logo */}

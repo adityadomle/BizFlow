@@ -29,6 +29,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import useScrollTracking from "./utils/useScrollTracking";
 import useTimeTracking from "./utils/useTimeTracking";
 import { trackPageView } from "./utils/analytics";
+import Contibutors from "./pages/Contibutors";
+
 
 function App() {
   // Initialize analytics tracking hooks
@@ -87,6 +89,8 @@ function App() {
             <Route path="/partner" element={<Partner />} />
             <Route path="/analytics" element={<AnalyticsDashboard />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/contributors" element={<Contibutors />} />
+
             <Route path="*" element={<NotFound />} />
           </Routes>
 
