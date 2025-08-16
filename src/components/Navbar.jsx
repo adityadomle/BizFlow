@@ -18,6 +18,8 @@ const Navbar = () => {
     { href: "/analytics", label: "Analytics" },
     { href: "/contact", label: "Contact" },
   ];
+  
+
 
   // Scroll spy logic
   useEffect(() => {
@@ -112,10 +114,11 @@ const Navbar = () => {
                 to={link.href} // Use the standard `to` prop
                 onClick={() => setActiveLink(link.href)}
                 className={`text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-blue-600 after:transition-all ${
-                  window.location.pathname === link.href
-                    ? "text-blue-600 after:w-full"
-                    : "text-gray-600 hover:text-gray-900"
-                }`}
+    (link.href === "/" && activeLink === "#home") || 
+    (link.href !== "/" && window.location.pathname === link.href)
+      ? "text-blue-600 after:w-full"
+      : "text-gray-600 hover:text-gray-900"
+  }`}
               >
                 {link.label}
               </Link>
@@ -176,7 +179,7 @@ const Navbar = () => {
                   }}
                   className={`block text-sm font-medium py-2 cursor-pointer
                     ${
-                      window.location.pathname === link.href
+                        activeLink === link.href
                         ? "text-blue-600"
                         : "text-gray-600 hover:text-gray-900"
                     }`}
