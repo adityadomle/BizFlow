@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { HiHome, HiChartBar } from 'react-icons/hi';
 
 const AnalyticsDashboard = () => {
   const [analyticsData, setAnalyticsData] = useState(null);
@@ -34,6 +36,9 @@ const AnalyticsDashboard = () => {
   };
 
   useEffect(() => {
+    // Scroll to top when component mounts to prevent header overlap
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    
     // Simulate API call delay
     const timer = setTimeout(() => {
       setAnalyticsData(mockData);
@@ -44,7 +49,7 @@ const AnalyticsDashboard = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center pt-20">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
           <p className="mt-4 text-gray-600">Loading analytics data...</p>
@@ -89,8 +94,27 @@ const AnalyticsDashboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <div className="min-h-screen bg-gray-50 pt-24 pb-6 px-6">
       <div className="max-w-7xl mx-auto">
+        {/* Breadcrumb Navigation */}
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-6"
+        >
+          <nav className="flex items-center space-x-2 text-sm text-gray-500">
+            <Link to="/" className="flex items-center hover:text-blue-600 transition-colors">
+              <HiHome className="w-4 h-4 mr-1" />
+              Home
+            </Link>
+            <span>/</span>
+            <span className="flex items-center text-gray-900 font-medium">
+              <HiChartBar className="w-4 h-4 mr-1" />
+              Analytics Dashboard
+            </span>
+          </nav>
+        </motion.div>
+
         {/* Header */}
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
@@ -98,7 +122,7 @@ const AnalyticsDashboard = () => {
           className="mb-8"
         >
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Analytics Dashboard</h1>
-          <p className="text-gray-700 text-lg font-medium mb-4 pt-5">Track your website performance and user engagement</p>
+          <p className="text-gray-700 text-lg font-medium mb-4">Track your website performance and user engagement</p>
         </motion.div>
 
         {/* Key Metrics Cards */}
