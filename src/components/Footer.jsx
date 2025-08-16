@@ -85,7 +85,7 @@ const Footer = () => {
               </motion.a>
               <motion.a
                 whileHover={{ scale: 1.1 }}
-                href="#"
+                href='https://twitter.com/bizflow'
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Twitter"
@@ -95,7 +95,7 @@ const Footer = () => {
               </motion.a>
               <motion.a
                 whileHover={{ scale: 1.1 }}
-                href="#"
+                href="https://linkedin.com/company/bizflow"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
