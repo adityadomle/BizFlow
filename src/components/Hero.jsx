@@ -24,10 +24,11 @@ const Hero = () => {
   return (
     <section id="home" className="flex flex-col md:flex-row justify-between items-center px-4 sm:px-6 lg:px-8 pt-44 pb-16 container mx-auto">
       {/* Left Column */}
-      <div className="w-full md:w-1/2 space-y-6">
+      <div className="w-full md:w-1/2 space-y-6 pt-24 md:pt-0">
         <motion.div variants={fadeIn('right', 0.2)} initial="hidden" whileInView="show">
           {/* Star badge */}
-          <div className="flex items-center gap-2 bg-background-color w-fit px-4 py-2 rounded-full hover:bg-card-background transition-colors cursor-pointer group">
+          <div className="flex items-center gap-2 bg-gray-50 dark:bg-background-color w-fit px-4 py-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
+
             <span className="text-blue-600 group-hover:scale-110 transition-transform">★</span>
             <span className="text-sm font-medium">Jump start your growth</span>
           </div>

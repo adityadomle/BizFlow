@@ -15,6 +15,7 @@ import TestimonialsSection from "./components/TestimonialsSection";
 import NewsletterSection from "./components/NewsletterSection";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
+import NotFound from "./components/NotFound";
 
 // Pages
 import Partner from "./pages/Partner";
@@ -81,6 +82,7 @@ function App() {
             />
             <Route path="/partner" element={<Partner />} />
             <Route path="/analytics" element={<AnalyticsDashboard />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
 
           <Footer />
