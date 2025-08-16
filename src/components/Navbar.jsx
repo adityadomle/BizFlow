@@ -5,6 +5,7 @@ import { fadeIn } from "../utils/motion";
 import { trackButtonClick } from "../utils/analytics";
 import { HashLink } from "react-router-hash-link";
 import { Link, useNavigate } from "react-router-dom";
+import { scrollToTop, scrollToElement, createScrollSpy, getNavbarHeight } from "../utils/scrollUtils";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -23,30 +24,21 @@ const Navbar = () => {
   // Handle analytics navigation with scroll to top
   const handleAnalyticsClick = () => {
     navigate('/analytics');
-    // Ensure page scrolls to top when navigating to analytics
-    setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 100);
+    // Use the new scroll utility for proper scroll behavior
+    scrollToTop();
   };
 
-  // Scroll spy logic
+  // Enhanced scroll spy logic with navbar offset
   useEffect(() => {
     const sections = document.querySelectorAll("section[id]");
-    const options = { threshold: 0.6 }; // Section is considered active if 60% visible
+    
+    // Use the new scroll spy utility with proper navbar offset
+    const cleanup = createScrollSpy(sections, setActiveLink, {
+      threshold: 0.6,
+      rootMargin: `-${getNavbarHeight()}px 0px 0px 0px`
+    });
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveLink(`#${entry.target.id}`);
-        }
-      });
-    }, options);
-
-    sections.forEach((section) => observer.observe(section));
-
-    return () => {
-      sections.forEach((section) => observer.unobserve(section));
-    };
+    return cleanup;
   }, []);
 
   return (
@@ -107,6 +99,10 @@ const Navbar = () => {
                 key={index}
                 smooth
                 to={link.href}
+                scroll={(el) => {
+                  const elementId = link.href.split('#')[1];
+                  scrollToElement(elementId);
+                }}
                 onClick={() => setActiveLink(link.href)}
                 className={`text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-blue-600 after:transition-all ${
                   activeLink === link.href
