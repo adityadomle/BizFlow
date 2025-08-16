@@ -4,14 +4,15 @@ import { motion } from "framer-motion";
 import { fadeIn } from "../utils/motion";
 import { trackButtonClick } from "../utils/analytics";
 import { HashLink } from "react-router-hash-link";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeLink, setActiveLink] = useState("#home");
+  const [activeLink, setActiveLink] = useState("/#home");
+  const navigate = useNavigate();
 
   const navLinks = [
-    { href: "/", label: "Home" },
+    { href: "/#home", label: "Home" },
     { href: "/#about", label: "About Us" },
     { href: "/#services", label: "Our Services" },
     { href: "/#testimonials", label: "Testimonials" },
@@ -19,15 +20,42 @@ const Navbar = () => {
     { href: "/contact", label: "Contact" },
   ];
 
-  // Scroll spy logic
+  // Reset activeLink to home when on home page
   useEffect(() => {
+    if (window.location.pathname === "/") {
+      setActiveLink("/#home");
+    }
+  }, [window.location.pathname]);
+
+  // Handle route changes to update activeLink
+  useEffect(() => {
+    const currentPath = window.location.pathname;
+    if (currentPath === "/") {
+      setActiveLink("/#home");
+    } else if (currentPath === "/analytics") {
+      setActiveLink("/analytics");
+    } else if (currentPath === "/contact") {
+      setActiveLink("/contact");
+    } else if (currentPath === "/partner") {
+      setActiveLink("/partner");
+    }
+  }, [window.location.pathname]);
+
+  // Scroll spy logic - only track sections when on home page
+  useEffect(() => {
+    // Only track sections when we're on the home page
+    if (window.location.pathname !== "/") {
+      return;
+    }
+
     const sections = document.querySelectorAll("section[id]");
     const options = { threshold: 0.6 }; // Section is considered active if 60% visible
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          setActiveLink(`#${entry.target.id}`);
+          // Don't update activeLink for hash sections when on home page
+          // Keep it as "/#home" to maintain the blue highlighter under Home
         }
       });
     }, options);
@@ -38,6 +66,8 @@ const Navbar = () => {
       sections.forEach((section) => observer.unobserve(section));
     };
   }, []);
+
+
 
   return (
 
@@ -91,36 +121,67 @@ const Navbar = () => {
           variants={fadeIn("down", 0.3)}
           className="hidden md:flex items-center gap-10"
         >
-          {navLinks.map((link, index) =>
-            link.href.includes("/#") ? (
-              <HashLink
-                key={index}
-                smooth
-                to={link.href}
-                onClick={() => setActiveLink(link.href)}
-                className={`text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-blue-600 after:transition-all ${
-                  activeLink === link.href
-                    ? "text-blue-600 after:w-full"
-                    : "text-gray-600 hover:text-gray-900"
-                }`}
-              >
-                {link.label}
-              </HashLink>
-            ) : (
-              <Link
-                key={index}
-                to={link.href} // Use the standard `to` prop
-                onClick={() => setActiveLink(link.href)}
-                className={`text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-blue-600 after:transition-all ${
-                  window.location.pathname === link.href
-                    ? "text-blue-600 after:w-full"
-                    : "text-gray-600 hover:text-gray-900"
-                }`}
-              >
-                {link.label}
-              </Link>
-            )
-          )}
+          {navLinks.map((link, index) => {
+            // Special handling for Home link
+            if (link.href === "/#home") {
+              return (
+                <button
+                  key={index}
+                  onClick={() => {
+                    setActiveLink(link.href);
+                    if (window.location.pathname !== "/") {
+                      // If not on home page, navigate there first
+                      navigate("/#home");
+                    } else {
+                      // If already on home page, scroll to top
+                      document.getElementById("home")?.scrollIntoView({ behavior: "smooth" });
+                    }
+                  }}
+                  className={`text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-blue-600 after:transition-all cursor-pointer ${
+                    activeLink === link.href
+                      ? "text-blue-600 after:w-full"
+                      : "text-gray-600 hover:text-gray-900"
+                  }`}
+                >
+                  {link.label}
+                </button>
+              );
+            }
+            
+                         return link.href.includes("/#") ? (
+               <HashLink
+                 key={index}
+                 smooth
+                 to={link.href}
+                 onClick={() => {
+                   // Only update activeLink for section navigation if we're NOT on home page
+                   if (window.location.pathname !== "/") {
+                     setActiveLink(link.href);
+                   }
+                 }}
+                 className={`text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-blue-600 after:transition-all ${
+                   activeLink === link.href
+                     ? "text-blue-600 after:w-full"
+                     : "text-gray-600 hover:text-gray-900"
+                 }`}
+               >
+                 {link.label}
+               </HashLink>
+             ) : (
+               <Link
+                 key={index}
+                 to={link.href}
+                 onClick={() => setActiveLink(link.href)}
+                 className={`text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-blue-600 after:transition-all ${
+                   window.location.pathname === link.href
+                     ? "text-blue-600 after:w-full"
+                     : "text-gray-600 hover:text-gray-900"
+                 }`}
+               >
+                 {link.label}
+               </Link>
+             );
+          })}
         </motion.div>
 
         {/* CTA Button */}
@@ -128,10 +189,19 @@ const Navbar = () => {
           variants={fadeIn("left", 0.3)}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          onClick={() => trackButtonClick("Navbar CTA Button")}
-          className="hidden md:block bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 text-sm font-medium transition-all hover:shadow-lg hover:shadow-blue-100"
+          onClick={() => {
+            trackButtonClick("Navbar CTA Button");
+            // If we're not on the home page, navigate there first
+            if (window.location.pathname !== "/") {
+              navigate("/#newsletter");
+            } else {
+              // If we're already on home page, scroll to newsletter section
+              document.getElementById("newsletter")?.scrollIntoView({ behavior: "smooth" });
+            }
+          }}
+          className="hidden md:block bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 text-sm font-medium transition-all hover:shadow-lg hover:shadow-blue-100 cursor-pointer"
         >
-          <a href="#newsletter">Get in touch</a>
+          Get in touch
         </motion.button>
       </div>
 
@@ -147,52 +217,92 @@ const Navbar = () => {
             variants={fadeIn("down", 0.3)}
             className="container mx-auto px-4 space-y-6"
           >
-            {navLinks.map((link, index) =>
-              link.href.includes("/#") ? (
-                <HashLink
-                  key={index}
-                  smooth
-                  to={link.href}
-                  onClick={() => {
-                    setActiveLink(link.href);
-                    setIsMenuOpen(false);
-                  }}
-                  className={`block text-sm font-medium py-2 cursor-pointer
-                  ${
-                    activeLink === link.href
-                      ? "text-blue-600"
-                      : "text-gray-600 hover:text-gray-900"
-                  }`}
-                >
-                  {link.label}
-                </HashLink>
-              ) : (
-                <Link
-                  key={index}
-                  to={link.href}
-                  onClick={() => {
-                    setActiveLink(link.href);
-                    setIsMenuOpen(false);
-                  }}
-                  className={`block text-sm font-medium py-2 cursor-pointer
-                    ${
-                      window.location.pathname === link.href
+            {navLinks.map((link, index) => {
+              // Special handling for Home link
+              if (link.href === "/#home") {
+                return (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      setActiveLink(link.href);
+                      setIsMenuOpen(false);
+                      if (window.location.pathname !== "/") {
+                        // If not on home page, navigate there first
+                        navigate("/#home");
+                      } else {
+                        // If already on home page, scroll to top
+                        document.getElementById("home")?.scrollIntoView({ behavior: "smooth" });
+                      }
+                    }}
+                    className={`block text-sm font-medium py-2 cursor-pointer w-full text-left ${
+                      activeLink === link.href
                         ? "text-blue-600"
                         : "text-gray-600 hover:text-gray-900"
                     }`}
-                >
-                  {link.label}
-                </Link>
-              )
-            )}
+                  >
+                    {link.label}
+                  </button>
+                );
+              }
+              
+                             return link.href.includes("/#") ? (
+                 <HashLink
+                   key={index}
+                   smooth
+                   to={link.href}
+                   onClick={() => {
+                     // Only update activeLink for section navigation if we're NOT on home page
+                     if (window.location.pathname !== "/") {
+                       setActiveLink(link.href);
+                     }
+                     setIsMenuOpen(false);
+                   }}
+                   className={`block text-sm font-medium py-2 cursor-pointer
+                   ${
+                     activeLink === link.href
+                       ? "text-blue-600"
+                       : "text-gray-600 hover:text-gray-900"
+                   }`}
+                 >
+                   {link.label}
+                 </HashLink>
+               ) : (
+                 <Link
+                   key={index}
+                   to={link.href}
+                   onClick={() => {
+                     setActiveLink(link.href);
+                     setIsMenuOpen(false);
+                   }}
+                   className={`block text-sm font-medium py-2 cursor-pointer
+                     ${
+                       window.location.pathname === link.href
+                         ? "text-blue-600"
+                         : "text-gray-600 hover:text-gray-900"
+                     }`}
+                 >
+                   {link.label}
+                 </Link>
+               );
+            })}
             <motion.button
               variants={fadeIn("up", 0.4)}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              onClick={() => trackButtonClick("Mobile Navbar CTA Button")}
-              className="w-full bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 text-sm font-medium transition-all hover:shadow-lg hover:shadow-blue-100"
+              onClick={() => {
+                trackButtonClick("Mobile Navbar CTA Button");
+                // If we're not on the home page, navigate there first
+                if (window.location.pathname !== "/") {
+                  navigate("/#newsletter");
+                } else {
+                  // If we're already on home page, scroll to newsletter section
+                  document.getElementById("newsletter")?.scrollIntoView({ behavior: "smooth" });
+                }
+                setIsMenuOpen(false);
+              }}
+              className="w-full bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 text-sm font-medium transition-all hover:shadow-lg hover:shadow-blue-100 cursor-pointer"
             >
-              <a href="#newsletter">Get in touch</a>
+              Get in touch
             </motion.button>
           </motion.div>
         </motion.div>

@@ -9,3 +9,33 @@ html {
 .section-container {
   @apply  px-4 sm:px-6 lg:px-8 py-16 container mx-auto;
 }
+
+/* Continuous Carousel Animation */
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 30s linear infinite;
+  width: max-content;
+}
+
+.slide {
+  min-width: 325px !important;
+  width: 325px !important;
+  height: 375px !important;
+  margin: 0 25px !important;
+  flex-shrink: 0 !important;
+}
+
+/* Override any Tailwind classes that might interfere */
+.slide > div {
+  width: 100% !important;
+  height: 100% !important;
+  min-width: unset !important;
+}

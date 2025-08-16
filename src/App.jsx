@@ -23,12 +23,35 @@ import AnalyticsDashboard from "./components/AnalyticsDashboard";
 import Partner from "./pages/Partner";
 
 // Router
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 
 // Analytics hooks and utils
 import useScrollTracking from "./utils/useScrollTracking";
 import useTimeTracking from "./utils/useTimeTracking";
 import { trackPageView } from "./utils/analytics";
+
+// Component to handle hash navigation
+function HashNavigation() {
+  const location = useLocation();
+  const previousHash = React.useRef(location.hash);
+  
+  useEffect(() => {
+    // Only scroll if hash actually changed (not on initial load)
+    if (location.hash && location.hash !== previousHash.current) {
+      const element = document.querySelector(location.hash);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+      }
+    }
+    
+    // Update the previous hash
+    previousHash.current = location.hash;
+  }, [location]);
+
+  return null;
+}
 
 function App() {
   // Initialize analytics tracking hooks
@@ -54,6 +77,9 @@ function App() {
         <div className="overflow-hidden">
           {/* Navbar always visible */}
           <Navbar />
+          
+          {/* Hash Navigation Handler */}
+          <HashNavigation />
 
           {/* Routes */}
           <Routes>
