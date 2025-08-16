@@ -14,12 +14,12 @@ const PricingSection = () => {
       variants={fadeIn('up', 0.2)}
       initial="hidden"
       whileInView="show"
-      className="py-20 px-4 bg-gray-50 "
+      className="py-20 px-4 bg-background-color transition-colors duration-300"
     >
       <div className="max-w-6xl mx-auto">
         <motion.h2 
           variants={textVariant(0.3)}
-          className="rounded-lg py-5 text-3xl md:text-4xl font-bold text-center mb-16"
+          className="rounded-lg py-5 text-3xl md:text-4xl font-bold text-center mb-16 transition-colors duration-300"
         >
           Pricing
         </motion.h2>
@@ -31,17 +31,17 @@ const PricingSection = () => {
           {/* Starter Plan */}
           <motion.div 
             variants={fadeIn('right', 0.5)}
-            className="py-20 px-4 bg-gradient-to-r from-pink-200 to-blue-100 p-8 rounded-lg shadow-lg"
+            className="py-20 px-4 bg-gradient-to-r from-secondary-color to-accent-color/20 p-8 rounded-lg shadow-lg card-bg card-border"
           >
             <motion.h3 
               variants={fadeIn('up', 0.6)}
-              className="text-xl text-gray-600 mb-4"
+              className="text-xl text-text-color mb-4 transition-colors duration-300"
             >
               Starter
             </motion.h3>
             <motion.p 
               variants={fadeIn('up', 0.7)}
-              className="text-3xl font-bold mb-6"
+              className="text-3xl font-bold mb-6 transition-colors duration-300"
             >
               ${starterPrice}/mo
             </motion.p>
@@ -50,17 +50,17 @@ const PricingSection = () => {
           {/* Business Plan */}
           <motion.div 
             variants={fadeIn('left', 0.5)}
-            className="py-20 px-4 bg-gradient-to-r from-pink-200 to-blue-100 p-8 rounded-lg shadow-lg"
+            className="py-20 px-4 bg-gradient-to-r from-secondary-color to-accent-color/20 p-8 rounded-lg shadow-lg card-bg card-border"
           >
             <motion.h3 
               variants={fadeIn('up', 0.6)}
-              className="text-xl text-gray-600 mb-4"
+              className="text-xl text-text-color mb-4 transition-colors duration-300"
             >
               Business
             </motion.h3>
             <motion.p 
               variants={fadeIn('up', 0.7)}
-              className="text-3xl font-bold mb-6"
+              className="text-3xl font-bold mb-6 transition-colors duration-300"
             >
               ${businessPrice}/mo
             </motion.p>
@@ -73,7 +73,7 @@ const PricingSection = () => {
         >
           <motion.p 
             variants={fadeIn('up', 0.9)}
-            className="text-center text-gray-600 mb-4"
+            className="text-center text-text-color mb-4 transition-colors duration-300"
           >
             {productCount} products
           </motion.p>
@@ -83,16 +83,16 @@ const PricingSection = () => {
             className="relative px-4"
           >
             <div className="flex items-center gap-2">
-              <span className="text-xs sm:text-sm text-gray-600">1</span>
+              <span className="text-xs sm:text-sm text-text-color transition-colors duration-300">1</span>
               <input 
                 type="range" 
                 min="1" 
                 max="50" 
                 value={productCount}
                 onChange={(e) => setProductCount(parseInt(e.target.value))}
-                className="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                className="flex-1 h-2 bg-secondary-color rounded-lg appearance-none cursor-pointer"
               />
-              <span className="text-xs sm:text-sm text-gray-600">50</span>
+              <span className="text-xs sm:text-sm text-text-color transition-colors duration-300">50</span>
             </div>
           </motion.div>
 
@@ -102,7 +102,7 @@ const PricingSection = () => {
           >
             <motion.p 
               variants={fadeIn('up', 1.2)}
-              className="text-xl text-gray-600 mb-4"
+              className="text-xl text-text-color mb-4 transition-colors duration-300"
             >
               Ready to get started?
             </motion.p>
@@ -110,7 +110,7 @@ const PricingSection = () => {
               variants={fadeIn('up', 1.3)}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-pink-200 text-white px-6 py-3 rounded-lg transition-all duration-300 ease-in-out hover:bg-pink-300 hover:scale-105 hover:shadow-[0_0_15px_#f9a8d4] cursor-pointer"
+              className="bg-accent-color text-white px-6 py-3 rounded-lg transition-all duration-300 ease-in-out hover:bg-accent-color/80 hover:scale-105 hover:shadow-lg hover:shadow-accent-color/20 cursor-pointer"
             >
               Get Started
             </motion.button>
@@ -121,4 +121,4 @@ const PricingSection = () => {
   )
 }
 
-export default PricingSection 
+export default PricingSection

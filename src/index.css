@@ -3,7 +3,26 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 100px;
-  }
+  background-color: var(--background-color-light);
+  color: var(--text-color-light);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html[data-theme='dark'] {
+  background-color: var(--background-color-dark);
+  color: var(--text-color-dark);
+}
+
+body {
+  background-color: var(--background-color-light);
+  color: var(--text-color-light);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html[data-theme='dark'] body {
+  background-color: var(--background-color-dark);
+  color: var(--text-color-dark);
+}
 
   /* customize container here using tailwindcss */
 .section-container {

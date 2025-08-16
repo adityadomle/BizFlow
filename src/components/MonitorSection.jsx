@@ -21,26 +21,26 @@ const MonitorSection = () => {
         >
           <motion.span 
             variants={fadeIn('up', 0.4)}
-            className="text-emerald-500 font-semibold"
+            className="text-accent-color font-semibold"
           >
             MONITOR
           </motion.span>
           <motion.h2 
             variants={textVariant(0.5)}
-            className="text-3xl md:text-4xl font-bold text-navy-900 mt-4 mb-6 md:w-4/5"
+            className="text-3xl md:text-4xl font-bold text-heading-color mt-4 mb-6 md:w-4/5"
           >
             Introducing best mobile carousels
           </motion.h2>
           <motion.p 
             variants={fadeIn('up', 0.6)}
-            className="text-gray-600 mb-8 md:w-4/5"
+            className="text-text-color mb-8 md:w-4/5"
           >
             Before the ship is really back. Round, round, all around the world. Round, all around the world. Round, all around the world. Round, all around the world.
           </motion.p>
           <motion.a 
             variants={fadeIn('up', 0.7)}
             href="#" 
-            className="text-blue-500 font-semibold flex items-center gap-2 hover:gap-4 transition-all"
+            className="text-accent-color font-semibold flex items-center gap-2 hover:gap-4 transition-all"
           >
             Learn more about monitoring
             <motion.svg 
@@ -82,4 +82,4 @@ const MonitorSection = () => {
   )
 }
 
-export default MonitorSection 
+export default MonitorSection

@@ -1,0 +1,47 @@
+:root {
+  --background-color-light: #ffffff;
+  --text-color-light: #333333;
+  --primary-color-light: #007bff; /* Vibrant blue */
+  --secondary-color-light: #e0e7ff;
+  --card-background-light: #ffffff;
+  --card-border-light: #e2e8f0;
+  --footer-background-light: #f8f8f8;
+  --navbar-background-light: #ffffff;
+  --navbar-border-light: #e2e8f0;
+  --heading-color-light: #1a202c;
+  --blue-ball-color: #007bff;
+  --red-ball-color: #ff0000;
+  --pricing-card-dark-from: #e0e7ff;
+  --pricing-card-dark-to: #e0e7ff;
+}
+
+html[data-theme='dark'] {
+  --background-color-dark: #1a202c;
+  --text-color-dark: #e2e8f0;
+  --primary-color-dark: #6366f1;
+  --secondary-color-dark: #2d3748;
+  --card-background-dark: #2d3748;
+  --card-border-dark: #4a5568;
+  --footer-background-dark: #1a202c;
+  --navbar-background-dark: #1a202c;
+  --navbar-border-dark: #4a5568;
+  --heading-color-dark: #e2e8f0;
+}
+
+body {
+  background-color: var(--background-color-light);
+  color: var(--text-color-light);
+}
+
+html[data-theme='dark'] body {
+  background-color: var(--background-color-dark);
+  color: var(--text-color-dark);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--heading-color-light);
+}
+
+html[data-theme='dark'] h1, html[data-theme='dark'] h2, html[data-theme='dark'] h3, html[data-theme='dark'] h4, html[data-theme='dark'] h5, html[data-theme='dark'] h6 {
+  color: var(--heading-color-dark);
+}

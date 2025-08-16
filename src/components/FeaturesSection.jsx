@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { motion } from "framer-motion";
 import { fadeIn, textVariant } from "../utils/motion";
 
@@ -58,13 +58,13 @@ const FeaturesSection = () => {
       >
         <motion.h2
           variants={textVariant(0.2)}
-          className="text-3xl font-bold mb-4"
+          className="text-3xl font-bold mb-4 transition-colors duration-300 text-heading-color"
         >
           How can we help your business?
         </motion.h2>
         <motion.p
           variants={fadeIn('up', 0.4)}
-          className="text-gray-600"
+          className="text-text-color transition-colors duration-300"
         >
           When you resell Besnik, you build trust and increase
         </motion.p>
@@ -82,17 +82,16 @@ const FeaturesSection = () => {
           <motion.div
             key={index}
             variants={itemVariants}
-            className="flex flex-col items-center p-6 bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow"
+            className="flex flex-col items-center p-6 card rounded-xl shadow-sm hover:shadow-lg transition-shadow card-bg card-border"
           >
             <div
-              className="w-24 h-24 rounded-full mb-6 flex items-center justify-center transition-transform duration-300 hover:scale-110"
-              style={{ backgroundColor: feature.bg }}
+              className="w-24 h-24 rounded-full mb-6 flex items-center justify-center transition-transform duration-300 hover:scale-110 bg-card-background"
               aria-hidden="true"
             >
               <span className="text-3xl">{feature.icon}</span>
             </div>
-            <h3 className="text-2xl font-medium mb-3">{feature.title}</h3>
-            <p className="text-gray-500 text-center">{feature.description}</p>
+            <h3 className="text-2xl font-medium mb-3 transition-colors duration-300 text-heading-color">{feature.title}</h3>
+            <p className="text-text-color text-center transition-colors duration-300">{feature.description}</p>
           </motion.div>
         ))}
       </motion.div>
@@ -103,7 +102,7 @@ const FeaturesSection = () => {
       >
         <Link 
     to="/partner" 
-    className="inline-block bg-orange-200 text-white cursor-pointer px-8 py-3 rounded-full font-medium transition-all duration-300 ease-in-out hover:bg-orange-300 hover:scale-105 hover:shadow-[0_0_15px_#fed7aa] relative"
+    className="inline-block bg-accent-color text-white cursor-pointer px-8 py-3 rounded-full font-medium transition-all duration-300 ease-in-out hover:bg-accent-color/80 hover:scale-105 hover:shadow-[0_0_15px_var(--accent-color-shadow)] relative"
   >
     <motion.div
       variants={fadeIn('up', 0.8)}
@@ -112,7 +111,7 @@ const FeaturesSection = () => {
       className="relative"
     >
       Become a Partner
-      <div className="absolute -z-10 w-full h-full rounded-full bg-blue-600/30 blur-xl top-0 left-0"></div>
+      <div className="absolute -z-10 w-full h-full rounded-full bg-accent-color/30 blur-xl top-0 left-0"></div>
     </motion.div>
   </Link>
       </motion.div>

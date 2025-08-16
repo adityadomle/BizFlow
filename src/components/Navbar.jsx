@@ -1,3 +1,12 @@
+
+import { useState, useEffect } from 'react'
+import { HiMenu, HiX } from 'react-icons/hi'
+import { motion } from "framer-motion";
+import { fadeIn } from "../utils/motion";
+import { trackButtonClick } from '../utils/analytics';
+import { HashLink } from 'react-router-hash-link';
+import ThemeToggle from './ThemeToggle';
+
 import React, { useState, useEffect } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
 import { motion } from "framer-motion";
@@ -5,6 +14,7 @@ import { fadeIn } from "../utils/motion";
 import { trackButtonClick } from "../utils/analytics";
 import { HashLink } from "react-router-hash-link";
 import { Link } from "react-router-dom";
+
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -46,7 +56,7 @@ const Navbar = () => {
       initial="hidden"
       whileInView="show"
       viewport={{ once: true }}
-      className="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-sm z-50 border-b border-gray-100 shadow-sm"
+      className="fixed top-0 left-0 right-0 navbar-bg backdrop-blur-sm z-50 border-b navbar-border shadow-sm transition-colors duration-300"
     >
       <div className="w-full flex justify-between items-center container mx-auto px-4 sm:px-6 lg:px-8 md:h-20 h-16">
         {/* Logo */}
@@ -57,19 +67,28 @@ const Navbar = () => {
           <div className="flex items-center gap-1">
             <motion.div
               whileHover={{ scale: 1.1 }}
-              className="w-4 h-4 bg-blue-600 rounded-full opacity-75 hover:opacity-100 transition-opacity"
+              className="w-4 h-4 rounded-full opacity-75 hover:opacity-100 transition-opacity" style={{ backgroundColor: 'var(--blue-ball-color)' }}
             ></motion.div>
             <motion.div
               whileHover={{ scale: 1.1 }}
-              className="w-4 h-4 bg-red-500 rounded-full -ml-2 hover:opacity-75 transition-opacity"
+              className="w-4 h-4 rounded-full -ml-2 hover:opacity-75 transition-opacity" style={{ backgroundColor: 'var(--red-ball-color)' }}
             ></motion.div>
           </div>
+
+          <motion.span 
+              whileHover={{ scale: 1.02 }}
+              className="text-xl font-bold text-heading-color hover:text-accent-color transition-colors duration-300"
+            >
+              BizFlow
+            </motion.span>
+
           <motion.span
             whileHover={{ scale: 1.02 }}
             className="text-xl font-bold text-gray-800 hover:text-blue-600 transition-colors"
           >
             BizFlow
           </motion.span>
+
         </motion.div>
 
         {/* Mobile Menu Button */}
@@ -87,6 +106,38 @@ const Navbar = () => {
         </motion.button>
 
         {/* Navigation Links - Desktop */}
+
+        <motion.div 
+          variants={fadeIn('down', 0.3)}
+          className="hidden md:flex items-center gap-8"
+        >
+          {navLinks.map((link, index) => (
+            <HashLink 
+              key={index}
+              smooth
+              to={link.href}
+              onClick={() => setActiveLink(link.href)}
+              className={`text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-accent-color after:transition-all duration-300 ${activeLink === link.href ? 'text-accent-color after:w-full' : 'text-text-color hover:text-heading-color'}`}
+            >
+              {link.label}
+            </HashLink>
+          ))}
+        </motion.div>
+
+        {/* CTA Button and Theme Toggle */}
+        <div className="flex items-center gap-4">
+          <motion.button
+            variants={fadeIn('left', 0.3)}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => trackButtonClick('Navbar CTA Button')}
+            className="hidden md:block bg-accent-color text-white dark:text-white px-6 py-2.5 rounded-lg hover:bg-accent-color/80 text-sm font-medium transition-all duration-300 hover:shadow-lg hover:shadow-accent-color/20"
+          >
+            <a href="#newsletter">Get in touch</a>
+          </motion.button>
+          <ThemeToggle />
+        </div>
+
         <motion.div
           variants={fadeIn("down", 0.3)}
           className="hidden md:flex items-center gap-10"
@@ -133,6 +184,7 @@ const Navbar = () => {
         >
           <a href="#newsletter">Get in touch</a>
         </motion.button>
+
       </div>
 
       {/* Mobile Menu */}
@@ -141,12 +193,29 @@ const Navbar = () => {
           variants={fadeIn("down", 0.2)}
           initial="hidden"
           animate="show"
-          className="md:hidden bg-white border-t border-gray-100 py-4"
+          className="md:hidden navbar-bg border-t navbar-border py-4 transition-colors duration-300"
         >
           <motion.div
             variants={fadeIn("down", 0.3)}
             className="container mx-auto px-4 space-y-6"
           >
+
+            {navLinks.map((link, index) => (
+              <HashLink
+                key={index}
+                smooth
+                to={link.href}
+                onClick={() => {
+                  setActiveLink(link.href);
+                  setIsMenuOpen(false);
+                }}
+                className={`block text-sm font-medium py-2 cursor-pointer transition-colors duration-300
+                  ${activeLink === link.href ? 'text-accent-color' : 'text-text-color hover:text-heading-color'}`}
+              >
+                {link.label}
+              </HashLink>
+            ))}
+
             {navLinks.map((link, index) =>
               link.href.includes("/#") ? (
                 <HashLink
@@ -185,12 +254,18 @@ const Navbar = () => {
                 </Link>
               )
             )}
+
             <motion.button
               variants={fadeIn("up", 0.4)}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
+
+              onClick={() => trackButtonClick('Mobile Navbar CTA Button')}
+              className="w-full bg-accent-color text-white px-6 py-2.5 rounded-lg hover:bg-accent-color/80 text-sm font-medium transition-all duration-300 hover:shadow-lg hover:shadow-accent-color/20"
+
               onClick={() => trackButtonClick("Mobile Navbar CTA Button")}
               className="w-full bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 text-sm font-medium transition-all hover:shadow-lg hover:shadow-blue-100"
+
             >
               <a href="#newsletter">Get in touch</a>
             </motion.button>
