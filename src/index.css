@@ -1,6 +1,15 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
 
-html {
+/* Theme variables */
+:root {
+  --font-roboto: 'Roboto', sans-serif;
+  --color-primary: #2563eb;
+}
+
+/* Base styles */
+html, body {
   scroll-behavior: smooth;
   scroll-padding-top: 100px;
   background-color: var(--background-color-light);
@@ -22,9 +31,40 @@ body {
 html[data-theme='dark'] body {
   background-color: var(--background-color-dark);
   color: var(--text-color-dark);
+  min-height: 100vh;
 }
 
-  /* customize container here using tailwindcss */
+/* Customize container */
 .section-container {
-  @apply  px-4 sm:px-6 lg:px-8 py-16 container mx-auto;
+  @apply px-4 sm:px-6 lg:px-8 py-16 container mx-auto;
+}
+
+/* Continuous Carousel Animation */
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 30s linear infinite;
+  width: max-content;
+}
+
+/* Slide cards */
+.slide {
+  min-width: 325px !important;
+  width: 325px !important;
+  height: 375px !important;
+  margin: 0 25px !important;
+  flex-shrink: 0 !important;
+}
+
+.slide > div {
+  width: 100% !important;
+  height: 100% !important;
+  min-width: unset !important;
 }

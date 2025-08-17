@@ -11,7 +11,8 @@ import {
   FiClock,
   FiLinkedin,
   FiTwitter,
-  FiGithub
+  FiGithub,
+  FiFacebook
 } from 'react-icons/fi';
 import { trackButtonClick } from '../utils/analytics';
 
@@ -141,6 +142,7 @@ const Contact = () => {
   const socialLinks = [
     { icon: FiLinkedin, link: 'https://linkedin.com/company/bizflow', label: 'LinkedIn' },
     { icon: FiTwitter, link: 'https://twitter.com/bizflow', label: 'Twitter' },
+    {icon:FiFacebook,label:'facebook'},
     { icon: FiGithub, link: 'https://github.com/bizflow', label: 'GitHub' }
   ];
 
