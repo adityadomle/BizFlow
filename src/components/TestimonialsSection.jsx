@@ -1,5 +1,7 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { fadeIn, textVariant } from "../utils/motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const testimonials = [
   {
@@ -100,133 +102,102 @@ const testimonials = [
   },
 ];
 
-const TestimonialsSection = () => {
-  return (
-    <section id="testimonials" className="py-16 px-4 max-w-7xl mx-auto">
-      <motion.div 
-        variants={fadeIn('up', 0.3)}
-        className="text-center mb-12"
-      >
-        <motion.h2 
-          variants={textVariant(0.2)}
-          className="text-3xl md:text-4xl font-bold mb-4"
-        >
-          What our happy client say
-        </motion.h2>
-        <motion.p 
-          variants={fadeIn('up', 0.4)}
-          className="text-gray-600"
-        >
-          Things that make it the best place to start trading
-        </motion.p>
-      </motion.div>
 
-      <motion.div 
-        variants={fadeIn('up', 0.5)}
-        className="relative"
-      >
-        <div className="overflow-hidden w-full">
-          <div className="flex animate-scroll">
-            {/* Original slides */}
-            {testimonials.map((testimonial, index) => (
-              <div key={`original-${testimonial.id}`} className="slide">
-                <motion.div 
-                  variants={fadeIn('up', 0.3 * (index + 1))}
-                  className="text-center bg-white p-4 rounded-lg shadow-md flex flex-col"
-                >
-                  <motion.div 
-                    variants={fadeIn('down', 0.4 * (index + 1))}
-                    className="w-24 h-24 mx-auto mb-4"
-                  >
-                    <motion.img
-                      variants={fadeIn('up', 0.5 * (index + 1))}
-                      src={testimonial.image}
-                      alt={testimonial.name}
+const TestimonialsSection = () => {
+  const [current, setCurrent] = useState(0);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  // Detect desktop vs mobile
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 1024);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Auto slide every 2s
+  useEffect(() => {
+    const timer = setInterval(() => {
+      nextSlide();
+    }, 2000);
+    return () => clearInterval(timer);
+  });
+
+  const nextSlide = () => {
+    setCurrent((prev) => (prev + 1) % testimonials.length);
+  };
+
+  const prevSlide = () => {
+    setCurrent((prev) =>
+      prev === 0 ? testimonials.length - 1 : prev - 1
+    );
+  };
+
+  return (
+    <section className="py-16 px-4 relative">
+      <h2 className="text-center text-3xl font-bold mb-10 ">Testimonials</h2>
+
+      <div className="overflow-hidden relative w-[80%] mx-auto">
+        <div
+          className="flex transition-transform duration-500 ease-in-out "
+          style={{
+            transform: `translateX(-${
+              current * (isDesktop ? 33.33 : 100)
+            }%)`,
+          }}
+        >
+          {testimonials.map((t, index) => {
+            // figure out the "active card"
+            let isActive = false;
+            const activeIndex = isDesktop ? (current + 1) % testimonials.length : current;
+            isActive = index === activeIndex;
+
+            return (
+              <motion.div
+                key={t.id}
+                className={`flex-shrink-0 px-2 ${
+                  isDesktop ? "w-1/3" : "w-full"
+                }`}
+                animate={{
+                  scale: isActive ? 1 : 0.85,
+                  opacity: isActive ? 1 : 0.5,
+                }}
+                transition={{ duration: 0.5 }}
+              >
+                <div className="bg-white rounded-2xl shadow-lg p-6 text-center relative  ">
+                  <div className="w-24 h-24 mx-auto mb-4">
+                    <img
+                      src={t.image}
+                      alt={t.name}
                       className="w-full h-full object-cover rounded-full"
                     />
-                  </motion.div>
-                  <motion.div 
-                    variants={fadeIn('up', 0.4 * (index + 1))}
-                    className="flex justify-center mb-2"
-                  >
-                    {[...Array(5)].map((_, starIndex) => (
-                      <motion.span 
-                        key={starIndex} 
-                        variants={fadeIn('up', 0.1 * starIndex)}
-                        className="text-blue-600"
-                      >
-                        ★
-                      </motion.span>
-                    ))}
-                  </motion.div>
-                  <motion.h3 
-                    variants={textVariant(0.3)}
-                    className="font-semibold text-xl mb-3"
-                  >
-                    {testimonial.name}
-                  </motion.h3>
-                  <motion.p 
-                    variants={fadeIn('up', 0.6 * (index + 1))}
-                    className="text-gray-600"
-                  >
-                    {testimonial.text}
-                  </motion.p>
-                </motion.div>
-              </div>
-            ))}
-            
-            {/* Duplicate slides for infinite effect */}
-            {testimonials.map((testimonial, index) => (
-              <div key={`duplicate-${testimonial.id}`} className="slide">
-                <motion.div 
-                  variants={fadeIn('up', 0.3 * (index + 1))}
-                  className="text-center bg-white p-4 rounded-lg shadow-md flex flex-col"
-                >
-                  <motion.div 
-                    variants={fadeIn('down', 0.4 * (index + 1))}
-                    className="w-24 h-24 mx-auto mb-4"
-                  >
-                    <motion.img
-                      variants={fadeIn('up', 0.5 * (index + 1))}
-                      src={testimonial.image}
-                      alt={testimonial.name}
-                      className="w-full h-full object-cover rounded-full"
-                    />
-                  </motion.div>
-                  <motion.div 
-                    variants={fadeIn('up', 0.4 * (index + 1))}
-                    className="flex justify-center mb-2"
-                  >
-                    {[...Array(5)].map((_, starIndex) => (
-                      <motion.span 
-                        key={starIndex} 
-                        variants={fadeIn('up', 0.1 * starIndex)}
-                        className="text-blue-600"
-                      >
-                        ★
-                      </motion.span>
-                    ))}
-                  </motion.div>
-                  <motion.h3 
-                    variants={textVariant(0.3)}
-                    className="font-semibold text-xl mb-3"
-                  >
-                    {testimonial.name}
-                  </motion.h3>
-                  <motion.p 
-                    variants={fadeIn('up', 0.6 * (index + 1))}
-                    className="text-gray-600"
-                  >
-                    {testimonial.text}
-                  </motion.p>
-                </motion.div>
-              </div>
-            ))}
-          </div>
+                  </div>
+                  <h3 className="font-semibold text-lg mb-2">{t.name}</h3>
+                  <p className="text-gray-600 text-sm">{t.text}</p>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
-      </motion.div>
+      </div>
+
+      {/* Buttons */}
+      <button
+        onClick={prevSlide}
+        className="absolute left-8 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-md"
+      >
+        <ChevronLeft size={24} />
+      </button>
+
+      <button
+        onClick={nextSlide}
+        className="absolute right-8 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-md"
+      >
+        <ChevronRight size={24} />
+      </button>
     </section>
   );
-};
-
+}
 export default TestimonialsSection;
