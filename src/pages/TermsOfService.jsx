@@ -57,20 +57,20 @@ const TermsOfService = () => {
     }`}>
       <Navbar />
       
-      {/* Hero Section */}
+      {/* Hero Section - Minimal Gap */}
       <motion.section 
         initial="hidden"
         animate="show"
-        className={`pt-24 pb-16 ${isDarkMode ? "bg-gray-900" : "bg-gray-50"}`}
+        className={`pt-24 pb-2 ${isDarkMode ? "bg-gray-900" : "bg-gray-50"}`}
       >
-        <div className="section-container">
+        <div className="section-container px-6">
           <motion.div 
             variants={textVariant()}
-            className="text-center mb-12"
+            className="text-center mb-4"
           >
             <motion.div
               variants={fadeIn("down", 0.2)}
-              className="flex items-center justify-center gap-2 mb-6"
+              className="flex items-center justify-center gap-2 mb-3"
             >
               <div className="w-5 h-5 bg-blue-600 rounded-full shadow-md"></div>
               <div className="w-5 h-5 bg-red-500 rounded-full -ml-2 shadow-md"></div>
@@ -79,44 +79,44 @@ const TermsOfService = () => {
               </span>
             </motion.div>
             
-            <h1 className={`text-4xl md:text-5xl font-bold mb-4 ${
+            <h1 className={`text-4xl md:text-5xl font-bold mb-2 ${
               isDarkMode ? "text-white" : "text-gray-900"
             }`}>
               Terms of Service
             </h1>
-            <p className={`text-lg md:text-xl max-w-3xl mx-auto ${
+            <p className={`text-lg md:text-xl max-w-3xl mx-auto mb-1 ${
               isDarkMode ? "text-gray-400" : "text-gray-600"
             }`}>
               Please read these terms carefully before using BizFlow, your modern business workflow dashboard
             </p>
-            <p className={`text-sm mt-4 ${isDarkMode ? "text-gray-500" : "text-gray-500"}`}>
+            <p className={`text-sm ${isDarkMode ? "text-gray-500" : "text-gray-500"}`}>
               Last updated: {new Date().toLocaleDateString()}
             </p>
           </motion.div>
         </div>
       </motion.section>
 
-      {/* Content Section */}
+      {/* Content Section - No Gap */}
       <motion.section 
         variants={fadeIn("up", 0.2)}
         initial="hidden"
         animate="show"
-        className="py-16"
+        className="pt-0 pb-8"
       >
-        <div className="section-container">
+        <div className="section-container px-6">
           <div className="max-w-4xl mx-auto">
             <motion.div 
               variants={fadeIn("up", 0.3)}
-              className={`rounded-2xl shadow-lg p-8 md:p-12 ${
+              className={`rounded-2xl shadow-lg p-6 md:p-8 ${
                 isDarkMode ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200"
               }`}
             >
-              <div className="space-y-8">
+              <div className="space-y-6">
                 {sections.map((section, index) => (
                   <motion.div
                     key={index}
                     variants={fadeIn("up", 0.1 * index)}
-                    className="space-y-4"
+                    className="space-y-3"
                   >
                     <h2 className={`text-xl md:text-2xl font-bold ${
                       isDarkMode ? "text-white" : "text-gray-900"
@@ -135,7 +135,7 @@ const TermsOfService = () => {
               {/* Footer Note */}
               <motion.div
                 variants={fadeIn("up", 0.5)}
-                className={`mt-12 pt-8 border-t text-center ${
+                className={`mt-8 pt-6 border-t text-center ${
                   isDarkMode ? "border-gray-700" : "border-gray-200"
                 }`}
               >
