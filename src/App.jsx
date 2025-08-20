@@ -26,6 +26,7 @@ import Partner from "./pages/Partner";
 import Contibutors from "./pages/Contibutors";
 import SupportCareer from "./pages/SupportCareer";
 import Faqs from "./pages/Faqs";
+import QuickChat from "./pages/QuickChat"; 
 
 // Router
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -56,8 +57,8 @@ function HashNavigation() {
 }
 
 function AppContent() {
-   const { isDarkMode } = useTheme();
-   const location = useLocation();
+  const { isDarkMode } = useTheme();
+  const location = useLocation();
 
   // Initialize analytics tracking hooks
   useScrollTracking();
@@ -75,7 +76,7 @@ function AppContent() {
 
   return (
     <main className="relative min-h-screen overflow-x-hidden scroll-smooth transition-colors duration-300">
-      {/* Background Gradients (fixed across the site, non-intrusive) */}
+      {/* Background Gradients */}
       <div className="pointer-events-none fixed inset-0 z-0">
         <div className={`absolute -top-28 -left-28 w-[500px] h-[500px] rounded-full blur-[80px] ${isDarkMode
             ? "bg-gradient-to-tr from-indigo-500/10 to-pink-500/10"
@@ -89,8 +90,6 @@ function AppContent() {
 
       <div className="relative z-10 overflow-hidden">
         <Navbar />
-
-        {/* Hash Navigation Handler */}
         <HashNavigation />
 
         <Routes>
@@ -112,24 +111,28 @@ function AppContent() {
                 </section>
                 <section id="testimonials"><TestimonialsSection /></section>
                 <section id="newsletter"><NewsletterSection /></section>
+                <Footer />
               </>
             }
           />
-          <Route path="/partner" element={<Partner />} />
-          <Route path="/analytics" element={<AnalyticsDashboard />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/contributors" element={<Contibutors />} />
-          <Route path="/support-career" element={<SupportCareer />} />
-          <Route path="/faqs" element={<Faqs />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="/partner" element={<><Partner /><Footer /></>} />
+          <Route path="/analytics" element={<><AnalyticsDashboard /><Footer /></>} />
+          <Route path="/contact" element={<><Contact /><Footer /></>} />
+          <Route path="/contributors" element={<><Contibutors /><Footer /></>} />
+          <Route path="/support-career" element={<><SupportCareer /><Footer /></>} />
+          <Route path="/faqs" element={<><Faqs /><Footer /></>} />
+          <Route path="/quick-chat" element={<QuickChat />} />
+          <Route path="*" element={<><NotFound /><Footer /></>} />
         </Routes>
 
-        <Footer />
+        {/* Remove global Footer from here */}
         <ScrollToTop />
       </div>
     </main>
   );
- }
+}
+
+
 
 function App() {
   return (
