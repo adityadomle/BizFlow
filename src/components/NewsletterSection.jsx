@@ -1,27 +1,49 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { HiArrowRight } from 'react-icons/hi'
-import { motion, AnimatePresence } from "framer-motion";
-import { fadeIn, textVariant } from "../utils/motion";
+import { motion, AnimatePresence } from "framer-motion"
+import { fadeIn, textVariant } from "../utils/motion"
 
 const NewsletterSection = () => {
-  const [email, setEmail] = useState('');
-  const [showPopup, setShowPopup] = useState(false);
+  const [email, setEmail] = useState('')
+  const [showPopup, setShowPopup] = useState(false)
+  const [error, setError] = useState('')
+  const [registeredEmails, setRegisteredEmails] = useState([]) // store registered emails
+
+  const validateEmail = (email) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return regex.test(email)
+  }
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     if (!email.trim()) {
-      alert('Please enter your email address.');
-      return;
+      setError('Please enter your email address.')
+      return
     }
 
-    console.log('Email submitted:', email);
+    if (!validateEmail(email)) {
+      setError('Please enter a valid email address (e.g. user@gmail.com).')
+      return
+    }
 
-    setShowPopup(true);
-    setEmail('');
+    // Check if email already exists
+    if (registeredEmails.includes(email.toLowerCase())) {
+      setError('⚠ This email is already registered.')
+      return
+    }
 
-    setTimeout(() => setShowPopup(false), 3000);
-  };
+    // If new email, add it
+    setRegisteredEmails([...registeredEmails, email.toLowerCase()])
+    setError('')
+    console.log('Email submitted:', email)
+
+    setShowPopup(true)
+    setEmail('')
+
+    setTimeout(() => setShowPopup(false), 3000)
+  }
+
   return (
     <section id="newsletter" className="section-container px-4 md:px-0">
       <motion.div
@@ -66,7 +88,6 @@ const NewsletterSection = () => {
                 onSubmit={handleSubmit}
                 className="flex flex-col sm:flex-row gap-4 sm:gap-0 relative"
               >
-
                 <motion.input
                   variants={fadeIn('right', 0.7)}
                   type="email"
@@ -74,7 +95,8 @@ const NewsletterSection = () => {
                   placeholder="Enter your email address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full sm:w-auto md:w-80 px-4 sm:px-6 py-3 sm:py-4 rounded-xl sm:rounded-l-xl sm:rounded-r-none focus:outline-none focus:ring-2 focus:ring-green-500 bg-white"
+                  className="w-full sm:w-auto md:w-80 px-4 sm:px-6 py-3 sm:py-4 rounded-xl sm:rounded-l-xl sm:rounded-r-none focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800 placeholder-gray-500"
+                  style={{ backgroundColor: 'white' }}
                 />
                 <motion.button
                   type="submit"
@@ -86,16 +108,33 @@ const NewsletterSection = () => {
                   <span>Discover</span>
                   <HiArrowRight className="w-5 h-5" />
                 </motion.button>
+
+                {/* Error Message */}
                 <AnimatePresence>
-                  {showPopup && (
+                  {error && (
                     <motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
                       transition={{ duration: 0.3 }}
-                      className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-blue-500 text-white px-4 py-2 rounded-lg shadow-lg"
+                      className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-red-500 text-white px-4 py-2 rounded-lg shadow-lg"
                     >
-                      ✅ Email Sent!
+                      {error}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                {/* Success Message */}
+                <AnimatePresence>
+                  {showPopup && !error && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      transition={{ duration: 0.3 }}
+                      className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg"
+                    >
+                      ✅ Thank you for Subscribing!
                     </motion.div>
                   )}
                 </AnimatePresence>

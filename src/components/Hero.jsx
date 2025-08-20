@@ -3,23 +3,30 @@ import { motion, AnimatePresence } from "framer-motion";
 import { fadeIn, textVariant } from "../utils/motion";
 import heroImage from "../assets/hero-image.png";
 import { trackButtonClick, trackNewsletterSignup } from "../utils/analytics";
+import { useTheme } from "../context/ThemeContext";
 
 const Hero = () => {
   const [email, setEmail] = useState("");
   const [showPopup, setShowPopup] = useState(false);
+  const [error, setError] = useState("");
+  const { isDarkMode } = useTheme();
 
   const handleSend = () => {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!email) {
-      alert("Please enter an email address.");
+      setError("Please enter an email address.");
+      setTimeout(() => setError(""), 2000);
       return;
     }
 
     if (!emailPattern.test(email)) {
-      alert("Please enter a valid email address.");
+      setError("Please enter a valid email address.");
+      setTimeout(() => setError(""), 2000);
       return;
     }
+
+    setError("");
 
     console.log("Email to send:", email);
 
@@ -42,11 +49,23 @@ const Hero = () => {
           whileInView="show"
         >
           {/* Star badge */}
-          <div className="flex  items-center gap-2 bg-gray-50 w-fit px-4 py-2 rounded-full hover:bg-gray-100 transition-colors cursor-pointer group">
+          <div
+            className={`flex items-center gap-2 w-fit px-4 py-2 rounded-full hover:bg-gray-100 transition-colors cursor-pointer group ${
+              isDarkMode
+                ? "bg-gray-800 hover:bg-gray-700"
+                : "bg-gray-50 hover:bg-gray-100"
+            }`}
+          >
             <span className="text-blue-600 group-hover:scale-110 transition-transform">
               ★
             </span>
-            <span className="text-sm font-medium">Jump start your growth</span>
+            <span
+              className={`text-sm font-medium transition-colors ${
+                isDarkMode ? "text-gray-300" : "text-gray-700"
+              }`}
+            >
+              Jump start your growth
+            </span>
           </div>
         </motion.div>
 
@@ -54,7 +73,9 @@ const Hero = () => {
           variants={textVariant(0.3)}
           initial="hidden"
           whileInView="show"
-          className="text-4xl md:text-5xl lg:text-6xl  font-bold leading-tight"
+          className={`text-4xl md:text-5xl lg:text-6xl font-bold leading-tight transition-colors ${
+            isDarkMode ? "text-white" : "text-gray-900"
+          }`}
         >
           We boost the growth for{" "}
           <span className="text-blue-600 relative inline-block">
@@ -68,7 +89,9 @@ const Hero = () => {
           variants={fadeIn("up", 0.4)}
           initial="hidden"
           whileInView="show"
-          className="text-gray-600 text-lg md:text-xl max-w-xl -mt-2"
+          className={`text-lg md:text-xl max-w-xl -mt-2 transition-colors ${
+            isDarkMode ? "text-gray-300" : "text-gray-600"
+          }`}
         >
           Get the most accurate leads, sales people training and conversions,
           tools and more — all within the same one billing.
@@ -78,14 +101,18 @@ const Hero = () => {
           variants={fadeIn("up", 0.5)}
           initial="hidden"
           whileInView="show"
-          className="flex gap-3 max-w-md relative -mt-1"
+          className="flex flex-wrap gap-3 max-w-md relative -mt-1"
         >
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email address"
-            className="flex-1 px-6 py-4 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100  transition-all text-gray-600"
+            className={`flex-1 px-6 py-2 min-[440px]:py-4  border rounded-xl focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 transition-all ${
+              isDarkMode
+                ? "border-gray-600 bg-gray-800 text-white placeholder-gray-400 focus:ring-blue-900"
+                : "border-gray-200 bg-white text-gray-600 placeholder-gray-500 focus:ring-blue-100"
+            }`}
           />
           <button
             onClick={() => {
@@ -93,10 +120,26 @@ const Hero = () => {
               trackNewsletterSignup("hero_section");
               handleSend();
             }}
-            className="bg-blue-600 text-white px-8 py-4 rounded-xl hover:bg-blue-700 cursor-pointer transition-all hover:shadow-lg hover:shadow-blue-100 active:scale-95"
+            className="bg-blue-600 text-white px-8 min-[440px]:py-4 py-2 rounded-xl hover:bg-blue-700 cursor-pointer transition-all hover:shadow-lg hover:shadow-blue-100 active:scale-95"
           >
             →
           </button>
+
+          {/* Error Message */}
+          <AnimatePresence>
+            {error && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3 }}
+                className="absolute -bottom-20 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-4 py-2 rounded-lg shadow-lg text-sm"
+              >
+                ⚠️ Invalid mail
+              </motion.div>
+            )}
+          </AnimatePresence>
+
           {/* Popup Message */}
           <AnimatePresence>
             {showPopup && (
@@ -134,4 +177,3 @@ const Hero = () => {
 };
 
 export default Hero;
-

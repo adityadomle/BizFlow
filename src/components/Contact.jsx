@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { fadeIn, textVariant } from '../utils/motion';
+import { useTheme } from '../context/ThemeContext';
 import { 
   FiMail, 
   FiPhone, 
@@ -17,6 +18,7 @@ import {
 import { trackButtonClick } from '../utils/analytics';
 
 const Contact = () => {
+  const { isDarkMode } = useTheme();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -84,7 +86,7 @@ const Contact = () => {
       // Track form submission
       trackButtonClick('Contact Form Submit');
       
-      console.log('Contact form submitted:',);
+      console.log('Contact form submitted:', formData);
       
       // Simulate API call delay
       await new Promise(resolve => setTimeout(resolve, 1500));
@@ -224,29 +226,29 @@ const Contact = () => {
         <div className="max-w-4xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Form */}
-            <motion.div
-              variants={fadeIn('right', 0.7)}
-              className="bg-white p-8 rounded-2xl shadow-lg"
-            >
-              <h2 className="text-2xl font-bold mb-6">Send us a message</h2>
+                         <motion.div
+               variants={fadeIn('right', 0.7)}
+               className={`p-8 rounded-2xl shadow-lg ${isDarkMode ? 'bg-slate-800 border border-slate-700' : 'bg-white'}`}
+             >
+               <h2 className={`text-2xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>Send us a message</h2>
               
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      <FiUser className="inline w-4 h-4 mr-2" />
-                      Full Name
-                    </label>
+                                         <label className={`block text-sm font-medium mb-2 ${isDarkMode ? 'text-gray-200' : 'text-gray-700'}`}>
+                       <FiUser className={`inline w-4 h-4 mr-2 ${isDarkMode ? 'text-blue-400' : 'text-gray-700'}`} />
+                       Full Name
+                     </label>
                     <input
                       type="text"
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
                       required
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
-                        errors.name ? 'border-red-500' : 'border-gray-300'
-                      }`}
-                      placeholder="John Doe"
+                                             className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
+                         errors.name ? 'border-red-500' : isDarkMode ? 'border-slate-600' : 'border-gray-300'
+                       } ${isDarkMode ? 'bg-slate-700 text-white placeholder-gray-300' : 'bg-white text-gray-800 placeholder-gray-500'}`}
+                       placeholder="John Doe"
                     />
                     {errors.name && (
                       <p className="text-red-500 text-sm mt-1">{errors.name}</p>
@@ -254,20 +256,20 @@ const Contact = () => {
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      <FiMail className="inline w-4 h-4 mr-2" />
-                      Email
-                    </label>
+                                         <label className={`block text-sm font-medium mb-2 ${isDarkMode ? 'text-gray-200' : 'text-gray-700'}`}>
+                       <FiMail className={`inline w-4 h-4 mr-2 ${isDarkMode ? 'text-blue-400' : 'text-gray-700'}`} />
+                       Email
+                     </label>
                     <input
                       type="email"
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
-                        errors.email ? 'border-red-500' : 'border-gray-300'
-                      }`}
-                      placeholder="john@example.com"
+                                             className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
+                         errors.email ? 'border-red-500' : isDarkMode ? 'border-slate-600' : 'border-gray-300'
+                       } ${isDarkMode ? 'bg-slate-700 text-white placeholder-gray-300' : 'bg-white text-gray-800 placeholder-gray-500'}`}
+                       placeholder="john@example.com"
                     />
                     {errors.email && (
                       <p className="text-red-500 text-sm mt-1">{errors.email}</p>
@@ -276,20 +278,20 @@ const Contact = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    <FiMessageSquare className="inline w-4 h-4 mr-2" />
-                    Subject
-                  </label>
+                                     <label className={`block text-sm font-medium mb-2 ${isDarkMode ? 'text-gray-200' : 'text-gray-700'}`}>
+                     <FiMessageSquare className={`inline w-4 h-4 mr-2 ${isDarkMode ? 'text-blue-400' : 'text-gray-700'}`} />
+                     Subject
+                   </label>
                   <input
                     type="text"
                     name="subject"
                     value={formData.subject}
                     onChange={handleInputChange}
                     required
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
-                      errors.subject ? 'border-red-500' : 'border-gray-300'
-                    }`}
-                    placeholder="How can we help you?"
+                                         className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
+                       errors.subject ? 'border-red-500' : isDarkMode ? 'border-slate-600' : 'border-gray-300'
+                     } ${isDarkMode ? 'bg-slate-700 text-white placeholder-gray-300' : 'bg-white text-gray-800 placeholder-gray-500'}`}
+                     placeholder="How can we help you?"
                   />
                   {errors.subject && (
                     <p className="text-red-500 text-sm mt-1">{errors.subject}</p>
@@ -297,20 +299,20 @@ const Contact = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    <FiMessageSquare className="inline w-4 h-4 mr-2" />
-                    Message
-                  </label>
+                                     <label className={`block text-sm font-medium mb-2 ${isDarkMode ? 'text-gray-200' : 'text-gray-700'}`}>
+                     <FiMessageSquare className={`inline w-4 h-4 mr-2 ${isDarkMode ? 'text-blue-400' : 'text-gray-700'}`} />
+                     Message
+                   </label>
                   <textarea
                     name="message"
                     value={formData.message}
                     onChange={handleInputChange}
                     required
                     rows={6}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none ${
-                      errors.message ? 'border-red-500' : 'border-gray-300'
-                    }`}
-                    placeholder="Tell us about your project or inquiry..."
+                                         className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none ${
+                       errors.message ? 'border-red-500' : isDarkMode ? 'border-slate-600' : 'border-gray-300'
+                     } ${isDarkMode ? 'bg-slate-700 text-white placeholder-gray-300' : 'bg-white text-gray-800 placeholder-gray-500'}`}
+                     placeholder="Tell us about your project or inquiry..."
                   />
                   {errors.message && (
                     <p className="text-red-500 text-sm mt-1">{errors.message}</p>
@@ -364,16 +366,16 @@ const Contact = () => {
               variants={fadeIn('left', 0.8)}
               className="space-y-8"
             >
-              <div className="bg-gradient-to-br from-blue-50 to-indigo-100 p-8 rounded-2xl">
-                <h3 className="text-xl font-semibold mb-4">Why choose BizFlow?</h3>
+              <div className={`p-8 rounded-2xl ${isDarkMode ? 'bg-slate-800 border border-slate-700' : 'bg-gradient-to-br from-blue-50 to-indigo-100'}`}>
+                <h3 className={`text-xl font-semibold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>Why choose BizFlow?</h3>
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
                     <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                       <span className="text-white text-xs">✓</span>
                     </div>
                     <div>
-                      <p className="font-medium">Expert Team</p>
-                      <p className="text-sm text-gray-600">Experienced professionals ready to help</p>
+                      <p className={`font-medium ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>Expert Team</p>
+                      <p className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>Experienced professionals ready to help</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
@@ -381,8 +383,8 @@ const Contact = () => {
                       <span className="text-white text-xs">✓</span>
                     </div>
                     <div>
-                      <p className="font-medium">Fast Response</p>
-                      <p className="text-sm text-gray-600">We respond within 24 hours</p>
+                      <p className={`font-medium ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>Fast Response</p>
+                      <p className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>We respond within 24 hours</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
@@ -390,8 +392,8 @@ const Contact = () => {
                       <span className="text-white text-xs">✓</span>
                     </div>
                     <div>
-                      <p className="font-medium">Custom Solutions</p>
-                      <p className="text-sm text-gray-600">Tailored to your specific needs</p>
+                      <p className={`font-medium ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>Custom Solutions</p>
+                      <p className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>Tailored to your specific needs</p>
                     </div>
                   </div>
                 </div>
@@ -417,7 +419,7 @@ const Contact = () => {
                   </div>
                 </div>
                 <p className="text-xs text-gray-500 mt-4">
-                  * All times are in Pacific Standard Time (PST)
+                  * All times are in Indian Standard Time (IST)
                 </p>
               </div>
 

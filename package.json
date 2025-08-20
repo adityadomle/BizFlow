@@ -10,8 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+ feature/ai-assistant-suggestions
     "@google/genai": "^1.15.0",
     "@google/generative-ai": "^0.24.1",
+
+    "@heroicons/react": "^2.2.0",
+ main
     "@tailwindcss/vite": "^4.0.8",
     "autoprefixer": "^10.4.21",
     "axios": "^1.11.0",

@@ -84,7 +84,7 @@ const ServicesSection = () => {
             variants={fadeIn('up', 0.9)}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="mt-8 bg-purple-200 transition-all duration-300 ease-in-out text-gray-600 px-8 py-3 cursor-pointer rounded-full hover:bg-purple-300 hover:scale-105 hover:shadow-[0_0_15px_#e9d5ff]"
+            className="mt-8 bg-purple-200 dark:bg-purple-600 transition-all duration-300 ease-in-out text-gray-600 dark:text-white px-8 py-3 cursor-pointer rounded-full hover:bg-purple-300 dark:hover:bg-purple-700 hover:scale-105 hover:shadow-[0_0_15px_#e9d5ff] dark:hover:shadow-[0_0_18px_#7c3aed]"
           >
             Get started
           </motion.button>

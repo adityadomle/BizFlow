@@ -6,6 +6,28 @@
 :root {
   --font-roboto: 'Roboto', sans-serif;
   --color-primary: #2563eb;
+  
+  /* Light mode colors */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-tertiary: #f1f5f9;
+  --text-primary: #111827;
+  --text-secondary: #374151;
+  --text-muted: #6b7280;
+  --border-color: #e2e8f0;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Dark mode colors */
+.dark {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-tertiary: #334155;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #64748b;
+  --border-color: #334155;
+  --shadow-color: rgba(0, 0, 0, 0.3);
 }
 
 /* Base styles */
@@ -13,6 +35,9 @@ html, body {
   scroll-behavior: smooth;
   scroll-padding-top: 100px;
   min-height: 100vh;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Customize container */
@@ -30,9 +55,18 @@ html, body {
   }
 }
 
+.animate-scroll:hover {
+  animation-play-state: paused; /* pause when hovering over carousel */
+}
+
 .animate-scroll {
   animation: scroll 30s linear infinite;
   width: max-content;
+}
+
+/* Pause when React adds the "paused" class (click/tap) */
+.animate-scroll.paused {
+  animation-play-state: paused;
 }
 
 /* Slide cards */
@@ -48,4 +82,41 @@ html, body {
   width: 100% !important;
   height: 100% !important;
   min-width: unset !important;
+}
+
+/* Dark mode utility classes */
+.dark .bg-white {
+  background-color: var(--bg-secondary);
+}
+
+.dark .text-gray-800 {
+  color: var(--text-primary);
+}
+
+.dark .text-gray-600 {
+  color: var(--text-secondary);
+}
+
+.dark .text-gray-900 {
+  color: var(--text-primary);
+}
+
+.dark .bg-gray-50 {
+  background-color: var(--bg-secondary);
+}
+
+.dark .bg-gray-100 {
+  background-color: var(--bg-tertiary);
+}
+
+.dark .border-gray-200 {
+  border-color: var(--border-color);
+}
+
+.dark .border-gray-300 {
+  border-color: var(--border-color);
+}
+
+.dark .shadow-lg {
+  box-shadow: 0 10px 15px -3px var(--shadow-color);
 }

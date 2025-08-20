@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useTheme } from '../context/ThemeContext';
 
 const AnalyticsDashboard = () => {
-  const [analyticsData, setAnalyticsData] = useState(null);
+  const { isDarkMode } = useTheme();
+  const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   // Mock data for demonstration - replace with actual GA4 API calls
   const mockData = {
@@ -36,7 +37,7 @@ const AnalyticsDashboard = () => {
   useEffect(() => {
     // Simulate API call delay
     const timer = setTimeout(() => {
-      setAnalyticsData(mockData);
+      setData(mockData);
       setLoading(false);
     }, 1200);
     return () => clearTimeout(timer);
@@ -44,43 +45,25 @@ const AnalyticsDashboard = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className={`min-h-screen flex items-center justify-center ${isDarkMode ? 'bg-slate-900' : 'bg-gray-50'}`}>
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading analytics data...</p>
+          <p className={`mt-4 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>Loading analytics data...</p>
         </div>
       </div>
     );
   }
 
-  if (error) {
+  if (!data) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className={`min-h-screen flex items-center justify-center ${isDarkMode ? 'bg-slate-900' : 'bg-gray-50'}`}>
         <div className="text-center">
-          <div className="text-red-500 text-6xl mb-4">⚠️</div>
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">Error Loading Analytics</h2>
-          <p className="text-gray-600 mb-4">{error}</p>
-          <button 
-            onClick={() => window.location.reload()}
-            className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            Retry
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  if (!analyticsData) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="text-gray-400 text-6xl mb-4">📊</div>
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">No Analytics Data Yet</h2>
-          <p className="text-gray-600 mb-4">
+          <div className={`text-6xl mb-4 ${isDarkMode ? 'text-gray-500' : 'text-gray-400'}`}>📊</div>
+          <h2 className={`text-2xl font-bold mb-2 ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>No Analytics Data Yet</h2>
+          <p className={`mb-4 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
             Your analytics dashboard will appear here once you start receiving visitor data.
           </p>
-          <p className="text-sm text-gray-500">
+          <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
             Make sure Google Analytics is properly configured and tracking your website.
           </p>
         </div>
@@ -89,7 +72,7 @@ const AnalyticsDashboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <div className={`min-h-screen p-6 ${isDarkMode ? 'bg-slate-900' : 'bg-gray-50'}`}>
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div 
@@ -97,8 +80,8 @@ const AnalyticsDashboard = () => {
           animate={{ opacity: 1, y: 0 }}
           className="mb-8"
         >
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Analytics Dashboard</h1>
-          <p className="text-gray-700 text-lg font-medium mb-4 pt-5">Track your website performance and user engagement</p>
+          <h1 className={`text-3xl font-bold mb-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Analytics Dashboard</h1>
+          <p className={`text-lg font-medium mb-4 pt-5 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>Track your website performance and user engagement</p>
         </motion.div>
 
         {/* Key Metrics Cards */}
@@ -108,7 +91,7 @@ const AnalyticsDashboard = () => {
           transition={{ delay: 0.1 }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
         >
-          <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+          <div className={`rounded-lg shadow-sm p-6 border ${isDarkMode ? 'bg-slate-800 border-slate-700' : 'bg-white border-gray-200'}`}>
             <div className="flex items-center">
               <div className="p-2 bg-blue-100 rounded-lg">
                 <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -116,13 +99,13 @@ const AnalyticsDashboard = () => {
                 </svg>
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Today's Visitors</p>
-                <p className="text-2xl font-bold text-gray-900">{analyticsData.visitors.today.toLocaleString()}</p>
+                <p className={`text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>Today&apos;s Visitors</p>
+                <p className={`text-2xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{data.visitors.today.toLocaleString()}</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+          <div className={`rounded-lg shadow-sm p-6 border ${isDarkMode ? 'bg-slate-800 border-slate-700' : 'bg-white border-gray-200'}`}>
             <div className="flex items-center">
               <div className="p-2 bg-green-100 rounded-lg">
                 <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -130,13 +113,13 @@ const AnalyticsDashboard = () => {
                 </svg>
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">This Week</p>
-                <p className="text-2xl font-bold text-gray-900">{analyticsData.visitors.thisWeek.toLocaleString()}</p>
+                <p className={`text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>This Week</p>
+                <p className={`text-2xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{data.visitors.thisWeek.toLocaleString()}</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+          <div className={`rounded-lg shadow-sm p-6 border ${isDarkMode ? 'bg-slate-800 border-slate-700' : 'bg-white border-gray-200'}`}>
             <div className="flex items-center">
               <div className="p-2 bg-purple-100 rounded-lg">
                 <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -144,13 +127,13 @@ const AnalyticsDashboard = () => {
                 </svg>
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Avg. Session</p>
-                <p className="text-2xl font-bold text-gray-900">{analyticsData.engagement.avgSessionDuration}</p>
+                <p className={`text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>Avg. Session</p>
+                <p className={`text-2xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{data.engagement.avgSessionDuration}</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+          <div className={`rounded-lg shadow-sm p-6 border ${isDarkMode ? 'bg-slate-800 border-slate-700' : 'bg-white border-gray-200'}`}>
             <div className="flex items-center">
               <div className="p-2 bg-orange-100 rounded-lg">
                 <svg className="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -158,8 +141,8 @@ const AnalyticsDashboard = () => {
                 </svg>
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Bounce Rate</p>
-                <p className="text-2xl font-bold text-gray-900">{analyticsData.engagement.bounceRate}</p>
+                <p className={`text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>Bounce Rate</p>
+                <p className={`text-2xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{data.engagement.bounceRate}</p>
               </div>
             </div>
           </div>
@@ -172,19 +155,19 @@ const AnalyticsDashboard = () => {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
-            className="bg-white rounded-lg shadow-sm p-6 border border-gray-200"
+            className={`rounded-lg shadow-sm p-6 border ${isDarkMode ? 'bg-slate-800 border-slate-700' : 'bg-white border-gray-200'}`}
           >
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Popular Pages</h3>
+            <h3 className={`text-lg font-semibold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Popular Pages</h3>
             <div className="space-y-4">
-              {analyticsData.popularPages.map((page, index) => (
+              {data.popularPages.map((page, index) => (
                 <div key={index} className="flex items-center justify-between">
                   <div className="flex items-center">
                     <div className="w-3 h-3 bg-blue-500 rounded-full mr-3"></div>
-                    <span className="text-gray-700 font-medium">{page.page}</span>
+                    <span className={`font-medium ${isDarkMode ? 'text-gray-200' : 'text-gray-700'}`}>{page.page}</span>
                   </div>
                   <div className="flex items-center space-x-4">
-                    <span className="text-gray-600">{page.views.toLocaleString()}</span>
-                    <span className="text-sm text-gray-500">{page.percentage}%</span>
+                    <span className={`${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>{page.views.toLocaleString()}</span>
+                    <span className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>{page.percentage}%</span>
                   </div>
                 </div>
               ))}
@@ -196,17 +179,17 @@ const AnalyticsDashboard = () => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3 }}
-            className="bg-white rounded-lg shadow-sm p-6 border border-gray-200"
+            className={`rounded-lg shadow-sm p-6 border ${isDarkMode ? 'bg-slate-800 border-slate-700' : 'bg-white border-gray-200'}`}
           >
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Top Referrers</h3>
+            <h3 className={`text-lg font-semibold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Top Referrers</h3>
             <div className="space-y-4">
-              {analyticsData.topReferrers.map((referrer, index) => (
+              {data.topReferrers.map((referrer, index) => (
                 <div key={index} className="flex items-center justify-between">
                   <div className="flex items-center">
                     <div className="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
-                    <span className="text-gray-700 font-medium">{referrer.source}</span>
+                    <span className={`font-medium ${isDarkMode ? 'text-gray-200' : 'text-gray-700'}`}>{referrer.source}</span>
                   </div>
-                  <span className="text-gray-600">{referrer.visitors.toLocaleString()}</span>
+                  <span className={`${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>{referrer.visitors.toLocaleString()}</span>
                 </div>
               ))}
             </div>
@@ -218,21 +201,21 @@ const AnalyticsDashboard = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="mt-8 bg-white rounded-lg shadow-sm p-6 border border-gray-200"
+          className={`mt-8 rounded-lg shadow-sm p-6 border ${isDarkMode ? 'bg-slate-800 border-slate-700' : 'bg-white border-gray-200'}`}
         >
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Engagement Metrics</h3>
+          <h3 className={`text-lg font-semibold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Engagement Metrics</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center">
-              <div className="text-3xl font-bold text-blue-600 mb-2">{analyticsData.engagement.pagesPerSession}</div>
-              <p className="text-sm text-gray-600">Pages per Session</p>
+              <div className="text-3xl font-bold text-blue-600 mb-2">{data.engagement.pagesPerSession}</div>
+              <p className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>Pages per Session</p>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-green-600 mb-2">{analyticsData.engagement.avgSessionDuration}</div>
-              <p className="text-sm text-gray-600">Average Session Duration</p>
+              <div className="text-3xl font-bold text-green-600 mb-2">{data.engagement.avgSessionDuration}</div>
+              <p className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>Average Session Duration</p>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-purple-600 mb-2">{analyticsData.engagement.bounceRate}</div>
-              <p className="text-sm text-gray-600">Bounce Rate</p>
+              <div className="text-3xl font-bold text-purple-600 mb-2">{data.engagement.bounceRate}</div>
+              <p className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>Bounce Rate</p>
             </div>
           </div>
         </motion.div>
@@ -242,7 +225,7 @@ const AnalyticsDashboard = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
-          className="mt-8 text-center text-sm text-gray-500"
+          className={`mt-8 text-center text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}
         >
           <p>Data updates every 24 hours • Last updated: {new Date().toLocaleDateString()}</p>
           <p className="mt-1">

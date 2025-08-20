@@ -1,5 +1,7 @@
-import React, { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import "./App.css";
+import { useTheme } from "./context/ThemeContext";
+import { useLocation } from "react-router-dom";
 
 // Components
 import Navbar from "./components/Navbar";
@@ -22,9 +24,11 @@ import AnalyticsDashboard from "./components/AnalyticsDashboard";
 // Pages
 import Partner from "./pages/Partner";
 import Contibutors from "./pages/Contibutors";
+import SupportCareer from "./pages/SupportCareer";
+import Faqs from "./pages/Faqs";
 
 // Router
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // Analytics hooks
 import useScrollTracking from "./utils/useScrollTracking";
@@ -35,7 +39,7 @@ import AIBusinessBOT from "./components/AIBusinessBOT";
 // Hash Navigation component
 function HashNavigation() {
   const location = useLocation();
-  const previousHash = React.useRef(location.hash);
+  const previousHash = useRef(location.hash);
 
   useEffect(() => {
     if (location.hash && location.hash !== previousHash.current) {
@@ -52,23 +56,86 @@ function HashNavigation() {
   return null;
 }
 
-function App() {
+function AppContent() {
+   const { isDarkMode } = useTheme();
+   const location = useLocation();
+
   // Initialize analytics tracking hooks
   useScrollTracking();
   useTimeTracking();
 
   // Track page views on route changes
   useEffect(() => {
-    const currentPath = window.location.pathname;
+    const currentPath = location.pathname;
     const pageName =
       currentPath === "/"
         ? "Home"
         : currentPath.charAt(1).toUpperCase() + currentPath.slice(2);
     trackPageView(pageName);
-  }, []);
+  }, [location.pathname]);
 
   return (
+    <main className="relative min-h-screen overflow-x-hidden scroll-smooth transition-colors duration-300">
+      {/* Background Gradients (fixed across the site, non-intrusive) */}
+      <div className="pointer-events-none fixed inset-0 z-0">
+        <div className={`absolute -top-28 -left-28 w-[500px] h-[500px] rounded-full blur-[80px] ${isDarkMode
+            ? "bg-gradient-to-tr from-indigo-500/10 to-pink-500/10"
+            : "bg-gradient-to-tr from-indigo-500/20 to-pink-500/20"
+          }`}></div>
+        <div className={`absolute -bottom-32 -right-32 w-[600px] h-[600px] rounded-full blur-[100px] ${isDarkMode
+            ? "bg-gradient-to-tr from-blue-500/10 to-purple-500/10"
+            : "bg-gradient-to-tr from-blue-500/20 to-purple-500/20"
+          }`}></div>
+      </div>
+
+      <div className="relative z-10 overflow-hidden">
+        <Navbar />
+
+        {/* Hash Navigation Handler */}
+        <HashNavigation />
+
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <section id="home"><Hero /></section>
+                <section id="about">
+                  <CompanyLogo />
+                  <PurposeSection />
+                  <FeaturesSection />
+                </section>
+                <section id="services">
+                  <ScheduleSection />
+                  <MonitorSection />
+                  <PricingSection />
+                  <ServicesSection />
+                </section>
+                <section id="testimonials"><TestimonialsSection /></section>
+                <section id="newsletter"><NewsletterSection /></section>
+              </>
+            }
+          />
+          <Route path="/partner" element={<Partner />} />
+          <Route path="/analytics" element={<AnalyticsDashboard />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/contributors" element={<Contibutors />} />
+          <Route path="/support-career" element={<SupportCareer />} />
+          <Route path="/faqs" element={<Faqs />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+
+        <Footer />
+        <ScrollToTop />
+      </div>
+    </main>
+  );
+ }
+
+function App() {
+  return (
     <Router>
+ feature/ai-assistant-suggestions
       <main className="relative min-h-screen overflow-x-hidden scroll-smooth">
         {/* Background Gradient Blob */}
         <div className="absolute -top-28 -left-28 w-[500px] h-[500px] bg-gradient-to-tr from-indigo-500/20 to-pink-500/20 rounded-full blur-[80px] -z-10"></div>
@@ -113,6 +180,9 @@ function App() {
           <ScrollToTop />
         </div>
       </main>
+
+      <AppContent />
+   main
     </Router>
   );
 }

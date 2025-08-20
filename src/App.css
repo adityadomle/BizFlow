@@ -2,6 +2,10 @@
   color: red;
 }
 
+html,body {
+  transition: background-color 0.3s, color 0.3s;
+}
+
 @keyframes marquee {
     0% {
       transform: translateX(0);
