@@ -30,6 +30,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from "react-route
 import useScrollTracking from "./utils/useScrollTracking";
 import useTimeTracking from "./utils/useTimeTracking";
 import { trackPageView } from "./utils/analytics";
+import AIBusinessBOT from "./components/AIBusinessBOT";
 
 // Hash Navigation component
 function HashNavigation() {
@@ -104,6 +105,7 @@ function App() {
             <Route path="/analytics" element={<AnalyticsDashboard />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/contributors" element={<Contibutors />} />
+            <Route path="/AIBusinessBOT" element={<AIBusinessBOT />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
 

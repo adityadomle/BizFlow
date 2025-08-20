@@ -19,6 +19,7 @@ const Navbar = () => {
     { href: "/analytics", label: "Analytics" },
     { href: "/contact", label: "Contact" },
     { href: "/contributors", label: "Contributors" },
+     { href: "/AIBusinessBOT", label: "AI-Business" },
   ];
 
   // Reset activeLink to home when on home page
