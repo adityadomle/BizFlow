@@ -19,7 +19,7 @@ import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import NotFound from "./components/NotFound";
 import Contact from "./components/Contact";
-import AnalyticsDashboard from "./components/AnalyticsDashboard";
+import AnalyticsDashboard from "./components/AnalyticsDashboard"; 
 
 // Pages
 import Partner from "./pages/Partner";
@@ -110,6 +110,8 @@ function AppContent() {
                   <ServicesSection />
                 </section>
                 <section id="testimonials"><TestimonialsSection /></section>
+                <section id="analytics"><AnalyticsDashboard /></section>
+                
                 <section id="newsletter"><NewsletterSection /></section>
                 <Footer />
               </>
@@ -125,14 +127,11 @@ function AppContent() {
           <Route path="*" element={<><NotFound /><Footer /></>} />
         </Routes>
 
-        {/* Remove global Footer from here */}
         <ScrollToTop />
       </div>
     </main>
   );
 }
-
-
 
 function App() {
   return (
