@@ -14,19 +14,19 @@ const Navbar = () => {
   const { isDarkMode, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
-  const userScroll = useRef(false); // Ref to track user click-scrolls
+  const userScroll = useRef(false);
+  const observerRef = useRef(null);
 
   const navLinks = [
     { href: "/#home", label: "Home" },
     { href: "/#about", label: "About Us" },
     { href: "/#services", label: "Our Services" },
     { href: "/#testimonials", label: "Testimonials" },
-    { href: "/analytics", label: "Analytics" },
+    { href: "/#analytics", label: "Analytics" },
     { href: "/contact", label: "Contact" },
     { href: "/contributors", label: "Contributors" },
   ];
 
-  // This effect now correctly handles PAGE changes without conflicting with the scroll spy.
   useEffect(() => {
     const currentPath = location.pathname;
     if (currentPath === "/") {
@@ -39,55 +39,95 @@ const Navbar = () => {
     }
   }, [location.pathname]);
 
-  // This effect now correctly handles scroll spying on the homepage and ignores clicks.
   useEffect(() => {
     if (location.pathname !== "/") return;
+    if (observerRef.current) {
+      observerRef.current.disconnect();
+    }
 
-    const sections = document.querySelectorAll("section[id]");
-    if (sections.length === 0) return;
-    const options = { rootMargin: "-40% 0px -60% 0px", threshold: 0 };
+    const setupObserver = () => {
+      const sections = document.querySelectorAll("section[id]");
+      if (sections.length === 0) {
+        setTimeout(setupObserver, 100);
+        return;
+      }
 
-    const observer = new IntersectionObserver((entries) => {
-      if (userScroll.current) return; // Ignore observer if a click-scroll is happening
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const id = entry.target.getAttribute("id");
-          setActiveLink(`/#${id}`);
-        }
+      console.log('Observing sections:', Array.from(sections).map(s => s.id));
+
+      const options = {
+        root: null,
+        rootMargin: "-40% 0px -60% 0px", // Better margins for detection
+        threshold: [0, 0.1, 0.25, 0.5, 0.75, 1] // More threshold points
+      };
+
+      observerRef.current = new IntersectionObserver((entries) => {
+        if (userScroll.current) return; 
+
+        // Get all currently intersecting sections
+        const intersectingSections = entries.filter(entry => entry.isIntersecting);
+        
+        if (intersectingSections.length === 0) return;
+
+        // Sort by visibility (intersection ratio) and position
+        const sortedSections = intersectingSections.sort((a, b) => {
+          const aRect = a.boundingClientRect;
+          const bRect = b.boundingClientRect;
+          const aCenter = aRect.top + aRect.height / 2;
+          const bCenter = bRect.top + bRect.height / 2;
+          
+          // Prefer section closest to viewport center
+          return Math.abs(aCenter - window.innerHeight / 2) - Math.abs(bCenter - window.innerHeight / 2);
+        });
+
+        const mostVisible = sortedSections[0];
+        const sectionId = mostVisible.target.getAttribute("id");
+        
+        console.log('Active section detected:', sectionId); // Debug
+        setActiveLink(`/#${sectionId}`);
+      }, options);
+
+      sections.forEach((section) => {
+        observerRef.current.observe(section);
       });
-    }, options);
+    };
 
-    sections.forEach((section) => observer.observe(section));
+    // Start setup with small delay
+    setTimeout(setupObserver, 300);
+
     return () => {
-      sections.forEach((section) => observer.unobserve(section));
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
     };
   }, [location.pathname]);
 
-  // New click handler to prevent scroll-spy flickering.
   const handleHashLinkClick = (href) => {
+    console.log('Clicked link:', href); // Debug
     setActiveLink(href);
     setIsMenuOpen(false);
     userScroll.current = true;
+    
+    // Reset user scroll flag after animation
     setTimeout(() => {
       userScroll.current = false;
-    }, 1000); // Ignore scroll spy for 1 second
+      console.log('User scroll reset'); // Debug
+    }, 2500);
   };
+
   return (
-
-  <motion.nav
-  role="navigation"
-  aria-label="Main Navigation"
-  variants={fadeIn("down", 0.2)}
-  initial="hidden"
-  whileInView="show"
-  viewport={{ once: true }}
-  className={`fixed top-0 inset-x-0 z-50 border-b shadow-sm backdrop-blur-md transition-colors duration-300 ${
-    isDarkMode 
-      ? "bg-gray-900/90 border-gray-700" 
-      : "bg-white/90 border-gray-100"
-  }`}
->
-
+    <motion.nav
+      role="navigation"
+      aria-label="Main Navigation"
+      variants={fadeIn("down", 0.2)}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true }}
+      className={`fixed top-0 inset-x-0 z-50 border-b shadow-sm backdrop-blur-md transition-colors duration-300 ${
+        isDarkMode 
+          ? "bg-gray-900/90 border-gray-700" 
+          : "bg-white/90 border-gray-100"
+      }`}
+    >
       <div className="w-full flex justify-between items-center container mx-auto px-4 sm:px-6 lg:px-8 lg:h-20 h-16">
         {/* Logo */}
         <motion.div
@@ -114,18 +154,15 @@ const Navbar = () => {
           >
             <button
               onClick={() => {
-                    if (window.location.pathname !== "/") {
-                      // If not on home page, navigate there first
-                      navigate("/#home");
-                    } else {
-                      // If already on home page, scroll to top
-                      document.getElementById("home")?.scrollIntoView({ behavior: "smooth" });
-                    }
-                  }}
-                  >
+                if (window.location.pathname !== "/") {
+                  navigate("/#home");
+                } else {
+                  document.getElementById("home")?.scrollIntoView({ behavior: "smooth" });
+                }
+              }}
+            >
               BizFlow
             </button>
-            
           </motion.span>
         </motion.div>
 
@@ -148,6 +185,7 @@ const Navbar = () => {
         >
           {navLinks.map((link) => {
             const isActive = activeLink === link.href;
+            
             if (link.href === "/#home") {
               return (
                 <button
@@ -178,7 +216,7 @@ const Navbar = () => {
                 key={link.href}
                 smooth
                 to={link.href}
-                onClick={() => handleHashLinkClick(link.href)} // **UPDATED**
+                onClick={() => handleHashLinkClick(link.href)}
                 className={`text-base font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-blue-600 after:transition-all transition-colors ${
                   isActive
                     ? "text-blue-600 after:w-full"
@@ -213,7 +251,6 @@ const Navbar = () => {
           variants={fadeIn("left", 0.3)}
           className="hidden md:flex items-center gap-3"
         >
-          {/* Get in Touch Button */}
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -230,7 +267,6 @@ const Navbar = () => {
             Get in touch
           </motion.button>
 
-          {/* Theme Toggle Button */}
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -269,12 +305,13 @@ const Navbar = () => {
           >
             {navLinks.map((link) => {
               const isActive = activeLink === link.href;
+              
               if (link.href === "/#home") {
                 return (
                   <button
                     key={link.href}
                     onClick={() => {
-                      handleHashLinkClick(link.href); // **UPDATED**
+                      handleHashLinkClick(link.href);
                       if (location.pathname !== "/") {
                         navigate("/#home");
                       } else {
@@ -299,7 +336,7 @@ const Navbar = () => {
                   key={link.href}
                   smooth
                   to={link.href}
-                  onClick={() => handleHashLinkClick(link.href)} // **UPDATED**
+                  onClick={() => handleHashLinkClick(link.href)}
                   className={`block text-base font-medium py-2 cursor-pointer transition-colors ${
                     isActive
                       ? "text-blue-600"
@@ -330,6 +367,7 @@ const Navbar = () => {
                 </Link>
               );
             })}
+            
             <motion.button
               variants={fadeIn("up", 0.4)}
               whileHover={{ scale: 1.02 }}
