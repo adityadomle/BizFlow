@@ -20,6 +20,8 @@ import ScrollToTop from "./components/ScrollToTop";
 import NotFound from "./components/NotFound";
 import Contact from "./components/Contact";
 import AnalyticsDashboard from "./components/AnalyticsDashboard"; 
+import TermsOfService from "./pages/TermsOfService";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 // Pages
 import Partner from "./pages/Partner";
@@ -112,6 +114,7 @@ function AppContent() {
                 <section id="testimonials"><TestimonialsSection /></section>
                 <section id="analytics"><AnalyticsDashboard /></section>
                 
+                
                 <section id="newsletter"><NewsletterSection /></section>
                 <Footer />
               </>
@@ -122,6 +125,8 @@ function AppContent() {
           <Route path="/contact" element={<><Contact /><Footer /></>} />
           <Route path="/contributors" element={<><Contibutors /><Footer /></>} />
           <Route path="/support-career" element={<><SupportCareer /><Footer /></>} />
+          <Route path="/terms-of-use" element={<><TermsOfService /></>} />
+<Route path="/privacy-policy" element={<><PrivacyPolicy /></>} />
           <Route path="/faqs" element={<><Faqs /><Footer /></>} />
           <Route path="/quick-chat" element={<QuickChat />} />
           <Route path="*" element={<><NotFound /><Footer /></>} />
