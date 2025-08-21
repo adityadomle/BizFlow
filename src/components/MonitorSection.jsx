@@ -3,8 +3,22 @@ import { fadeIn, textVariant } from "../utils/motion";
 import 'swiper/css';
 import 'swiper/css/navigation';
 import monitorCardBg from '../assets/monitor-card.webp';
+import { toast } from "react-toastify";
 
 const MonitorSection = () => {
+  // handle upcoming feature
+  const handleUpcomingFeature = () => {
+    try {
+      // successfull redairection
+    } 
+    catch (error) {
+      // error
+    }
+    finally{
+      toast.info("🛠️ Our team is working on this amazing feature! Stay tuned.")
+    }
+  }
+
   return (
     <motion.section 
       variants={fadeIn('up', 0.2)}
@@ -39,7 +53,7 @@ const MonitorSection = () => {
           </motion.p>
           <motion.a 
             variants={fadeIn('up', 0.7)}
-            href="#" 
+            onClick={handleUpcomingFeature}
             className="text-blue-500 font-semibold flex items-center gap-2 hover:gap-4 transition-all"
           >
             Learn more about monitoring

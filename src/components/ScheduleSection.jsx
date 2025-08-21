@@ -1,8 +1,20 @@
 import scheduleImage from '../assets/stats.webp'
 import { motion } from "framer-motion";
 import { fadeIn, textVariant } from "../utils/motion";
+import { toast } from 'react-toastify';
 
 const ScheduleSection = () => {
+  const handleUpcomingFeature = () => {
+    try {
+      // redirectiona
+    } 
+    catch (error) {
+      // readirection
+    }
+    finally{
+      toast.info("⚒️ Our team is working on this amazing feature! Stay tuned.")
+    }
+  }
   return (
     <motion.section
       variants={fadeIn('up', 0.2)}
@@ -50,8 +62,8 @@ const ScheduleSection = () => {
           </motion.p>
           <motion.a
             variants={fadeIn('up', 0.7)}
-            href="#"
             className="text-blue-500 font-semibold flex items-center gap-2 hover:gap-4 transition-all"
+            onClick={handleUpcomingFeature}
           >
             Explore scheduling features
             <motion.svg

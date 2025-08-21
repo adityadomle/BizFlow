@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const NotFound = () => {
+  // upcoming features 
+  useEffect(() => {
+    toast.info("🛠️ Our developers are working on this amazing feature ! Stay tuned for updates.")
+  })
   return (
     <motion.section
       initial={{ opacity: 0, y: 40 }}

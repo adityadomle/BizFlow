@@ -5,6 +5,7 @@ import { FiSettings } from 'react-icons/fi'
 import { BiTime } from 'react-icons/bi'
 import { motion } from "framer-motion";
 import { fadeIn, textVariant } from "../utils/motion";
+import { toast } from 'react-toastify'
 
 const ServicesSection = () => {
   const services = [
@@ -33,6 +34,20 @@ const ServicesSection = () => {
       link: "#learn-more"
     }
   ]
+
+  // handle upcoming feature
+  const handleUpcomingFeature = () => {
+    try {
+      // implemnetation
+    } 
+    catch (error) {
+      // catch error
+      toast.error("Something went wrong!")
+    }
+    finally{
+      toast.info("🚧 This feature is coming soon! Stay tuned for updates.")
+    }
+  }
 
   return (
     <section id="services" className="py-20 container mx-auto px-4 sm:px-6 lg:px-8">
@@ -85,6 +100,7 @@ const ServicesSection = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="mt-8 bg-purple-200 dark:bg-purple-600 transition-all duration-300 ease-in-out text-gray-600 dark:text-white px-8 py-3 cursor-pointer rounded-full hover:bg-purple-300 dark:hover:bg-purple-700 hover:scale-105 hover:shadow-[0_0_15px_#e9d5ff] dark:hover:shadow-[0_0_18px_#7c3aed]"
+            onClick={handleUpcomingFeature}
           >
             Get started
           </motion.button>
@@ -124,6 +140,7 @@ const ServicesSection = () => {
                 variants={fadeIn('up', 0.6 * (index + 1))}
                 href={service.link}
                 className="text-indigo-600 font-medium hover:text-indigo-700 transition-colors"
+                onClick={handleUpcomingFeature}
               >
                 LEARN MORE
               </motion.a>

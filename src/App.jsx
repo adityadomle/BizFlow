@@ -3,6 +3,9 @@ import "./App.css";
 import { useTheme } from "./context/ThemeContext";
 import { useLocation } from "react-router-dom";
 
+// react-toastify
+import {ToastContainer} from 'react-toastify'
+
 // Components
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -124,6 +127,33 @@ function AppContent() {
           <Route path="/faqs" element={<Faqs />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
+
+        {/* Toast conatiner for message */}
+        {
+          isDarkMode ? 
+          <ToastContainer
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={true}
+          closeOnClick={false}
+          draggable
+          theme="dark"
+          pauseOnHover
+        />
+          : 
+          <ToastContainer
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={true}
+          closeOnClick={false}
+          draggable
+          theme="light"
+          pauseOnHover
+        />
+
+        }
 
         <Footer />
         <ScrollToTop />
