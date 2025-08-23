@@ -11,11 +11,11 @@ import {
   FiMessageSquare,
   FiClock,
   FiLinkedin,
-  FiTwitter,
   FiGithub,
   FiFacebook
 } from 'react-icons/fi';
 import { trackButtonClick } from '../utils/analytics';
+import { FaXTwitter } from "react-icons/fa6";
 
 const Contact = () => {
   const { isDarkMode } = useTheme();
@@ -143,7 +143,7 @@ const Contact = () => {
 
   const socialLinks = [
     { icon: FiLinkedin, link: 'https://linkedin.com/company/bizflow', label: 'LinkedIn' },
-    { icon: FiTwitter, link: 'https://twitter.com/bizflow', label: 'Twitter' },
+    { icon: FaXTwitter, link: 'https://twitter.com/bizflow', label: 'Twitter' },
     {icon:FiFacebook,label:'facebook'},
     { icon: FiGithub, link: 'https://github.com/bizflow', label: 'GitHub' }
   ];

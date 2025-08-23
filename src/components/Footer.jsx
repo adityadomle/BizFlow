@@ -3,6 +3,7 @@ import { FaFacebookF, FaTwitter, FaLinkedinIn, FaGithub } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { fadeIn, textVariant } from "../utils/motion";
 import { useTheme } from "../context/ThemeContext";
+import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   const { isDarkMode } = useTheme();
@@ -93,10 +94,10 @@ const Footer = () => {
                   icon: <FaFacebookF className="w-5 h-5" />,
                   hover: "hover:bg-blue-600 hover:text-white",
                 },
-                {
+               {
                   href: "https://x.com/domleaditya",
-                  icon: <FaTwitter className="w-5 h-5" />,
-                  hover: "hover:bg-sky-500 hover:text-white",
+                  icon: <FaXTwitter className="w-5 h-5" />,
+                  hover: "hover:bg-black hover:text-white",
                 },
                 {
                   href: "https://www.linkedin.com/in/adityadomle?",
