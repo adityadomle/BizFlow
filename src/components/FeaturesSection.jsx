@@ -1,40 +1,54 @@
-import React from 'react';
 import { motion } from "framer-motion";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { fadeIn, textVariant } from "../utils/motion";
 import { useTheme } from "../context/ThemeContext";
 
 // Variants for staggered animation
 const containerVariants = {
   hidden: { opacity: 0 },
-  show: { 
-    opacity: 1, 
-    transition: { staggerChildren: 0.2 } 
-  }
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.2 },
+  },
 };
 
 const itemVariants = {
   hidden: { opacity: 0, y: 40, scale: 0.9 },
-  show: { 
-    opacity: 1, 
-    y: 0, 
-    scale: 1, 
-    transition: { duration: 0.6, ease: "easeOut" } 
-  }
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
 };
 
 const FeaturesSection = () => {
   const { isDarkMode } = useTheme();
 
   const features = [
-    { icon: "🔍", title: "Find out what you need", description: "We present you a proposal and discuss nitty-gritty like", bg: "#F1EFFD" },
-    { icon: "⚙️", title: "Work out the details", description: "Communication protocols apart from engagement models", bg: "#FFE7E7" },
-    { icon: "🚀", title: "We get to work fast", description: "Protocols apart from engage models, pricing billing", bg: "#FFF3E4" }
+    {
+      icon: "🔍",
+      title: "Find out what you need",
+      description: "We present you a proposal and discuss nitty-gritty like",
+      bg: "#F1EFFD",
+    },
+    {
+      icon: "⚙️",
+      title: "Work out the details",
+      description: "Communication protocols apart from engagement models",
+      bg: "#FFE7E7",
+    },
+    {
+      icon: "🚀",
+      title: "We get to work fast",
+      description: "Protocols apart from engage models, pricing billing",
+      bg: "#FFF3E4",
+    },
   ];
 
   return (
     <motion.section
-      variants={fadeIn('up', 0.2)}
+      variants={fadeIn("up", 0.2)}
       initial="hidden"
       whileInView="show"
       viewport={{ once: false, amount: 0.2 }}
@@ -43,8 +57,8 @@ const FeaturesSection = () => {
       }`}
     >
       {/* Header */}
-      <motion.div 
-        variants={fadeIn('up', 0.3)} 
+      <motion.div
+        variants={fadeIn("up", 0.3)}
         viewport={{ once: false, amount: 0.2 }}
         className="text-center mb-12"
       >
@@ -57,7 +71,7 @@ const FeaturesSection = () => {
           How can we help your business?
         </motion.h2>
         <motion.p
-          variants={fadeIn('up', 0.4)}
+          variants={fadeIn("up", 0.4)}
           className={`${isDarkMode ? "text-gray-300/80" : "text-gray-600"}`}
         >
           When you resell Besnik, you build trust and increase
@@ -120,8 +134,8 @@ const FeaturesSection = () => {
       </motion.div>
 
       {/* Call to Action */}
-      <motion.div 
-        variants={fadeIn('up', 0.7)} 
+      <motion.div
+        variants={fadeIn("up", 0.7)}
         viewport={{ once: false, amount: 0.2 }}
         className="text-center mt-12"
       >
@@ -135,7 +149,7 @@ const FeaturesSection = () => {
             }`}
         >
           <motion.div
-            variants={fadeIn('up', 0.8)}
+            variants={fadeIn("up", 0.8)}
             whileHover={{ scale: 1.03, y: -2 }}
             whileTap={{ scale: 0.97 }}
             className="relative"

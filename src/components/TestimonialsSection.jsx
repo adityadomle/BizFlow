@@ -1,9 +1,9 @@
+//redessign this
 import { motion } from "framer-motion";
 import { fadeIn, textVariant } from "../utils/motion";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useTheme } from "../context/ThemeContext";
 
-// ✅ Full Testimonials Data
 const testimonials = [
   {
     id: 1,
@@ -38,16 +38,42 @@ const testimonials = [
 ];
 
 const TestimonialsSection = () => {
-  const [paused, setPaused] = useState(false);
   const { isDarkMode } = useTheme();
+  const scrollRef = useRef();
+  const [hovered, setHovered] = useState(false);
+
+  const baseSpeed = 0.7;
+  const hoverSpeedFactor = 0.2;
+
+  useEffect(() => {
+    const scrollContainer = scrollRef.current;
+    if (!scrollContainer) return;
+
+    let animationFrameId;
+    const step = () => {
+      const speed = hovered ? baseSpeed * hoverSpeedFactor : baseSpeed;
+      scrollContainer.scrollLeft += speed;
+      if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2) {
+        scrollContainer.scrollLeft = 0;
+      }
+      animationFrameId = requestAnimationFrame(step);
+    };
+    animationFrameId = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [hovered]);
 
   return (
     <section
       id="testimonials"
-      className={`py-16 px-4 max-w-7xl mx-auto transition-colors duration-300 ${
-        isDarkMode ? "bg-black text-gray-100" : "bg-white text-gray-900"
+      className={`relative py-20 px-4 max-w-7xl mx-auto overflow-hidden transition-colors duration-300 ${
+        isDarkMode
+          ? "bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 text-gray-100"
+          : "bg-gradient-to-br from-purple-50 via-pink-50 to-purple-100 text-gray-900"
       }`}
     >
+      {/* Parallax Background */}
+      <div className="absolute top-0 left-0 w-full h-full -z-10 bg-gradient-to-r from-pink-200 via-purple-200 to-blue-200 opacity-20 animate-gradient-x"></div>
+
       {/* Header */}
       <motion.div variants={fadeIn("up", 0.3)} className="text-center mb-16">
         <motion.h2
@@ -60,93 +86,88 @@ const TestimonialsSection = () => {
         </motion.h2>
         <motion.p
           variants={fadeIn("up", 0.4)}
-          className={`${isDarkMode ? "text-gray-400" : "text-gray-700"} max-w-2xl mx-auto text-lg`}
+          className={`max-w-2xl mx-auto text-lg ${
+            isDarkMode ? "text-gray-400" : "text-gray-700"
+          }`}
         >
-          Real experiences from our customers who trust us to power their business.
+          Real experiences from our customers who trust us to power their
+          business.
         </motion.p>
       </motion.div>
 
-      {/* Testimonials Scroller */}
-      <motion.div
-        variants={fadeIn("up", 0.5)}
-        className={`relative py-2 transition-colors duration-300 ${
-          isDarkMode ? "border-transparent" : "border-t border-b border-slate-100"
-        }`}
-      >
-        <div className="overflow-hidden w-full">
-          <div
-            className={`flex animate-scroll space-x-6 ${paused ? "paused" : ""}`}
-            onClick={() => setPaused((p) => !p)} // toggle pause on click/tap
-          >
-            {[...testimonials, ...testimonials].map((testimonial, index) => (
-              <div
-                key={`${testimonial.id}-${index}`}
-                className="min-w-[280px] md:min-w-[350px] lg:min-w-[400px] flex-shrink-0"
+      {/* Scrollable Testimonials */}
+      <div className="relative">
+        <div
+          className={`absolute top-0 left-0 h-full w-16 z-10 pointer-events-none ${
+            isDarkMode
+              ? "bg-gradient-to-r from-gray-900"
+              : "bg-gradient-to-r from-purple-50"
+          }`}
+        />
+        <div
+          className={`absolute top-0 right-0 h-full w-16 z-10 pointer-events-none ${
+            isDarkMode
+              ? "bg-gradient-to-l from-gray-900"
+              : "bg-gradient-to-l from-purple-50"
+          }`}
+        />
+
+        <div
+          ref={scrollRef}
+          className="flex space-x-6 overflow-x-hidden scrollbar-hide py-2 cursor-pointer"
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+        >
+          {[...testimonials, ...testimonials].map((testimonial, index) => (
+            <motion.div
+              key={`${testimonial.id}-${index}`}
+              variants={fadeIn("up", 0.2 * (index + 1))}
+              whileHover={{ scale: 1.08, y: -6 }}
+              transition={{ type: "spring", stiffness: 200, damping: 20 }}
+              className={`relative flex-shrink-0 w-80 md:w-96 p-6 rounded-3xl flex flex-col items-center gap-4 overflow-hidden transition-all duration-500
+                ${
+                  isDarkMode
+                    ? "bg-gradient-to-br from-gray-800 via-gray-900 to-gray-950 border border-gray-700 shadow-xl hover:shadow-2xl"
+                    : "bg-white shadow-lg border border-gray-200 hover:shadow-2xl"
+                }`}
+            >
+              {/* Overlay on Hover */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-blue-400 via-purple-400 to-pink-400 opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-3xl"></div>
+
+              <img
+                src={testimonial.image}
+                alt={testimonial.name}
+                className="w-20 h-20 object-cover rounded-full border-4 border-blue-500 shadow-md z-10"
+              />
+              <h3
+                className={`text-xl font-semibold z-10 ${
+                  isDarkMode ? "text-gray-100" : "text-gray-900"
+                }`}
               >
-                <motion.div
-                  variants={fadeIn("up", 0.3 * (index + 1))}
-                  whileHover={{ scale: 1.05, y: -8 }}
-                  transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                  className={`p-6 rounded-2xl transition-all duration-300 flex flex-col h-full group border
-                    ${
-                      isDarkMode
-                        ? "bg-gradient-to-br from-gray-800 via-gray-900 to-gray-950 border-gray-700 shadow-lg hover:shadow-2xl"
-                        : "bg-gradient-to-br from-white via-slate-50 to-slate-100 border-slate-200 shadow-[0_6px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_10px_28px_rgba(0,0,0,0.10)]"
-                    }`}
-                >
-                  {/* Avatar with ring effect */}
-                  <div className="w-20 h-20 mx-auto mb-4 relative">
-                    <motion.img
-                      variants={fadeIn("up", 0.5 * (index + 1))}
-                      src={testimonial.image}
-                      alt={testimonial.name}
-                      className={`w-full h-full object-cover rounded-full border-4 border-blue-500 shadow-md transition-all duration-300 group-hover:border-blue-400 ${
-                        isDarkMode ? "ring-transparent" : "ring-2 ring-white"
-                      }`}
-                    />
-                  </div>
-
-                  {/* Stars */}
-                  <motion.div
-                    variants={fadeIn("up", 0.4 * (index + 1))}
-                    className={`${isDarkMode ? "text-yellow-400" : "text-yellow-500"} flex justify-center mb-3`}
-                  >
-                    {[...Array(5)].map((_, starIndex) => (
-                      <motion.span
-                        key={starIndex}
-                        variants={fadeIn("up", 0.1 * starIndex)}
-                        className="text-xl drop-shadow-sm group-hover:scale-110 transition-transform"
-                      >
-                        ★
-                      </motion.span>
-                    ))}
-                  </motion.div>
-
-                  {/* Name */}
-                  <motion.h3
-                    variants={textVariant(0.3)}
-                    className={`font-semibold text-xl mb-2 transition-colors ${
-                      isDarkMode
-                        ? "text-gray-100 group-hover:text-blue-500"
-                        : "text-gray-900 group-hover:text-blue-600"
-                    }`}
-                  >
-                    {testimonial.name}
-                  </motion.h3>
-
-                  {/* Text */}
-                  <motion.p
-                    variants={fadeIn("up", 0.6 * (index + 1))}
-                    className={`${isDarkMode ? "text-gray-300" : "text-gray-700"} leading-relaxed text-sm md:text-base italic`}
-                  >
-                    “{testimonial.text}”
-                  </motion.p>
-                </motion.div>
+                {testimonial.name}
+              </h3>
+              <div
+                className={`flex space-x-1 z-10 ${
+                  isDarkMode ? "text-yellow-400" : "text-yellow-500"
+                }`}
+              >
+                {[...Array(5)].map((_, i) => (
+                  <span key={i} className="text-lg">
+                    ★
+                  </span>
+                ))}
               </div>
-            ))}
-          </div>
+              <p
+                className={`text-center italic z-10 ${
+                  isDarkMode ? "text-gray-300" : "text-gray-700"
+                }`}
+              >
+                “{testimonial.text}”
+              </p>
+            </motion.div>
+          ))}
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 };
