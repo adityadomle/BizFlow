@@ -24,11 +24,7 @@ const PurposeSection = () => {
   return (
     <section
       id="about"
-      className={`relative w-full py-16 px-4 md:px-8 transition-colors duration-500 ${
-        isDarkMode
-          ? "bg-transparent"
-          : "bg-gradient-to-b from-white via-indigo-50/60 to-white"
-      }`}
+      className={`relative w-full py-16 px-4 md:px-8 transition-colors duration-500 bg-transparent`}
     >
       {!isDarkMode && (
         <div
