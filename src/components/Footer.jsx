@@ -97,7 +97,11 @@ const Footer = () => {
                {
                   href: "https://x.com/domleaditya",
                   icon: <FaXTwitter className="w-5 h-5" />,
+<<<<<<< Updated upstream
                   hover: "hover:bg-black hover:text-white",
+=======
+                  hover: "hover:bg-sky-500 hover:text-white",
+>>>>>>> Stashed changes
                 },
                 {
                   href: "https://www.linkedin.com/in/adityadomle?",

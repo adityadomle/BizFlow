@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { fadeIn, textVariant } from '../utils/motion';
@@ -8,6 +9,19 @@ import {
   FiMapPin, 
   FiSend, 
   FiUser, 
+=======
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { fadeIn, textVariant } from "../utils/motion";
+import { useTheme } from "../context/ThemeContext";
+import { FaXTwitter } from "react-icons/fa6";
+import {
+  FiMail,
+  FiPhone,
+  FiMapPin,
+  FiSend,
+  FiUser,
+>>>>>>> Stashed changes
   FiMessageSquare,
   FiClock,
   FiLinkedin,
@@ -141,12 +155,44 @@ const Contact = () => {
     }
   ];
 
+<<<<<<< Updated upstream
   const socialLinks = [
     { icon: FiLinkedin, link: 'https://linkedin.com/company/bizflow', label: 'LinkedIn' },
     { icon: FaXTwitter, link: 'https://twitter.com/bizflow', label: 'Twitter' },
     {icon:FiFacebook,label:'facebook'},
     { icon: FiGithub, link: 'https://github.com/bizflow', label: 'GitHub' }
   ];
+=======
+
+const socialLinks = [
+  {
+    icon: FiLinkedin,
+    link: "https://linkedin.com/company/bizflow",
+    label: "LinkedIn",
+    hover: "hover:bg-blue-700 hover:text-white",
+  },
+  {
+    icon: FaXTwitter,
+    link: "https://twitter.com/bizflow",
+    label: "X",
+    hover: "hover:bg-sky-500 hover:text-white",
+  },
+  {
+    icon: FiFacebook,
+    link: "https://facebook.com/bizflow",
+    label: "Facebook",
+    hover: "hover:bg-blue-600 hover:text-white",
+  },
+  {
+    icon: FiGithub,
+    link: "https://github.com/bizflow",
+    label: "GitHub",
+    hover: "hover:bg-neutral-900 hover:text-white",
+  },
+];
+
+>>>>>>> Stashed changes
+
 
   return (
     <div className="min-h-screen pt-20">
