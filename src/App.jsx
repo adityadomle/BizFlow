@@ -20,10 +20,10 @@ import TestimonialsSection from "./components/TestimonialsSection";
 import NewsletterSection from "./components/NewsletterSection";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
+import FloatingThemeToggle from "./components/FloatingThemeToggle";
 import NotFound from "./components/NotFound";
 import Contact from "./components/Contact";
-import AnalyticsDashboard from "./components/AnalyticsDashboard";
-import FAQ from "./components/FAQ"; // ✅ Our FAQ component
+import FAQ from "./components/FAQ";
 
 // Pages
 import Partner from "./pages/Partner";
@@ -136,7 +136,6 @@ function AppContent() {
             }
           />
           <Route path="/partner" element={<Partner />} />
-          <Route path="/analytics" element={<AnalyticsDashboard />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/contributors" element={<Contibutors />} />
           <Route path="/support-career" element={<SupportCareer />} />
@@ -162,6 +161,7 @@ function AppContent() {
 
         <Footer />
         <ScrollToTop />
+        <FloatingThemeToggle />
       </div>
     </main>
   );

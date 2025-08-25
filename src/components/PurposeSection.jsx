@@ -1,6 +1,4 @@
 import React from "react";
-import { motion } from "framer-motion";
-import { fadeIn, textVariant } from "../utils/motion";
 import { useTheme } from "../context/ThemeContext";
 
 const PurposeSection = () => {
@@ -24,11 +22,7 @@ const PurposeSection = () => {
   return (
     <section
       id="about"
-      className={`relative w-full py-16 px-4 md:px-8 transition-colors duration-500 ${
-        isDarkMode
-          ? "bg-transparent"
-          : "bg-gradient-to-b from-white via-indigo-50/60 to-white"
-      }`}
+      className={`relative w-full py-16 px-4 md:px-8 transition-colors duration-500 bg-transparent`}
     >
       {!isDarkMode && (
         <div
@@ -42,54 +36,33 @@ const PurposeSection = () => {
       )}
 
       <div className="max-w-6xl mx-auto">
-        <motion.div
-          variants={fadeIn("right", 0.2)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: false, amount: 0.2 }}
-          className="grid md:grid-cols-3 grid-cols-1 gap-10 md:gap-8"
-        >
+        <div className="grid md:grid-cols-3 grid-cols-1 gap-10 md:gap-8">
           {/* Left column */}
-          <motion.div
-            variants={fadeIn("right", 0.3)}
-            viewport={{ once: false, amount: 0.2 }}
-          >
-            <motion.div
-              variants={fadeIn("up", 0.4)}
-              viewport={{ once: false, amount: 0.2 }}
+          <div>
+            <div
               className={`text-sm font-medium mb-3 tracking-wide ${
                 isDarkMode ? "text-blue-300/90" : "text-indigo-600"
               }`}
             >
               ACHIEVE MORE
-            </motion.div>
+            </div>
 
-            <motion.h2
-              variants={textVariant(0.5)}
-              viewport={{ once: false, amount: 0.2 }}
+            <h2
               className={`text-3xl md:text-4xl font-bold leading-tight ${
                 isDarkMode ? "text-gray-100" : "text-gray-900"
               } md:w-4/5`}
             >
               Purpose of a convoy is to keep your team
-            </motion.h2>
-          </motion.div>
+            </h2>
+          </div>
 
           {/* Right column */}
-          <motion.div
-            variants={fadeIn("left", 0.3)}
-            viewport={{ once: false, amount: 0.2 }}
-            className="col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8"
-          >
+          <div className="col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8">
             {features.map((feature, index) => (
-              <motion.div
+              <div
                 key={index}
-                variants={fadeIn("up", 0.3 * (index + 1))}
-                viewport={{ once: false, amount: 0.2 }}
-                whileHover={{ y: -4, scale: 1.005 }}
-                transition={{ type: "spring", stiffness: 220, damping: 18 }}
                 className={`relative flex items-start space-x-4 p-5 rounded-xl border
-                            transition-all ease-in-out duration-10
+                            transition-all duration-300 ease-out hover:translate-y-[-2px]
                             ${
                               isDarkMode
                                 ? "bg-slate-800/60 border-slate-700"
@@ -107,14 +80,11 @@ const PurposeSection = () => {
                           "linear-gradient(180deg, rgba(99,102,241,0.08), transparent 40%)",
                       }}
                     />
-                    <div className="pointer-events-none absolute inset-0 rounded-xl ring-0 ring-indigo-200/0 group-hover:ring-4 transition-[ring] duration-300" />
                   </>
                 )}
 
-                <motion.div
-                  variants={fadeIn("right", 0.4 * (index + 1))}
-                  viewport={{ once: false, amount: 0.2 }}
-                  className={`w-12 h-12 flex items-center justify-center rounded-lg text-xl shrink-0 z-[1]
+                <div
+                  className={`w-12 h-12 flex items-center justify-center rounded-lg text-xl shrink-0 z-[1] transition-transform duration-300 hover:scale-105
                               ${
                                 isDarkMode
                                   ? "bg-slate-700/70 text-gray-100"
@@ -123,37 +93,29 @@ const PurposeSection = () => {
                   aria-hidden="true"
                 >
                   {feature.icon}
-                </motion.div>
+                </div>
 
-                <motion.div
-                  variants={fadeIn("left", 0.4 * (index + 1))}
-                  viewport={{ once: false, amount: 0.2 }}
-                  className="z-[1]"
-                >
-                  <motion.h3
-                    variants={textVariant(0.3)}
-                    viewport={{ once: false, amount: 0.2 }}
+                <div className="z-[1]">
+                  <h3
                     className={`text-lg sm:text-xl font-semibold mb-1.5 ${
                       isDarkMode ? "text-gray-100" : "text-gray-900"
                     }`}
                   >
                     {feature.title}
-                  </motion.h3>
+                  </h3>
 
-                  <motion.p
-                    variants={fadeIn("up", 0.4)}
-                    viewport={{ once: false, amount: 0.2 }}
+                  <p
                     className={`${
                       isDarkMode ? "text-gray-300" : "text-gray-700"
                     }`}
                   >
                     {feature.description}
-                  </motion.p>
-                </motion.div>
-              </motion.div>
+                  </p>
+                </div>
+              </div>
             ))}
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );

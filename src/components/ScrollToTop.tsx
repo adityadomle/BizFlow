@@ -38,16 +38,22 @@ export default function ScrollToTop() {
   };
 
   return (
-    <>
-      {isVisible && (
-        <button
-          onClick={scrollToTop}
-          className="fixed bottom-8 right-8 z-50 h-12 w-12 rounded-full bg-[#0099F7] hover:bg-[#0077b5] shadow-lg transition-all duration-300 hover:shadow-xl hover:animate-bounce focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 flex items-center justify-center text-white font-bold text-lg border-2 border-pink-400 hover:border-pink-300 shadow-pink-400/50 hover:shadow-pink-300/60"
-          aria-label="Back to top"
-        >
+    <div
+      className={`fixed bottom-8 right-8 z-50 transition-all duration-500 ease-out ${
+        isVisible 
+          ? "opacity-100 scale-100 translate-y-0" 
+          : "opacity-0 scale-75 translate-y-4 pointer-events-none"
+      }`}
+    >
+      <button
+        onClick={scrollToTop}
+        className="h-12 w-12 rounded-full bg-[#0099F7] hover:bg-[#0077b5] shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 flex items-center justify-center text-white font-bold text-lg border-2 border-pink-400 hover:border-pink-300 shadow-pink-400/50 hover:shadow-pink-300/60 group"
+        aria-label="Back to top"
+      >
+        <span className="transition-transform duration-300 group-hover:-translate-y-0.5">
           ↑
-        </button>
-      )}
-    </>
+        </span>
+      </button>
+    </div>
   );
 }
