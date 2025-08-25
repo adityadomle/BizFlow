@@ -1,6 +1,7 @@
 import React from "react";
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaGithub } from "react-icons/fa";
 import { useTheme } from "../context/ThemeContext";
+import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   const { isDarkMode } = useTheme();
@@ -75,10 +76,14 @@ const Footer = () => {
                   icon: <FaFacebookF className="w-5 h-5" />,
                   hover: "hover:bg-blue-600 hover:text-white",
                 },
-                {
+               {
                   href: "https://x.com/domleaditya",
-                  icon: <FaTwitter className="w-5 h-5" />,
+                  icon: <FaXTwitter className="w-5 h-5" />,
+<<<<<<< Updated upstream
+                  hover: "hover:bg-black hover:text-white",
+=======
                   hover: "hover:bg-sky-500 hover:text-white",
+>>>>>>> Stashed changes
                 },
                 {
                   href: "https://www.linkedin.com/in/adityadomle?",

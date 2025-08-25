@@ -1,20 +1,20 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { fadeIn, textVariant } from "../utils/motion";
-import { useTheme } from "../context/ThemeContext";
-import {
-  FiMail,
-  FiPhone,
-  FiMapPin,
-  FiSend,
-  FiUser,
-  FiMessageSquare,
-  FiClock,
-  FiLinkedin,
-  FiTwitter,
-  FiGithub,
-  FiFacebook,
-} from "react-icons/fi";
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { fadeIn, textVariant } from '../utils/motion';
+import { useTheme } from '../context/ThemeContext';
+import { 
+  FiMail, 
+  FiPhone, 
+  FiMapPin, 
+  FiSend, 
+  FiUser, 
+  FiMessageSquare, 
+  FiClock, 
+  FiLinkedin, 
+  FiFacebook, 
+  FiGithub 
+} from 'react-icons/fi';
+import { FaXTwitter } from 'react-icons/fa6';
 import { trackButtonClick } from "../utils/analytics";
 
 const Contact = () => {
@@ -31,26 +31,12 @@ const Contact = () => {
 
   const validateForm = () => {
     const newErrors = {};
-
-    if (!formData.name.trim()) {
-      newErrors.name = "Name is required";
-    }
-
-    if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = "Please enter a valid email address";
-    }
-
-    if (!formData.subject.trim()) {
-      newErrors.subject = "Subject is required";
-    }
-
-    if (!formData.message.trim()) {
-      newErrors.message = "Message is required";
-    } else if (formData.message.trim().length < 10) {
-      newErrors.message = "Message should be at least 10 characters long";
-    }
+    if (!formData.name.trim()) newErrors.name = "Name is required";
+    if (!formData.email.trim()) newErrors.email = "Email is required";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = "Please enter a valid email address";
+    if (!formData.subject.trim()) newErrors.subject = "Subject is required";
+    if (!formData.message.trim()) newErrors.message = "Message is required";
+    else if (formData.message.trim().length < 10) newErrors.message = "Message should be at least 10 characters long";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -58,55 +44,22 @@ const Contact = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-
-    // Clear error for this field when user starts typing
-    if (errors[name]) {
-      setErrors((prev) => ({
-        ...prev,
-        [name]: "",
-      }));
-    }
+    setFormData(prev => ({ ...prev, [name]: value }));
+    if (errors[name]) setErrors(prev => ({ ...prev, [name]: "" }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Validate form before submission
-    if (!validateForm()) {
-      return;
-    }
+    if (!validateForm()) return;
 
     setIsSubmitting(true);
-
     try {
-      // Track form submission
       trackButtonClick("Contact Form Submit");
-
       console.log("Contact form submitted:", formData);
-
-      // Simulate API call delay
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-
-      // Simulate successful submission
+      await new Promise(resolve => setTimeout(resolve, 1500));
       setSubmitStatus("success");
       setFormData({ name: "", email: "", subject: "", message: "" });
       setErrors({});
-
-      // Log the submission details for testing
-      // console.log(`
-      //   📧 Contact Form Submission:
-      //   ===========================
-      //   Name: ${formData.name}
-      //   Email: ${formData.email}
-      //   Subject: ${formData.subject}
-      //   Message: ${formData.message}
-      //   Timestamp: ${new Date().toLocaleString()}
-      //   ===========================
-      // `);
     } catch (error) {
       console.error("Error submitting form:", error);
       setSubmitStatus("error");
@@ -117,37 +70,17 @@ const Contact = () => {
   };
 
   const contactInfo = [
-    {
-      icon: FiMail,
-      title: "Email",
-      details: "hello@bizflow.com",
-      link: "mailto:hello@bizflow.com",
-      description: "Send us an email anytime!",
-    },
-    {
-      icon: FiPhone,
-      title: "Phone",
-      details: "+1 (555) 123-4567",
-      link: "tel:+15551234567",
-      description: "Mon-Fri from 8am to 5pm",
-    },
-    {
-      icon: FiMapPin,
-      title: "Office",
-      details: "Delhi, India",
-      link: "https://maps.google.com",
-      description: "Come say hello at our HQ",
-    },
+    { icon: FiMail, title: "Email", details: "hello@bizflow.com", link: "mailto:hello@bizflow.com", description: "Send us an email anytime!" },
+    { icon: FiPhone, title: "Phone", details: "+1 (555) 123-4567", link: "tel:+15551234567", description: "Mon-Fri from 8am to 5pm" },
+    { icon: FiMapPin, title: "Office", details: "Delhi, India", link: "https://maps.google.com", description: "Come say hello at our HQ" },
   ];
 
-
- const socialLinks = [
-  { icon: FiLinkedin, link: "https://linkedin.com/company/bizflow", label: "LinkedIn", hover: "hover:bg-blue-700 hover:text-white" },
-  { icon: FiTwitter, link: "https://twitter.com/bizflow", label: "Twitter", hover: "hover:bg-sky-500 hover:text-white" },
-  { icon: FiFacebook, link: "https://facebook.com/bizflow", label: "Facebook", hover: "hover:bg-blue-600 hover:text-white" },
-  { icon: FiGithub, link: "https://github.com/bizflow", label: "GitHub", hover: "hover:bg-neutral-900 hover:text-white" },
-];
-
+  const socialLinks = [
+    { icon: FiLinkedin, link: "https://linkedin.com/company/bizflow", label: "LinkedIn", hover: "hover:bg-blue-700 hover:text-white" },
+    { icon: FaXTwitter, link: "https://twitter.com/bizflow", label: "X", hover: "hover:bg-sky-500 hover:text-white" },
+    { icon: FiFacebook, link: "https://facebook.com/bizflow", label: "Facebook", hover: "hover:bg-blue-600 hover:text-white" },
+    { icon: FiGithub, link: "https://github.com/bizflow", label: "GitHub", hover: "hover:bg-neutral-900 hover:text-white" },
+  ];
 
   return (
     <div className="min-h-screen pt-20">
@@ -216,7 +149,7 @@ const Contact = () => {
         </div>
       </motion.section>
 
-      {/* Contact Form */}
+      {/* Contact Form + Info Sidebar */}
       <motion.section
         variants={fadeIn("up", 0.6)}
         initial="hidden"
@@ -229,31 +162,17 @@ const Contact = () => {
             {/* Form */}
             <motion.div
               variants={fadeIn("right", 0.7)}
-              className={`p-8 rounded-2xl shadow-lg ${
-                isDarkMode ? "bg-slate-800 border border-slate-700" : "bg-white"
-              }`}
+              className={`p-8 rounded-2xl shadow-lg ${isDarkMode ? "bg-slate-800 border border-slate-700" : "bg-white"}`}
             >
-              <h2
-                className={`text-2xl font-bold mb-6 ${
-                  isDarkMode ? "text-white" : "text-gray-800"
-                }`}
-              >
+              <h2 className={`text-2xl font-bold mb-6 ${isDarkMode ? "text-white" : "text-gray-800"}`}>
                 Send us a message
               </h2>
-
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {/* Name */}
                   <div>
-                    <label
-                      className={`block text-sm font-medium mb-2 ${
-                        isDarkMode ? "text-gray-200" : "text-gray-700"
-                      }`}
-                    >
-                      <FiUser
-                        className={`inline w-4 h-4 mr-2 ${
-                          isDarkMode ? "text-blue-400" : "text-gray-700"
-                        }`}
-                      />
+                    <label className={`block text-sm font-medium mb-2 ${isDarkMode ? "text-gray-200" : "text-gray-700"}`}>
+                      <FiUser className={`inline w-4 h-4 mr-2 ${isDarkMode ? "text-blue-400" : "text-gray-700"}`} />
                       Full Name
                     </label>
                     <input
@@ -261,36 +180,18 @@ const Contact = () => {
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
-                      required
                       className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
-                        errors.name
-                          ? "border-red-500"
-                          : isDarkMode
-                          ? "border-slate-600"
-                          : "border-gray-300"
-                      } ${
-                        isDarkMode
-                          ? "bg-slate-700 text-white placeholder-gray-300"
-                          : "bg-white text-gray-800 placeholder-gray-500"
-                      }`}
+                        errors.name ? "border-red-500" : isDarkMode ? "border-slate-600" : "border-gray-300"
+                      } ${isDarkMode ? "bg-slate-700 text-white placeholder-gray-300" : "bg-white text-gray-800 placeholder-gray-500"}`}
                       placeholder="John Doe"
                     />
-                    {errors.name && (
-                      <p className="text-red-500 text-sm mt-1">{errors.name}</p>
-                    )}
+                    {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
                   </div>
 
+                  {/* Email */}
                   <div>
-                    <label
-                      className={`block text-sm font-medium mb-2 ${
-                        isDarkMode ? "text-gray-200" : "text-gray-700"
-                      }`}
-                    >
-                      <FiMail
-                        className={`inline w-4 h-4 mr-2 ${
-                          isDarkMode ? "text-blue-400" : "text-gray-700"
-                        }`}
-                      />
+                    <label className={`block text-sm font-medium mb-2 ${isDarkMode ? "text-gray-200" : "text-gray-700"}`}>
+                      <FiMail className={`inline w-4 h-4 mr-2 ${isDarkMode ? "text-blue-400" : "text-gray-700"}`} />
                       Email
                     </label>
                     <input
@@ -298,39 +199,19 @@ const Contact = () => {
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      required
                       className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
-                        errors.email
-                          ? "border-red-500"
-                          : isDarkMode
-                          ? "border-slate-600"
-                          : "border-gray-300"
-                      } ${
-                        isDarkMode
-                          ? "bg-slate-700 text-white placeholder-gray-300"
-                          : "bg-white text-gray-800 placeholder-gray-500"
-                      }`}
+                        errors.email ? "border-red-500" : isDarkMode ? "border-slate-600" : "border-gray-300"
+                      } ${isDarkMode ? "bg-slate-700 text-white placeholder-gray-300" : "bg-white text-gray-800 placeholder-gray-500"}`}
                       placeholder="john@example.com"
                     />
-                    {errors.email && (
-                      <p className="text-red-500 text-sm mt-1">
-                        {errors.email}
-                      </p>
-                    )}
+                    {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
                   </div>
                 </div>
 
+                {/* Subject */}
                 <div>
-                  <label
-                    className={`block text-sm font-medium mb-2 ${
-                      isDarkMode ? "text-gray-200" : "text-gray-700"
-                    }`}
-                  >
-                    <FiMessageSquare
-                      className={`inline w-4 h-4 mr-2 ${
-                        isDarkMode ? "text-blue-400" : "text-gray-700"
-                      }`}
-                    />
+                  <label className={`block text-sm font-medium mb-2 ${isDarkMode ? "text-gray-200" : "text-gray-700"}`}>
+                    <FiMessageSquare className={`inline w-4 h-4 mr-2 ${isDarkMode ? "text-blue-400" : "text-gray-700"}`} />
                     Subject
                   </label>
                   <input
@@ -338,66 +219,34 @@ const Contact = () => {
                     name="subject"
                     value={formData.subject}
                     onChange={handleInputChange}
-                    required
                     className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
-                      errors.subject
-                        ? "border-red-500"
-                        : isDarkMode
-                        ? "border-slate-600"
-                        : "border-gray-300"
-                    } ${
-                      isDarkMode
-                        ? "bg-slate-700 text-white placeholder-gray-300"
-                        : "bg-white text-gray-800 placeholder-gray-500"
-                    }`}
+                      errors.subject ? "border-red-500" : isDarkMode ? "border-slate-600" : "border-gray-300"
+                    } ${isDarkMode ? "bg-slate-700 text-white placeholder-gray-300" : "bg-white text-gray-800 placeholder-gray-500"}`}
                     placeholder="How can we help you?"
                   />
-                  {errors.subject && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {errors.subject}
-                    </p>
-                  )}
+                  {errors.subject && <p className="text-red-500 text-sm mt-1">{errors.subject}</p>}
                 </div>
 
+                {/* Message */}
                 <div>
-                  <label
-                    className={`block text-sm font-medium mb-2 ${
-                      isDarkMode ? "text-gray-200" : "text-gray-700"
-                    }`}
-                  >
-                    <FiMessageSquare
-                      className={`inline w-4 h-4 mr-2 ${
-                        isDarkMode ? "text-blue-400" : "text-gray-700"
-                      }`}
-                    />
+                  <label className={`block text-sm font-medium mb-2 ${isDarkMode ? "text-gray-200" : "text-gray-700"}`}>
+                    <FiMessageSquare className={`inline w-4 h-4 mr-2 ${isDarkMode ? "text-blue-400" : "text-gray-700"}`} />
                     Message
                   </label>
                   <textarea
                     name="message"
                     value={formData.message}
                     onChange={handleInputChange}
-                    required
                     rows={6}
                     className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none ${
-                      errors.message
-                        ? "border-red-500"
-                        : isDarkMode
-                        ? "border-slate-600"
-                        : "border-gray-300"
-                    } ${
-                      isDarkMode
-                        ? "bg-slate-700 text-white placeholder-gray-300"
-                        : "bg-white text-gray-800 placeholder-gray-500"
-                    }`}
+                      errors.message ? "border-red-500" : isDarkMode ? "border-slate-600" : "border-gray-300"
+                    } ${isDarkMode ? "bg-slate-700 text-white placeholder-gray-300" : "bg-white text-gray-800 placeholder-gray-500"}`}
                     placeholder="Tell us about your project or inquiry..."
                   />
-                  {errors.message && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {errors.message}
-                    </p>
-                  )}
+                  {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
                 </div>
 
+                {/* Submit */}
                 <motion.button
                   type="submit"
                   disabled={isSubmitting}
@@ -419,21 +268,13 @@ const Contact = () => {
                 </motion.button>
 
                 {submitStatus === "success" && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="p-4 bg-green-100 border border-green-200 rounded-lg text-green-700"
-                  >
+                  <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="p-4 bg-green-100 border border-green-200 rounded-lg text-green-700 mt-2">
                     ✅ Message sent successfully! We'll get back to you soon.
                   </motion.div>
                 )}
 
                 {submitStatus === "error" && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="p-4 bg-red-100 border border-red-200 rounded-lg text-red-700"
-                  >
+                  <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="p-4 bg-red-100 border border-red-200 rounded-lg text-red-700 mt-2">
                     ❌ Failed to send message. Please try again.
                   </motion.div>
                 )}
@@ -442,111 +283,47 @@ const Contact = () => {
 
             {/* Info Sidebar */}
             <motion.div variants={fadeIn("left", 0.8)} className="space-y-8">
-              <div
-                className={`p-8 rounded-2xl ${
-                  isDarkMode
-                    ? "bg-slate-800 border border-slate-700"
-                    : "bg-gradient-to-br from-blue-50 to-indigo-100"
-                }`}
-              >
-                <h3
-                  className={`text-xl font-semibold mb-4 ${
-                    isDarkMode ? "text-white" : "text-gray-800"
-                  }`}
-                >
-                  Why choose BizFlow?
-                </h3>
+              {/* Why Choose BizFlow */}
+              <div className={`p-8 rounded-2xl ${isDarkMode ? "bg-slate-800 border border-slate-700" : "bg-gradient-to-br from-blue-50 to-indigo-100"}`}>
+                <h3 className={`text-xl font-semibold mb-4 ${isDarkMode ? "text-white" : "text-gray-800"}`}>Why choose BizFlow?</h3>
                 <div className="space-y-4">
-                  <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <span className="text-white text-xs">✓</span>
+                  {["Expert Team","Fast Response","Custom Solutions"].map((title,index) => (
+                    <div key={index} className="flex items-start gap-3">
+                      <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <span className="text-white text-xs">✓</span>
+                      </div>
+                      <div>
+                        <p className={`font-medium ${isDarkMode ? "text-white" : "text-gray-800"}`}>{title}</p>
+                        <p className={`text-sm ${isDarkMode ? "text-gray-300" : "text-gray-600"}`}>
+                          {title === "Expert Team" ? "Experienced professionals ready to help" : title === "Fast Response" ? "We respond within 24 hours" : "Tailored to your specific needs"}
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <p
-                        className={`font-medium ${
-                          isDarkMode ? "text-white" : "text-gray-800"
-                        }`}
-                      >
-                        Expert Team
-                      </p>
-                      <p
-                        className={`text-sm ${
-                          isDarkMode ? "text-gray-300" : "text-gray-600"
-                        }`}
-                      >
-                        Experienced professionals ready to help
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <span className="text-white text-xs">✓</span>
-                    </div>
-                    <div>
-                      <p
-                        className={`font-medium ${
-                          isDarkMode ? "text-white" : "text-gray-800"
-                        }`}
-                      >
-                        Fast Response
-                      </p>
-                      <p
-                        className={`text-sm ${
-                          isDarkMode ? "text-gray-300" : "text-gray-600"
-                        }`}
-                      >
-                        We respond within 24 hours
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <span className="text-white text-xs">✓</span>
-                    </div>
-                    <div>
-                      <p
-                        className={`font-medium ${
-                          isDarkMode ? "text-white" : "text-gray-800"
-                        }`}
-                      >
-                        Custom Solutions
-                      </p>
-                      <p
-                        className={`text-sm ${
-                          isDarkMode ? "text-gray-300" : "text-gray-600"
-                        }`}
-                      >
-                        Tailored to your specific needs
-                      </p>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
 
+              {/* Business Hours */}
               <div className="bg-white p-8 rounded-2xl shadow-lg">
                 <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                  <FiClock className="w-5 h-5 text-blue-600" />
-                  Business Hours
+                  <FiClock className="w-5 h-5 text-blue-600" /> Business Hours
                 </h3>
                 <div className="space-y-2 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Monday - Friday</span>
-                    <span className="font-medium">8:00 AM - 6:00 PM</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Saturday</span>
-                    <span className="font-medium">9:00 AM - 4:00 PM</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Sunday</span>
-                    <span className="font-medium">Closed</span>
-                  </div>
+                  {[
+                    {day:"Monday - Friday", time:"8:00 AM - 6:00 PM"},
+                    {day:"Saturday", time:"9:00 AM - 4:00 PM"},
+                    {day:"Sunday", time:"Closed"}
+                  ].map((d,index) => (
+                    <div key={index} className="flex justify-between">
+                      <span className="text-gray-600">{d.day}</span>
+                      <span className="font-medium">{d.time}</span>
+                    </div>
+                  ))}
                 </div>
-                <p className="text-xs text-gray-500 mt-4">
-                  * All times are in Indian Standard Time (IST)
-                </p>
+                <p className="text-xs text-gray-500 mt-4">* All times are in Indian Standard Time (IST)</p>
               </div>
-                
+
+              {/* Social Links */}
               <div className="bg-white p-8 rounded-2xl shadow-lg">
                 <h3 className="text-xl font-semibold mb-4">Follow Us</h3>
                 <div className="flex gap-4">
@@ -562,9 +339,7 @@ const Contact = () => {
                         className={`w-10 h-10 rounded-full flex items-center justify-center shadow-full border transition-colors 
                           ${isDarkMode 
                           ? `bg-gray-800 text-gray-300 border-gray-600 ${social.hover}` 
-                          : `bg-gray-200 text-gray-700 border-gray-300 ${social.hover}`
-                        }`}
-
+                          : `bg-gray-200 text-gray-700 border-gray-300 ${social.hover}`}`}
                         aria-label={social.label}
                       >
                         <IconComponent className="w-5 h-5" />
