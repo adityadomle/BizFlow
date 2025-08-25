@@ -120,8 +120,12 @@ const Hero = () => {
               trackNewsletterSignup("hero_section");
               handleSend();
             }}
-            className="bg-blue-600 text-white px-8 min-[440px]:py-4 py-2 rounded-xl hover:bg-blue-700 cursor-pointer transition-all hover:shadow-lg hover:shadow-blue-100 active:scale-95"
-          >
+            className="bg-blue-600 text-white px-8 min-[440px]:py-4 py-2 rounded-xl
+             transition-transform duration-300 ease-out
+             hover:bg-blue-700 hover:translate-y-0.5 active:scale-95
+             shadow-md hover:shadow-lg
+             focus:outline-none focus:ring-0 focus:ring-offset-0"
+>
             →
           </button>
 

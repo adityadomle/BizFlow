@@ -72,7 +72,7 @@ export default function FAQ() {
         <motion.div variants={fadeIn("up", 0.3)} className="max-w-4xl mx-auto">
           <motion.h2
             variants={textVariant(0.2)}
-            className="text-3xl md:text-4xl font-bold text-center mb-12 text-white"
+            className="text-3xl md:text-4xl font-bold text-center mt-8 mb-8 text-white"
           >
             Frequently Asked Questions
           </motion.h2>
