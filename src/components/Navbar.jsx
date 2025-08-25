@@ -88,7 +88,7 @@ const Navbar = () => {
   }`}
 >
 
-      <div className="w-full flex justify-between items-center container mx-auto px-4 sm:px-6 lg:px-8 lg:h-20 h-16">
+      <div className="w-full flex justify-between items-center container mx-auto px-5 sm:px-7 lg:px-9 lg:h-20 h-16">
         {/* Logo */}
         <motion.div
           variants={fadeIn("right", 0.3)}
