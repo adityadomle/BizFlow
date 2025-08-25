@@ -326,14 +326,14 @@ const MonitorSection = () => {
 
           <motion.h2 
             variants={itemVariants}
-            className="text-4xl md:text-5xl lg:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-slate-800 to-slate-700 leading-tight"
+            className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 leading-tight"
           >
             Introducing{" "}
             <motion.span
               initial={{ backgroundPosition: "0% 50%" }}
               animate={{ backgroundPosition: "100% 50%" }}
               transition={{ duration: 3, repeat: Infinity, repeatType: "reverse" }}
-              className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 via-blue-500 to-purple-500 bg-[length:200%_200%]"
+              className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-blue-600 to-purple-600 bg-[length:200%_200%]"
             >
               best mobile
             </motion.span>{" "}
@@ -342,7 +342,7 @@ const MonitorSection = () => {
 
           <motion.p 
             variants={itemVariants}
-            className="text-slate-600 text-lg leading-relaxed max-w-md"
+            className="text-gray-500 text-lg leading-relaxed max-w-md"
           >
             Experience seamless navigation with our cutting-edge mobile carousel system. 
             Designed for performance, built for the future.
