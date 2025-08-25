@@ -8,14 +8,11 @@ import { useTheme } from "../context/ThemeContext";
 const calculatePrice = (basePrice, productCount) =>
   Math.round(basePrice * (productCount / 50));
 
-const PricingCard = ({ name, price, features, isDarkMode }) => (
-  <div
-    className={`shadow-lg hover:shadow-xl rounded-2xl px-5 justify-center py-5 transition-all duration-300 flex flex-col gap-3 items-start hover:translate-y-[-2px]
-      ${
-        isDarkMode
-          ? "bg-gradient-to-bl from-gray-800 via-gray-900 to-gray-950 text-white"
-          : "bg-white text-gray-900"
-      }`}
+const PricingCard = ({ name, price, features, animation }) => (
+  <motion.div
+    variants={animation}
+    className="bg-gradient-to-bl to-[#1c182c] from-[#1b1836] shadow-lg rounded-2xl px-5 justify-center py-5 flex flex-col gap-3 items-start"
+
   >
     <span
       className={`text-md px-3 py-1 rounded-full mb-4 border ${
@@ -120,7 +117,37 @@ const PricingSection = () => {
           {plans.map((plan) => (
             <PricingCard key={plan.name} {...plan} isDarkMode={isDarkMode} />
           ))}
+
+        </motion.div>
+
+        {/* Slider and CTA sections below */}
+        <motion.div
+          variants={fadeIn('up', 0.8)}
+          className="max-w-xl mx-auto"
+        >
+          <motion.div
+            variants={fadeIn('up', 1.1)}
+            className="text-center mt-16"
+          >
+            <motion.p
+              variants={fadeIn('up', 1.2)}
+              className="text-3xl text-gray-600 dark:text-gray-300 mb-4"
+            >
+              Ready to get started?
+            </motion.p>
+            <motion.button
+              variants={fadeIn('up', 1.3)}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="rounded-full px-6 md:px-6.5 py-2.5 md:py-3 font-medium bg-purple-900 text-gray-200 transition-all duration-300 ease-in-out hover:bg-purple-800 hover:shadow-[0_0_15px_#581c87] focus:outline-none focus:ring-0"
+              onClick={handleStartButton}
+            >
+              Get Started
+            </motion.button>
+          </motion.div>
+        </motion.div>
         </div>
+
       </div>
     </section>
   );
