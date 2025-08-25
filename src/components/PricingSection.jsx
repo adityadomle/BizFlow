@@ -10,74 +10,79 @@ const calculatePrice = (basePrice, productCount) =>
 
 const PricingCard = ({ name, price, features, isDarkMode }) => (
   <div
-    className={`shadow-lg hover:shadow-xl rounded-2xl px-5 justify-center py-5 transition-all duration-300 flex flex-col gap-3 items-start hover:translate-y-[-2px]
-      ${
-        isDarkMode
-          ? "bg-gradient-to-bl from-gray-800 via-gray-900 to-gray-950 text-white"
-          : "bg-white text-gray-900"
-      }`}
+    className={`relative overflow-hidden shadow-xl rounded-3xl p-8 transition-all duration-300 transform hover:-translate-y-1 ${
+      isDarkMode
+        ? "bg-gradient-to-b from-gray-800 to-gray-900 border border-gray-700"
+        : "bg-white border border-gray-100"
+    }`}
   >
-    <span
-      className={`text-md px-3 py-1 rounded-full mb-4 border ${
-        isDarkMode
-          ? "bg-gray-900 border-gray-700 text-purple-200"
-          : "bg-purple-50 border-purple-300 text-purple-800"
-      }`}
-    >
-      {name}
-    </span>
-    <p
-      className={`text-2xl font-semibold mb-6 ${
-        isDarkMode ? "text-indigo-200" : "text-indigo-700"
-      }`}
-    >
-      <span>Price: </span>${price}/month
-    </p>
-    <ul
-      className={`list-none pl-0 mb-6 ${
-        isDarkMode ? "text-gray-300" : "text-gray-700"
-      }`}
-    >
-      {features.map((feat) => (
-        <li key={feat} className="flex items-start mb-2">
-          <CheckCircleIcon
-            className={`w-5 h-5 mr-3 flex-shrink-0 mt-0.5 ${
-              isDarkMode ? "text-purple-400" : "text-purple-600"
-            }`}
-            aria-hidden="true"
-          />
-          <span>{feat}</span>
-        </li>
-      ))}
-    </ul>
-    <button
-      className={`px-6 py-3 rounded-full transition-all duration-300 font-medium hover:scale-105 ${
-        isDarkMode
-          ? "bg-purple-900 text-gray-200 hover:bg-purple-800"
-          : "bg-purple-600 text-white hover:bg-purple-500"
-      }`}
-      onClick={() =>
-        toast.info("⚒️ This feature is coming soon! Stay tuned for updates.")
-      }
-    >
-      Choose Plan
-    </button>
+    {/* Popular tag for Business plan */}
+    {name === "Business" && (
+      <div className="absolute top-5 right-5">
+        <span className="bg-gradient-to-r from-purple-600 to-pink-600 text-white text-sm px-4 py-1 rounded-full">
+          Popular
+        </span>
+      </div>
+    )}
+
+    <div className="space-y-6">
+      {/* Plan name */}
+      <h3 className={`text-2xl font-bold ${isDarkMode ? "text-white" : "text-gray-900"}`}>
+        {name}
+      </h3>
+
+      {/* Price */}
+      <div className="flex items-baseline">
+        <span className={`text-4xl font-bold ${isDarkMode ? "text-white" : "text-gray-900"}`}>
+          ${price}
+        </span>
+        <span className={`ml-2 text-base ${isDarkMode ? "text-gray-400" : "text-gray-500"}`}>
+          /month
+          </span>
+      </div>
+
+      {/* Features list */}
+      <ul className="space-y-4 mt-8">
+        {features.map((feature) => (
+          <li key={feature} className="flex items-center">
+            <CheckCircleIcon 
+              className={`w-5 h-5 mr-3 ${
+                isDarkMode ? "text-purple-400" : "text-purple-600"
+              }`}
+            />
+            <span className={`${isDarkMode ? "text-gray-300" : "text-gray-600"}`}>
+              {feature}
+            </span>
+          </li>
+        ))}
+      </ul>
+
+      {/* CTA Button */}
+      <button
+        onClick={() => toast.info("⚒️ This feature is coming soon! Stay tuned for updates.")}
+        className={`w-full py-4 px-8 rounded-xl font-semibold transition-all duration-300 
+          ${name === "Business"
+            ? "bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
+            : isDarkMode
+            ? "bg-gray-700 hover:bg-gray-600 text-white"
+            : "bg-gray-100 hover:bg-gray-200 text-gray-900"
+            }
+        `}
+      >
+        Get Started
+      </button>
+    </div>
   </div>
 );
-
-PricingCard.propTypes = {
-  name: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  features: PropTypes.arrayOf(PropTypes.string).isRequired,
-  isDarkMode: PropTypes.bool.isRequired,
-};
 
 const PricingSection = () => {
   const { isDarkMode } = useTheme();
   const [productCount] = useState(1);
-  const starterPrice = calculatePrice(4000, productCount);
-  const businessPrice = calculatePrice(7500, productCount);
-
+  const starterBasePrice = 4000;
+  const businessBasePrice = 8000;
+  
+  const starterPrice = calculatePrice(starterBasePrice, productCount);
+  const businessPrice = calculatePrice(businessBasePrice, productCount);
   const plans = [
     {
       name: "Starter",
@@ -106,17 +111,20 @@ const PricingSection = () => {
   ];
 
   return (
-    <section
-      className={`py-16 px-4 transition-colors duration-300 ${
-        isDarkMode ? "bg-gray-900 text-white" : "bg-pink-50 text-gray-900"
-      }`}
-    >
-      <div className="max-w-6xl mx-auto">
-        <h2 className="rounded-lg py-5 text-3xl md:text-4xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-700 via-pink-500 to-purple-700 text-center mb-16">
-          Pricing
-        </h2>
+    <section className={`py-24 px-4 ${isDarkMode ? "bg-gray-900" : "bg-gradient-to-b from-pink-50 to-white"}`}>
+      <div className="max-w-7xl mx-auto">
+        {/* Section header */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+            Simple, Transparent Pricing
+          </h2>
+          <p className={`text-lg ${isDarkMode ? "text-gray-400" : "text-gray-600"}`}>
+            Choose the perfect plan for your business needs
+          </p>
+        </div>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-12">
+        {/* Pricing cards grid */}
+        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {plans.map((plan) => (
             <PricingCard key={plan.name} {...plan} isDarkMode={isDarkMode} />
           ))}
@@ -125,5 +133,6 @@ const PricingSection = () => {
     </section>
   );
 };
+
 
 export default PricingSection;
