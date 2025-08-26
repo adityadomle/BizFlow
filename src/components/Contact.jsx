@@ -160,15 +160,19 @@ const Contact = () => {
         className="section-container text-center"
       >
         <motion.div variants={textVariant(0.3)} className="max-w-3xl mx-auto">
-          <div className="flex items-center justify-center gap-2 bg-blue-50 w-fit px-4 py-2 rounded-full mx-auto mb-6">
-            <span className="text-blue-600">💬</span>
-            <span className="text-sm font-medium text-blue-700">
+          <div
+            className={`flex items-center justify-center gap-2 w-fit px-4 py-2 rounded-full mx-auto mb-6 ${
+              isDarkMode ? "bg-slate-800" : "bg-blue-50"
+            }`}
+          >
+            <span className={isDarkMode ? "text-white" : "text-blue-600"}>💬</span>
+            <span className={`text-sm font-medium ${isDarkMode ? "text-white" : "text-blue-700"}`}>
               Get In Touch
             </span>
           </div>
 
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-            Let's start a{" "}
+            Let&apos;s start a{" "}
             <span className="text-blue-600 relative inline-block">
               conversation
               <span className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-200/60"></span>
@@ -177,7 +181,7 @@ const Contact = () => {
 
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Have a project in mind? Want to partner with us? Or just want to say
-            hello? We'd love to hear from you. Drop us a line and we'll get back
+            hello? We&apos;d love to hear from you. Drop us a line and we&apos;ll get back
             to you as soon as possible.
           </p>
         </motion.div>
@@ -424,7 +428,7 @@ const Contact = () => {
                     animate={{ opacity: 1, y: 0 }}
                     className="p-4 bg-green-100 border border-green-200 rounded-lg text-green-700"
                   >
-                    ✅ Message sent successfully! We'll get back to you soon.
+                    ✅ Message sent successfully! We&apos;ll get back to you soon.
                   </motion.div>
                 )}
 

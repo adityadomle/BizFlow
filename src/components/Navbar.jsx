@@ -82,13 +82,13 @@ const Navbar = () => {
   whileInView="show"
   viewport={{ once: true }}
   className={`fixed top-0 inset-x-0 z-50 border-b shadow-sm backdrop-blur-md transition-colors duration-300 ${
-    isDarkMode 
-      ? "bg-gray-900/90 border-gray-700" 
-      : "bg-white/90 border-gray-100"
+    isDarkMode
+      ? "bg-gray-900/90 border-gray-700 shadow-gray-900/40"
+      : "bg-white/90 border-gray-100 shadow-gray-200/40"
   }`}
 >
 
-      <div className="w-full flex justify-between items-center container mx-auto px-4 sm:px-6 lg:px-8 lg:h-20 h-16">
+      <div className="w-full flex justify-between items-center container mx-auto px-5 sm:px-7 lg:px-9 lg:h-20 h-16">
         {/* Logo */}
         <motion.div
           variants={fadeIn("right", 0.3)}
@@ -202,25 +202,48 @@ const Navbar = () => {
           className="hidden xl:flex items-center"
         >
           <motion.button
-            initial={{ opacity: 0, rotateX: -20, y: -15 }}
-            animate={{ opacity: 1, rotateX: 0, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+  initial={{ opacity: 0, rotateX: -20, y: -15 }}
+  animate={{ opacity: 1, rotateX: 0, y: 0 }}
+  transition={{ duration: 0.6, ease: "easeOut" }}
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+  onClick={() => {
+    trackButtonClick("Navbar CTA Button");
+    if (location.pathname !== "/") {
+      navigate("/#newsletter");
+    } else {
+      document.getElementById("newsletter")?.scrollIntoView({ behavior: "smooth" });
+    }
+  }}
+  className={`min-w-[140px] px-6 py-2.5 rounded-lg font-medium text-sm md:text-base transition-all duration-300 ease-in-out cursor-pointer
+    ${isDarkMode 
+      ? "bg-gradient-to-r from-blue-600 via-blue-700 to-cyan-600 text-white hover:from-blue-500 hover:to-cyan-500 hover:shadow-slate-900/60" 
+      : "bg-white text-blue-600 border border-blue-200 hover:bg-blue-50 hover:shadow-blue-100"}`}
+>
+
+  💬 Get in Touch
+</motion.button>
+
+
+          {/* Theme Toggle Button */}
+          <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => {
-              trackButtonClick("Navbar CTA Button");
-              if (location.pathname !== "/") {
-                navigate("/#newsletter");
-              } else {
-                document.getElementById("newsletter")?.scrollIntoView({ behavior: "smooth" });
-              }
-            }}
-             className={`min-w-[140px] px-5 py-2 rounded-lg font-medium text-sm md:text-base transition-all duration-300 ease-in-out
-    ${isDarkMode 
-      ? "bg-gradient-to-r from-blue-600 via-blue-700 to-cyan-600 text-white hover:from-blue-500 hover:to-cyan-500" 
-      : "bg-white text-blue-600 border border-blue-200 hover:bg-blue-50"}`}
->
-💬 Get in Touch
+            onClick={toggleTheme}
+            className={`p-2.5 rounded-lg transition-all cursor-pointer ${
+              isDarkMode 
+                ? "bg-gray-700 hover:bg-gray-600 text-yellow-400 hover:text-yellow-300" 
+                : "bg-blue-100 hover:bg-blue-200 text-blue-600 hover:text-blue-700"
+            }`}
+            aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+          >
+            {isDarkMode ? (
+              <HiSun className="h-5 w-5" />
+            ) : (
+              <HiMoon className="h-5 w-5" />
+            )}
+
+
           </motion.button>
         </motion.div>
 
