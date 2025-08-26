@@ -97,16 +97,16 @@ const Navbar = () => {
           <div className="flex items-center gap-1">
             <motion.div
               whileHover={{ scale: 1.1 }}
-              className="w-4 h-4 bg-blue-600 rounded-full opacity-75 hover:opacity-100 transition-opacity"
+              className="w-4 h-4 bg-blue-600 rounded-full opacity-75 "
             ></motion.div>
             <motion.div
               whileHover={{ scale: 1.1 }}
-              className="w-4 h-4 bg-red-500 rounded-full -ml-2 hover:opacity-75 transition-opacity"
+              className="w-4 h-4 bg-red-500 rounded-full -ml-2 "
             ></motion.div>
           </div>
           <motion.span
             whileHover={{ scale: 1.02 }}
-            className={`text-4xl font-bold transition-colors ${
+            className={`text-4xl font-bold font-logo  ${
               isDarkMode 
                 ? "text-white hover:text-blue-400" 
                 : "text-gray-800 hover:text-blue-600"
