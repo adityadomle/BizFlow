@@ -94,6 +94,10 @@ const CompanyLogo = () => {
                   ? "from-gray-800" 
                   : "from-white"
               }`}></div>
+              <div className="flex justify-center mb-4">
+  <span className="text-3xl font-bold font-poppins text-blue-600">Bizflow</span>
+</div>
+
               
               {/* Marquee container */}
               <div className="overflow-hidden py-4">
