@@ -12,7 +12,7 @@ const CompanyLogo = () => {
   const { isDarkMode } = useTheme();
 
   return (
-    <section className={`w-full py-16 lg:py-20 overflow-hidden transition-colors duration-300 bg-transparent`}>
+    <section className={`w-full py-16 lg:py-20 overflow-hidden transition-colors duration-300 bg-transparent `}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-12">
           
@@ -107,7 +107,7 @@ const CompanyLogo = () => {
                   {logos.map((logo, index) => (
                     <div
                       key={index}
-                      className={`flex-shrink-0 mx-8 lg:mx-12 group cursor-pointer transition-transform duration-300 hover:scale-105 ${isDarkMode? "bg-slate-100":"bg-slate-100"}`}
+                      className={`flex-shrink-0 mx-8 lg:mx-12 group cursor-pointer transition-transform duration-300 ${isDarkMode? "bg-slate-100":"bg-slate-100"}`}
                       onMouseEnter={() => setHoveredLogo(index)}
                       onMouseLeave={() => setHoveredLogo(null)}
                     >
@@ -138,7 +138,7 @@ const CompanyLogo = () => {
                   {logos.map((logo, index) => (
                     <div
                       key={`duplicate-${index}`}
-                      className={`flex-shrink-0 mx-8 lg:mx-12 group cursor-pointer transition-transform duration-300 hover:scale-105 ${isDarkMode? "bg-slate-100":"bg-slate-100"}`}
+                      className={`flex-shrink-0 mx-8 lg:mx-12 group cursor-pointer transition-transform duration-300 ${isDarkMode? "bg-slate-100":"bg-slate-100"}`}
                       onMouseEnter={() => setHoveredLogo(`dup-${index}`)}
                       onMouseLeave={() => setHoveredLogo(null)}
                     >
