@@ -23,6 +23,11 @@ import ScrollToTop from "./components/ScrollToTop";
 import NotFound from "./components/NotFound";
 import Contact from "./components/Contact";
 import FAQ from "./components/FAQ";
+import PolicyPage from "./pages/PolicyPage";
+import BusinessSupportPage from "./pages/BusinessSupportPage";
+import QuickChatPage from "./pages/QuickChatPage";
+import WhatsAppPage from "./pages/WhatsAppPage";
+import Support24Page from "./pages/Support24Page";
 
 // Pages
 import Partner from "./pages/Partner";
@@ -144,6 +149,11 @@ function AppContent() {
           <Route path="*" element={<NotFound />} />
           <Route path="/privacy-policy" element={<PrivacyPolicyPage/>} />
           <Route path="/terms-of-use" element={<TermsOfUsePage/>} />
+          <Route path="/policy" element={<PolicyPage />} />
+          <Route path="/business-support" element={<BusinessSupportPage />} />
+          <Route path="/quick-chat" element={<QuickChatPage />} />
+          <Route path="/contact/whatsapp" element={<WhatsAppPage />} />
+          <Route path="/contact/support-24" element={<Support24Page />} />
         </Routes>
 
         {/* Toast container for messages */}

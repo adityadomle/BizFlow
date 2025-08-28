@@ -96,7 +96,7 @@ const Footer = () => {
     ],
     getHelp: [
       { name: "Support Career", href: "/support-career" },
-      { name: "24h Service", href: "/#services" },
+      { name: "24h Service", href: "/contact/support-24" },
       { name: "Quick Chat", href: "/quick-chat" },
     ],
     contact: [

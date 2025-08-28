@@ -1,7 +1,7 @@
 
 //   purpose section
 
-export const features = [
+export const purposeFeatures = [
     {
       icon: "🟣", // Replace with your actual icon component or image
       title: "Built for impact",
@@ -16,7 +16,7 @@ export const features = [
 
 //   features section
 
-  const features = [
+  export const mainFeatures = [
     {
       icon: "🔍", 
       title: "Find out what you need",
@@ -35,7 +35,12 @@ export const features = [
   ]
 
 //   services section
-const services = [
+import { BsStack } from 'react-icons/bs';
+import { HiLightBulb } from 'react-icons/hi';
+import { FiSettings } from 'react-icons/fi';
+import { BiTime } from 'react-icons/bi';
+
+export const services = [
     {
       icon: <BsStack className="w-8 h-8 text-indigo-600" />,
       title: "Web Design",
@@ -64,7 +69,7 @@ const services = [
 
 //   testimonials section
 
-const testimonials = [
+export const testimonials = [
     {
       id: 1,
       name: "Robin Ayala Doe", 
@@ -105,7 +110,7 @@ const testimonials = [
   ];
 
   // footer section
-  const footerLinks = {
+  export const footerLinks = {
     company: [
       { name: 'About', href: '#' },
       { name: 'Terms of Use', href: '#' },

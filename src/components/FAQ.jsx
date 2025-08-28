@@ -1,21 +1,44 @@
-// Mock AnimatePresence component
-const AnimatePresence = ({ children, initial }) => children;import { useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
 
 import { useTheme } from "../context/ThemeContext";
 
-// Mock motion and theme utilities to preserve original structure
-const motion = {
-  div: ({ children, variants, className, onClick, ...props }) => (
-    <div className={className} onClick={onClick} {...props}>{children}</div>
-  ),
-  h2: ({ children, variants, className }) => (
-    <h2 className={className}>{children}</h2>
-  )
-};
+const fadeIn = (direction, delay) => ({
+  hidden: {
+    y: direction === 'up' ? 80 : direction === 'down' ? -80 : 0,
+    opacity: 0,
+    x: direction === 'left' ? 80 : direction === 'right' ? -80 : 0,
+  },
+  show: {
+    y: 0,
+    x: 0,
+    opacity: 1,
+    transition: {
+      type: 'tween',
+      duration: 1.2,
+      delay: delay,
+      ease: [0.25, 0.6, 0.3, 0.8],
+    },
+  },
+});
 
-const fadeIn = (direction, delay) => ({});
-const textVariant = (delay) => ({});
+const textVariant = (delay) => ({
+  hidden: {
+    y: -50,
+    opacity: 0,
+  },
+  show: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: 'spring',
+      duration: 1.25,
+      delay: delay,
+    },
+  },
+});
 
 const faqs = [
   {
@@ -47,6 +70,7 @@ const faqs = [
 
 export default function FAQ() {
   const { isDarkMode } = useTheme();  
+  const navigate = useNavigate();
   const [openIndex, setOpenIndex] = useState(null);
 
   const toggleFAQ = (index) => {
@@ -211,7 +235,7 @@ export default function FAQ() {
                           ? "bg-gradient-to-r from-blue-600 to-blue-500 text-white hover:from-blue-500 hover:to-blue-400 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/50 border border-blue-400/30"
                           : "bg-gradient-to-r from-blue-600 to-blue-500 text-white hover:from-blue-700 hover:to-blue-600 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 border border-blue-300/30"
                       }`}
-                      onClick={()=>navigate('/contact')}
+                      onClick={() => navigate('/contact')}
                     >
                       {/* Animated background shine effect */}
                       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
