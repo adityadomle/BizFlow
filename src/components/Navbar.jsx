@@ -18,12 +18,13 @@ const Navbar = () => {
 
   const navLinks = [
     { href: "/#home", label: "Home" },
-    { href: "/#about", label: "About Us" },
+    { href: "/about", label: "About Us" },
     { href: "/#services", label: "Our Services" },
     { href: "/#testimonials", label: "Testimonials" },
     { href: "/#faq", label: "FAQ" },
     { href: "/contact", label: "Contact" },
     { href: "/contributors", label: "Contributors" },
+    { href: "/contributor-guide", label:"Contributor Guide"}
   ];
 
   // This effect now correctly handles PAGE changes without conflicting with the scroll spy.
@@ -202,27 +203,27 @@ const Navbar = () => {
           className="hidden xl:flex items-center"
         >
           <motion.button
-  initial={{ opacity: 0, rotateX: -20, y: -15 }}
-  animate={{ opacity: 1, rotateX: 0, y: 0 }}
-  transition={{ duration: 0.6, ease: "easeOut" }}
-  whileHover={{ scale: 1.05 }}
-  whileTap={{ scale: 0.95 }}
-  onClick={() => {
-    trackButtonClick("Navbar CTA Button");
-    if (location.pathname !== "/") {
-      navigate("/#newsletter");
-    } else {
-      document.getElementById("newsletter")?.scrollIntoView({ behavior: "smooth" });
-    }
-  }}
-  className={`min-w-[140px] px-6 h-10 rounded-lg font-medium text-sm md:text-base transition-all duration-300 ease-in-out cursor-pointer
-    ${isDarkMode 
-      ? "bg-gradient-to-r from-blue-600 via-blue-700 to-cyan-600 text-white hover:from-blue-500 hover:to-cyan-500 hover:shadow-slate-900/60" 
-      : "bg-white text-blue-600 border border-blue-200 hover:bg-blue-50 hover:shadow-blue-100"}`}
->
+            initial={{ opacity: 0, rotateX: -20, y: -15 }}
+            animate={{ opacity: 1, rotateX: 0, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => {
+              trackButtonClick("Navbar CTA Button");
+              if (location.pathname !== "/") {
+                navigate("/#newsletter");
+              } else {
+                document.getElementById("newsletter")?.scrollIntoView({ behavior: "smooth" });
+              }
+            }}
+            className={`min-w-[140px] px-6 h-10 rounded-lg font-medium text-sm md:text-base transition-all duration-300 ease-in-out cursor-pointer
+              ${isDarkMode 
+                ? "bg-gradient-to-r from-blue-600 via-blue-700 to-cyan-600 text-white hover:from-blue-500 hover:to-cyan-500 hover:shadow-slate-900/60" 
+                : "bg-white text-blue-600 border border-blue-200 hover:bg-blue-50 hover:shadow-blue-100"}`}
+          >
 
-  💬 Get in Touch
-</motion.button>
+            💬 Get in Touch
+          </motion.button>
 
 
           {/* Theme Toggle Button */}
