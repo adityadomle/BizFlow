@@ -18,6 +18,7 @@
     "axios": "^1.11.0",
     "chart.js": "^4.4.0",
     "framer-motion": "^12.23.12",
+    "gsap": "^3.13.0",
     "lucide-react": "^0.540.0",
     "nodemailer": "^7.0.5",
     "postcss": "^8.5.6",
