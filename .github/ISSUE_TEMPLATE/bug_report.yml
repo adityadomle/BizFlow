@@ -1,0 +1,48 @@
+name: 🐞 Bug Report
+description: Report a bug to help us improve BizFlow
+title: "[BUG] "
+labels: [bug]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: 🐞 Bug Description
+      description: A clear and concise description of the bug.
+      placeholder: "The dashboard crashes when clicking on Analytics..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: ✅ Steps to Reproduce
+      description: Step-by-step instructions to reproduce the behavior.
+      placeholder: |
+        1. Go to '...'
+        2. Click on '...'
+        3. Scroll down to '...'
+        4. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 🎯 Expected Behavior
+      description: What should have happened instead?
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: 📸 Screenshots / Recordings
+      description: Add screenshots, GIFs, or recordings to explain the issue.
+      placeholder: "Attach images or video links here"
+
+  - type: input
+    id: environment
+    attributes:
+      label: 💻 Environment
+      description: Provide details about your system.
+      placeholder: "OS: Windows 11 | Browser: Chrome 117 | Node: 18.x"

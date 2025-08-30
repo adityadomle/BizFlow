@@ -1,0 +1,47 @@
+name: ✨ Feature Request
+description: Suggest a new feature or improvement for BizFlow
+title: "[Feature] "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: 💡 Feature Summary
+      description: A clear description of the feature you want.
+      placeholder: "Add a Kanban-style task board..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: 🔎 Problem Statement
+      description: Is your feature request related to a problem?
+      placeholder: "Currently, tasks can only be seen in list view..."
+    validations:
+      required: false
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: 🚀 Proposed Solution
+      description: Describe your ideal solution.
+      placeholder: "Introduce a board view with drag-and-drop tasks..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: 📊 Alternatives Considered
+      description: Other approaches you’ve thought about, if no any, leave blank
+      placeholder: "Could also integrate Trello API, but native view is better."
+    validations:
+      required: false
+
+  - type: textarea
+    id: context
+    attributes:
+      label: 📝 Additional Context
+      description: Add mockups, references, or extra info.
+      placeholder: "Attach images, links, or any other context here."
