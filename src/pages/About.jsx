@@ -13,6 +13,11 @@ import {
   FiEye,
 } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import { gsap } from 'gsap'
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger)
 
 const coreValues = [
   {
@@ -104,6 +109,29 @@ const AboutUs = () => {
       setBulbs(newBulbs);
     }
   }, [isDarkMode]);
+
+  useGSAP(()=>{
+    gsap.utils.toArray(".section-container").forEach((ele, idx) => {
+      gsap.fromTo(
+        ele,
+        {
+          x: idx % 2 === 0 ? 200 : -200, 
+          opacity: 0,
+        },
+        {
+          x: 0,
+          opacity: 1,
+          ease: "power1.out",
+          scrollTrigger: {
+            trigger: ele,
+            start: "top 80%",
+            end: "top 50%",
+            scrub: 1, // scrub with slight delay
+          },
+        }
+      );
+    });
+  },[])
 
   return (
     <div
