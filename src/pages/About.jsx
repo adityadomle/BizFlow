@@ -133,6 +133,12 @@ const AboutUs = () => {
     });
   },[])
 
+  const bounceHover = {
+    onMouseEnter: e => e.currentTarget.style.transform = "scale(1.07)",
+    onMouseLeave: e => e.currentTarget.style.transform = "scale(1)",
+    style: { transition: "transform 0.3s cubic-bezier(.34,1.56,.64,1)" }
+  };
+
   return (
     <div
       className={`min-h-screen pt-24 pb-16 transition-colors duration-500 relative overflow-hidden
@@ -171,6 +177,7 @@ const AboutUs = () => {
             className={`text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mt-40 relative inline-block ${
               isDarkMode ? "text-white" : "text-gray-900"
             }`}
+            {...bounceHover}
           >
             Meet the BizFlow Team
             {/* Underline */}
@@ -188,6 +195,7 @@ const AboutUs = () => {
             className={`text-lg max-w-3xl mt-10 mb-50 text-center mx-auto ${
               isDarkMode ? "text-gray-300" : "text-gray-700"
             }`}
+            {...bounceHover}
           >
             We're a passionate group of developers, designers, and innovators
             dedicated to creating powerful, intuitive business workflow
@@ -258,6 +266,7 @@ const AboutUs = () => {
               className={`flex items-center text-5xl font-bold gap-4 ${
                 isDarkMode ? "text-white" : "text-gray-900"
               }`}
+              {...bounceHover}
             >
               <FiTarget className="text-5xl text-gradient-to-r from-primary-500 to-accent-500" />
               Our Mission
@@ -336,6 +345,7 @@ const AboutUs = () => {
               className={`flex items-center text-5xl font-bold gap-4 ${
                 isDarkMode ? "text-white" : "text-gray-900"
               }`}
+              {...bounceHover}
             >
               <FiEye className="text-5xl text-gradient-to-r from-primary-500 to-accent-500" />
               Our Vision
@@ -356,6 +366,7 @@ const AboutUs = () => {
             className={`text-5xl font-bold text-center mb-6 mt-20 ${
               isDarkMode ? "text-white" : "text-gray-900"
             }`}
+            {...bounceHover}
           >
             Our Services
           </h2>
@@ -422,6 +433,7 @@ const AboutUs = () => {
             className={`text-5xl font-bold text-center mt-10 mb-10 ${
               isDarkMode ? "text-white" : "text-gray-900"
             }`}
+            {...bounceHover}
           >
             Our Core Values
           </h2>
@@ -487,11 +499,12 @@ const AboutUs = () => {
           <div className="flex justify-center">
             <h2
               className={`inline-block px-8 py-3 text-3xl font-bold mb-12 rounded-full
-      ${
-        isDarkMode
-          ? "bg-gray-700 text-white shadow-[0_0_10px_rgba(139,92,246,0.6)]"
-          : "bg-white text-black shadow-[0_0_20px_rgba(139,92,246,0.4)]"
-      }`}
+                ${
+                  isDarkMode
+                    ? "bg-gray-700 text-white shadow-[0_0_10px_rgba(139,92,246,0.6)]"
+                    : "bg-white text-black shadow-[0_0_20px_rgba(139,92,246,0.4)]"
+                }`}
+                {...bounceHover}
             >
               Meet the Project Owner
             </h2>
