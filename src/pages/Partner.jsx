@@ -100,11 +100,43 @@ const Partner = () => {
 
   // Form state
   const [formData, setFormData] = useState({
-    name: "",
+    username: "",
     email: "",
     company: "",
     message: "",
   });
+
+  const [errors , setErrors] = useState({});
+
+  const validateField = (name , value) => {
+    let message = ""
+
+    if (name === "username") {
+      if (value.length < 3) {
+        message = "Username must be at least 3 characters.";
+      }
+    }
+
+    if (name === "email") {
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+        message = "Please enter a valid email";
+      }
+    }
+
+    if (name === "company") { 
+      if (value.length < 3) {
+        message = "Company name must be at least 3 characters.";
+      }
+    }
+
+    if (name === "message") {
+      if (value.length < 10) {
+        message = "Message should be at least 10 characters.";
+      }
+    }
+
+    setErrors((prev) => ({...prev, [name]: message}));
+  };
 
   useEffect(() => {
     // Check if the browser supports this feature
@@ -130,11 +162,20 @@ const Partner = () => {
       ...prev,
       [name]: value,
     }));
+    validateField(name , value);
   };
 
   // Handle form submit
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    Object.entries(formData).forEach(([name , value]) =>
+    validateField(name , value)
+  );
+
+  if (Object.values(errors).some((msg) => msg)) {
+    return;
+  }
 
     setShowPopup(true);
 
@@ -229,8 +270,9 @@ const Partner = () => {
           </label>
           <input
             type="text"
-            name="name"
-            value={formData.name}
+            name="username"
+            minLength={3}
+            value={formData.username}
             onChange={handleChange}
             placeholder="Your full name"
             className={`w-full px-4 py-3 rounded-xl border focus:outline-none focus:ring-2
@@ -240,6 +282,10 @@ const Partner = () => {
               }`}
             required
           />
+          {errors.username && (
+        <p className="text-red-500 text-sm mt-1">{errors.username}</p>
+
+          )}
         </motion.div>
 
         {/* Email */}
@@ -262,6 +308,9 @@ const Partner = () => {
               }`}
             required
           />
+          {errors.username && (
+        <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+          )}
         </motion.div>
 
         {/* Company */}
@@ -274,6 +323,7 @@ const Partner = () => {
           <input
             type="text"
             name="company"
+            minLength={3}
             value={formData.company}
             onChange={handleChange}
             placeholder="Your company name"
@@ -283,6 +333,10 @@ const Partner = () => {
                 : "border-gray-300 bg-white/80 text-gray-800 placeholder-gray-500 focus:ring-blue-400"
               }`}
           />
+          {errors.username && (
+        <p className="text-red-500 text-sm mt-1">{errors.company}</p>
+
+          )}
         </motion.div>
 
         {/* Message */}
@@ -294,6 +348,7 @@ const Partner = () => {
           </label>
           <textarea
             name="message"
+            minLength={10}
             value={formData.message}
             onChange={handleChange}
             placeholder="Tell us about your partnership proposal"
@@ -304,6 +359,10 @@ const Partner = () => {
                 : "border-gray-300 bg-white/80 text-gray-800 placeholder-gray-500 focus:ring-indigo-400"
               }`}
           />
+          {errors.username && (
+        <p className="text-red-500 text-sm mt-1">{errors.message}</p>
+
+          )}
         </motion.div>
 
         {/* Submit Button */}
@@ -424,3 +483,15 @@ const Partner = () => {
 };
 
 export default Partner;
+
+
+
+
+
+
+
+
+
+
+
+
