@@ -10,6 +10,7 @@ import { ToastContainer } from "react-toastify";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
+import DeadlineReminder from "./components/DeadlineReminder";  // 👈 NEW IMPORT
 
 // Lazy loaded components
 const Hero = lazy(() => import("./components/Hero"));
@@ -26,7 +27,6 @@ const NewsletterSection = lazy(() => import("./components/NewsletterSection"));
 const NotFound = lazy(() => import("./components/NotFound"));
 const Contact = lazy(() => import("./components/Contact"));
 const FAQ = lazy(() => import("./components/FAQ"));
-
 
 // Lazy loaded pages
 const Partner = lazy(() => import("./pages/Partner"));
@@ -90,6 +90,9 @@ function HomePage() {
       </section>
       <section id="faq">
         <FAQ />
+      </section>
+      <section id="reminders">     {/* 👈 NEW SECTION */}
+        <DeadlineReminder />       {/* 👈 REMINDER FEATURE ADDED */}
       </section>
       <section id="newsletter">
         <NewsletterSection />
