@@ -3,11 +3,15 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { HiChevronUp } from "react-icons/hi";   // minimal + modern
+import { useTheme } from "../context/ThemeContext";
+
 
 
 export default function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
   const { pathname } = useLocation();
+    const { isDarkMode } = useTheme();
+
 
   useEffect(() => {
     const toggleVisibility = () => {
@@ -49,15 +53,31 @@ export default function ScrollToTop() {
     >
       <button
         onClick={scrollToTop}
-        className="
-    h-14 w-14 rounded-full
-    bg-white/20 backdrop-blur-lg border border-white/20
-    shadow-lg shadow-pink-400/30
-    hover:shadow-pink-400/50 hover:scale-110
-    transition-transform duration-300 flex items-center justify-center
-    text-white text-2xl
-    group relative overflow-hidden
-  "
+  //       className="
+  //   h-14 w-14 rounded-full
+  //   bg-white/20 backdrop-blur-lg border border-white/20
+  //   shadow-lg shadow-pink-400/30
+  //   hover:shadow-pink-400/50 hover:scale-110
+  //   transition-transform duration-300 flex items-center justify-center
+  //   text-white text-2xl
+  //   group relative overflow-hidden
+  // "
+
+  className={`
+  h-14 w-14 rounded-full
+  backdrop-blur-lg border
+  shadow-lg hover:scale-110
+  transition-transform duration-300 flex items-center justify-center
+  text-2xl group relative overflow-hidden
+  ${
+    isDarkMode
+      ? "bg-white/10 border-white/10 text-white shadow-pink-400/30 hover:shadow-pink-400/50"
+      // : "bg-black/10 border-black/10 text-black shadow-pink-300/30 hover:shadow-pink-300/50"
+      : "bg-black/10 border-black/10 text-black shadow-pink-600/40 hover:shadow-pink-600/60"
+
+    }
+`}
+
         aria-label="Back to top"
       >
         {/* Animated gradient overlay */}
