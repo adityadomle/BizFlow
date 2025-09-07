@@ -323,7 +323,7 @@ export default function FAQ() {
           </motion.button>
 
           <motion.button
-            onClick={() => navigate("/help")}
+            onClick={() => navigate("/contact#contact-info")}
             className={`px-6 py-3 rounded-xl border font-semibold transition-all duration-300 ${
               isDarkMode
                 ? "border-gray-600 text-gray-300 hover:bg-gray-700 hover:text-white"

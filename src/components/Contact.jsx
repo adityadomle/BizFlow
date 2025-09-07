@@ -317,6 +317,7 @@ const Contact = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             {/* Form - Takes 2 columns with Enhanced Glassmorphism */}
             <motion.div
+              id= "contact-info"
               variants={fadeIn("right", 0.7)}
               className={`lg:col-span-2 p-10 rounded-3xl backdrop-blur-xl border transition-all duration-500 ${
                 isDarkMode 
