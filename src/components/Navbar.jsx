@@ -258,11 +258,11 @@ const ModernNavbar = () => {
           }
         `}
       >
-        <div className="w-full flex justify-between items-center container mx-auto px-4 sm:px-6 lg:px-8 xl:px-9 h-16 lg:h-20">
+        <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8 xl:px-12 2xl:max-w-screen-xl lg:h-20">
           <Logo />
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-6 xl:gap-8 2xl:gap-12">
+          <div className="hidden xl:flex items-center gap-6 xl:gap-8 2xl:gap-10 ml-10">
             {navLinks.map((link) => (
               <NavLink key={link.href} link={link} />
             ))}
@@ -368,7 +368,7 @@ const ModernNavbar = () => {
           </div>
 
           {/* Desktop CTA + Theme Toggle */}
-          <div className="hidden lg:flex items-center gap-3 xl:gap-4">
+          <div className="hidden xl:flex items-center gap-3 xl:gap-4">
             <button
             className={`
               relative overflow-hidden group min-w-[100px] xl:min-w-[130px] px-3 xl:px-5 py-2 xl:py-2.5 
@@ -409,7 +409,7 @@ const ModernNavbar = () => {
           {/* Mobile Menu Button */}
           <button
             className={`
-              lg:hidden relative z-[10000] p-3 rounded-xl transition-all duration-300 transform hover:scale-105
+              xl:hidden relative z-[10000] p-3 rounded-xl transition-all duration-300 transform hover:scale-105
               ${isDarkMode 
                 ? "bg-gray-800/50 hover:bg-gray-700/50 text-white border border-gray-700/50" 
                 : "bg-gray-50/50 hover:bg-gray-100/50 text-gray-700 border border-gray-200/50"
