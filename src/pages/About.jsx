@@ -187,11 +187,11 @@ const AboutUs = () => {
         }`}
           >
             <h2
-              className={`inline-block text-xl font-semibold px-6 py-3 rounded-full tracking-wide mb-4
+              className={`inline-block text-xl font-semibold px-6 py-3 rounded-full tracking-wide mb-4 transition-all transition-ease-in-out
           ${
             isDarkMode
-              ? "bg-gradient-to-r from-primary-500 to-accent-500 text-white shadow-[0_0_20px_rgba(139,92,246,0.7)] animate-glow"
-              : "bg-gradient-to-r from-gray-200 text-black shadow-[0_0_20px_rgba(236,72,153,0.6)] animate-glow"
+              ? "bg-gradient-to-r from-primary-500 to-accent-500 text-white shadow-[0_0_20px_rgba(139,92,246,0.4)] hover:shadow-[0_0_20px_rgba(139,92,246,0.8)] hover:scale-105 animate-glow"
+              : "bg-gradient-to-r from-gray-200 text-black shadow-[0_0_20px_rgba(236,72,153,0.4)] hover:shadow-[0_0_20px_rgba(236,72,153,0.7)] hover:scale-105 animate-glow"
           }`}
             >
               About BizFlow?
