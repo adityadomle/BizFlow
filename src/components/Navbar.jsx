@@ -67,7 +67,6 @@ const ModernNavbar = () => {
     { href: "/#services", label: "Services", icon: <Zap className="w-4 h-4" /> },
     { href: "/#testimonials", label: "Testimonials", icon: <BookOpen className="w-4 h-4" /> },
     { href: "/#faq", label: "FAQ", icon: <BookOpen className="w-4 h-4" /> },
-    { href: "/contact", label: "Contact", icon: <Users className="w-4 h-4" /> },
   ], []);
 
   const dropdownItems = useMemo(() => [
@@ -535,7 +534,7 @@ const ModernNavbar = () => {
               `}
             >
               <Sparkles className="w-4 h-4" />
-              Get in Touch
+              Contact Us
             </button>
           </div>
 
