@@ -86,14 +86,6 @@ const FeaturesSection = () => {
         isDarkMode ? "text-gray-100" : "text-gray-900"
       }`}
     >
-      {/* Background gradient glow */}
-      <div className="absolute inset-0 -z-20 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-pink-500/10 blur-3xl opacity-50" />
-
-      {/* Color blobs (frosted) */}
-      <div className="absolute -top-20 -left-20 w-72 h-72 bg-pink-400/30 rounded-full mix-blend-multiply filter blur-3xl animate-pulse -z-10" />
-      <div className="absolute top-40 -right-24 w-80 h-80 bg-blue-400/30 rounded-full mix-blend-multiply filter blur-3xl animate-pulse -z-10" />
-      <div className="absolute bottom-0 left-1/3 w-96 h-96 bg-purple-400/18 rounded-full mix-blend-multiply filter blur-3xl animate-pulse -z-10" />
-
       {/* Header */}
       <motion.div
         className="text-center mb-16 relative z-10"
