@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext"; 
 import showGitCommit from "../../assets/showGitCommit.png"; 
+import showGitPush from "../../assets/showGitPush.png"; 
 export default function Step1Detail() {
   const navigate = useNavigate();
 
@@ -36,7 +37,11 @@ export default function Step1Detail() {
         <p className={` text-2xl mb-6 ${isDarkMode ? "text-gray-300" :" text-gray-800"} `}>
           <span className="text-blue-400 text-2xl mb-2">Step 2:</span> After Commit your messages you can push your local changes to remote repo use <strong>Command</strong> <span className="text-blue-400 text-xl mb-2">git push origin "your branch name"</span> 
         </p>
-
+         <img
+          src={showGitPush}
+          alt="Step 1 Screenshot"
+          className="m-8 px-2.5 py-1.5 flex justify-center align-center rounded-lg shadow-lg w-3xl"
+        /> 
         
         <h2 className={` text-2xl mb-6 ${isDarkMode ? "text-gray-100" :" text-gray-800"} `}>
           Conclusion

@@ -1,7 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext";
-import showCreateBranch from "../../assets/showCreateBranch.png";
+import showPR from "../../assets/showPR.png";
+import finalAddPR from "../../assets/finalAddPR.png";
 export default function Step1Detail() {
   const navigate = useNavigate();
 
@@ -34,11 +35,6 @@ export default function Step1Detail() {
           <span className="text-blue-400 text-2xl mb-2">Step 1:</span>Navigate
           to Your Repository on GitHub: Go to the repository page where you
           pushed your branch.
-          <img
-            src={showCreateBranch}
-            alt="Step 1 Screenshot"
-            className="m-8 px-2.5 py-1.5 flex justify-center align-center rounded-lg shadow-lg w-3xl"
-          />
         </p>
         <p
           className={` text-2xl mb-6 ${
@@ -49,6 +45,11 @@ export default function Step1Detail() {
           “Pull Requests” Tab: On the repository’s page, click the “Pull
           Requests” tab.
         </p>
+        <img
+          src={showPR}
+          alt="Step 1 Screenshot"
+          className="m-8 px-2.5 py-1.5 flex justify-center align-center rounded-lg shadow-lg w-3xl"
+        />
         <p
           className={` text-2xl mb-6 ${
             isDarkMode ? "text-gray-300" : " text-gray-800"
@@ -67,6 +68,11 @@ export default function Step1Detail() {
           Changes and Add Details: Review the changes, add a title and
           description for the pull request, and include relevant context.
         </p>
+        <img
+          src={finalAddPR}
+          alt="Step 1 Screenshot"
+          className="m-8 px-2.5 py-1.5 flex justify-center align-center rounded-lg shadow-lg w-3xl"
+        />
 
         <h2
           className={` text-2xl mb-6 ${
@@ -78,8 +84,9 @@ export default function Step1Detail() {
             className={`text-gray-300 text-xl m-2 ${
               isDarkMode ? "text-gray-300" : " text-gray-800"
             } `}
-          > 
-          Now you are all set ...if Everything is fine..till now ...You have wait till the PR merged
+          >
+            Now you are all set ...if Everything is fine..till now ...You have
+            wait till the PR merged
           </p>
         </h2>
       </div>
