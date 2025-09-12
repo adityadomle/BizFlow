@@ -22,9 +22,15 @@ const MonitorSection = lazy(() => import("./components/MonitorSection"));
 const PricingSection = lazy(() => import("./components/PricingSection"));
 const ServicesSection = lazy(() => import("./components/ServicesSection"));
 const TestimonialsSection = lazy(() => import("./components/TestimonialsSection"));
-const NewsletterSection = lazy(() => import("./components/NewsletterSection"));
+const NewsletterSection = lazy(() => import("./components/NewsletterSection")); 
 const NotFound = lazy(() => import("./components/NotFound"));
 const Contact = lazy(() => import("./components/Contact"));
+const Step1Detail = lazy(() => import("./components/LearnMore/Step1Detail"))
+const Step2Detail = lazy(() => import("./components/LearnMore/Step2Detail"))
+const Step3Detail = lazy(() => import("./components/LearnMore/Step3Detail"))
+const Step4Detail = lazy(() => import("./components/LearnMore/Step4Detail"))
+const Step5Detail = lazy(() => import("./components/LearnMore/Step5Detail"))
+const Step6Detail = lazy(() => import("./components/LearnMore/Step6Detail"))
 const FAQ = lazy(() => import("./components/FAQ"));
 
 
@@ -35,7 +41,7 @@ const SupportCareer = lazy(() => import("./pages/SupportCareer"));
 const PrivacyPolicyPage = lazy(() => import("./pages/PrivacyPolicyPage"));
 const TermsOfUsePage = lazy(() => import("./pages/TermsOfUsePage"));
 const ContributorGuide = lazy(() => import("./pages/ContributorGuide"));
-const LeaderBoard = lazy(() => import("./pages/LeaderBoard"));
+const LeaderBoard = lazy(() => import("./pages/LeaderBoard")); 
 
 // Router
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -45,6 +51,7 @@ import useScrollTracking from "./utils/useScrollTracking";
 import useTimeTracking from "./utils/useTimeTracking";
 import { trackPageView } from "./utils/analytics";
 import Loader from "./components/Loader";
+// import Step1Detail from "./pages/LearnMore/StepDetails";
 
 
 // Hash Navigation component
@@ -199,6 +206,14 @@ function AppContent() {
             <Route path="/faqs" element={<FAQ />} />
             <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
             <Route path="/terms-of-use" element={<TermsOfUsePage />} />
+            <Route path="/" element={<ContributorGuide/>} />
+            {/* added stepdetails for contributer guid cards */}
+            <Route path="/learn/1" element = {<Step1Detail/>}/>
+            <Route path="/learn/2" element = {<Step2Detail/>}/>
+            <Route path="/learn/3" element = {<Step3Detail/>}/>
+            <Route path="/learn/4" element = {<Step4Detail/>}/>
+            <Route path="/learn/5" element = {<Step5Detail/>}/>
+            <Route path="/learn/6" element = {<Step6Detail/>}/>
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
