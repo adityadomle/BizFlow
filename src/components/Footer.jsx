@@ -88,6 +88,7 @@ const Footer = () => {
       { name: "Privacy Policy", href: "/privacy-policy" },
       { name: "How it Works", href: "/#SCHEDULE" },
       { name: "Contact Us", href: "/contact" },
+      { name: "cookies", href: "/Cookies" },
     ],
     support: [
       { name: "FAQs", href: "/faqs" },
@@ -468,7 +469,7 @@ const Footer = () => {
                   Privacy
                 </a>
                 <a
-                  href="/cookies"
+                  href="/Cookies"
                   className={`hover:underline transition-colors duration-200 ${
                     isDarkMode
                       ? "text-gray-400 hover:text-white"
