@@ -92,7 +92,7 @@ const ScheduleSection = () => {
               transition={{ delay: 0.3 }}
               className="space-y-3"
             >
-              <h2 className={`relative text-3xl lg:text-4xl font-bold leading-tight ${
+              <h2 className={`relative text-3xl lg:text-4xl font-bold leading-tight inline-block ${
                 isDarkMode 
                   ? 'bg-gradient-to-r from-slate-200 via-blue-200 to-indigo-200 bg-clip-text text-transparent'
                   : 'bg-gradient-to-r from-slate-800 via-blue-800 to-indigo-800 bg-clip-text text-transparent'
