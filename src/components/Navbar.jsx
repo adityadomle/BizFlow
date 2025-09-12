@@ -163,11 +163,30 @@ const ModernNavbar = () => {
   // Enhanced logo component
   const Logo = ({ className = "" }) => (
     <div className={`flex items-center gap-3 cursor-pointer group ${className}`}>
-      <div className="relative">
+      {/* style for circle animation for logo*/}
+      <style>
+        {`
+            @keyframes testmove{
+              0% , 100%{
+                transform : translateY(0)  scale(1);
+                z-index : 1;
+              }
+              50%{
+                transform : translateY(-10px) scale(.9);
+                z-index : -1;
+              }
+            }
+        `}
+      </style>
+      <div className="relative"> 
         <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-600 rounded-full blur-md opacity-30 group-hover:opacity-50 transition-opacity duration-300" />
+
         <div className="relative flex items-center gap-1">
-          <div className="w-4 h-4 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full opacity-90 group-hover:opacity-100 transition-all duration-300 shadow-lg transform group-hover:scale-110 group-hover:rotate-180" />
-          <div className="w-4 h-4 bg-gradient-to-br from-red-500 to-pink-600 rounded-full -ml-2 opacity-90 group-hover:opacity-100 transition-all duration-300 shadow-lg transform group-hover:scale-110 group-hover:-rotate-180" />
+
+          <div className="w-4 h-4 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full opacity-90 group-hover:opacity-100 transition-all duration-300 shadow-lg transform group-hover:scale-110 group-hover:rotate-180" style ={{animation : 'testmove 2s ease-in-out infinite'}} />
+
+          <div className="w-4 h-4 bg-gradient-to-br from-red-500 to-pink-600 rounded-full -ml-2 opacity-90 group-hover:opacity-100 transition-all duration-300 shadow-lg transform group-hover:scale-110 group-hover:-rotate-180" style ={{animation : 'testmove 2s ease-in-out 1s infinite'}} />
+
         </div>
       </div>
       <button
