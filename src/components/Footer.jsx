@@ -458,7 +458,7 @@ const Footer = () => {
                   Terms
                 </a>
                 <a
-                  href="/privacy"
+                  href="/privacy-policy"
                   className={`hover:underline transition-colors duration-200 ${
                     isDarkMode
                       ? "text-gray-400 hover:text-white"
