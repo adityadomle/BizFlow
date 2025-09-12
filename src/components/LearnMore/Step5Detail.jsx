@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext"; 
-import showCreateBranch from "../../assets/showCreateBranch.png"; 
+import showGitCommit from "../../assets/showGitCommit.png"; 
 export default function Step1Detail() {
   const navigate = useNavigate();
 
@@ -27,11 +27,16 @@ export default function Step1Detail() {
         <p className={` text-2xl mb-6 ${isDarkMode ? "text-gray-300" :" text-gray-800"} `}>
           <span className="text-blue-400 text-2xl mb-2">Step 1:</span>Git commit is used for saving modifications to the current repository that we have do in previus steps ,Commits changes to your local repository, not affecting the remote repository.
           Use <strong>Command</strong> git commit -m "Your commit message" <span className="text-blue-400 text-xl mb-2">Inside Your commit message you can add describe what you done in concise manner</span>
-        </p>   
+        </p>  
+         <img
+          src={showGitCommit}
+          alt="Step 1 Screenshot"
+          className="m-8 px-2.5 py-1.5 flex justify-center align-center rounded-lg shadow-lg w-3xl"
+        /> 
         <p className={` text-2xl mb-6 ${isDarkMode ? "text-gray-300" :" text-gray-800"} `}>
           <span className="text-blue-400 text-2xl mb-2">Step 2:</span> After Commit your messages you can push your local changes to remote repo use <strong>Command</strong> <span className="text-blue-400 text-xl mb-2">git push origin "your branch name"</span> 
         </p>
-        
+
         
         <h2 className={` text-2xl mb-6 ${isDarkMode ? "text-gray-100" :" text-gray-800"} `}>
           Conclusion
