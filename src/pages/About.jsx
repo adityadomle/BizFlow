@@ -466,8 +466,8 @@ const AboutUs = () => {
               className={`inline-block px-8 py-3 text-3xl font-bold mb-12 rounded-full
       ${
         isDarkMode
-          ? "bg-gray-700 text-white shadow-[0_0_10px_rgba(139,92,246,0.6)]"
-          : "bg-white text-black shadow-[0_0_20px_rgba(139,92,246,0.4)]"
+          ? "bg-gray-700 text-white shadow-[0_0_10px_rgba(139,92,246,0.6)] hover:shadow-[0_0_20px_rgba(140,98,248,0.9)] hover:border-purple-600 transition:all ease-in-out"
+          : "bg-white text-black shadow-[0_0_20px_rgba(139,92,246,0.4)] hover:shadow-[0_0_25px_rgba(140,98,248,0.8)] hover:border-purple-600 transition:all ease-in-out"
       }`}
             >
               Meet the Project Owner
