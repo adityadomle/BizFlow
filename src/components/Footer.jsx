@@ -86,7 +86,7 @@ const Footer = () => {
       { name: "About", href: "/about" },
       { name: "Terms of Use", href: "/terms-of-use" },
       { name: "Privacy Policy", href: "/privacy-policy" },
-      { name: "How it Works", href: "/#SCHEDULE" },
+      { name: "How it Works", href: "/how-it-works" },
       { name: "Contact Us", href: "/contact" },
     ],
     support: [
