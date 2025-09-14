@@ -81,7 +81,7 @@ const Hero = () => {
           "highlight",
           "rounded-2xl"
         );
-      }, 1500); // remove highlight after 1.5seconds
+      }, 1500); // remove highlight after 1.5s
     }
   };
   useEffect(() => {
