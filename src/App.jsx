@@ -36,6 +36,7 @@ const PrivacyPolicyPage = lazy(() => import("./pages/PrivacyPolicyPage"));
 const TermsOfUsePage = lazy(() => import("./pages/TermsOfUsePage"));
 const ContributorGuide = lazy(() => import("./pages/ContributorGuide"));
 const LeaderBoard = lazy(() => import("./pages/LeaderBoard"));
+const HowItWorks = lazy(() => import("./pages/HowItWorks"));
 
 // Router
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -144,6 +145,9 @@ function AppContent() {
       case "/terms-of-use":
         pageTitle = "Terms of Use | BizFlow";
         break;
+      case "/how-it-works":
+        pageTitle = "How it Works | BizFlow";
+        break;
       default:
         pageTitle = "Page Not Found | BizFlow";
     }
@@ -199,6 +203,7 @@ function AppContent() {
             <Route path="/faqs" element={<FAQ />} />
             <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
             <Route path="/terms-of-use" element={<TermsOfUsePage />} />
+            <Route path="/how-it-works" element={<HowItWorks />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
