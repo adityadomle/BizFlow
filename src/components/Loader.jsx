@@ -12,6 +12,7 @@ const Loader = ({
   const [particles, setParticles] = useState([]);
 
   // Generate random particles
+  
   useEffect(() => {
     const particleCount = 8;
     const newParticles = Array.from({ length: particleCount }, (_, i) => ({
