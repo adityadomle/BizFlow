@@ -1,84 +1,128 @@
-**Code of Conduct — BizFlow | GSSoC’25 Documentation** 
+# Contributor Covenant Code of Conduct
 
----
+## Our Pledge
 
-***Our Commitment***
+We as members, contributors, and leaders pledge to make participation in our
+community a harassment-free experience for everyone, regardless of age, body
+size, visible or invisible disability, ethnicity, sex characteristics, gender
+identity and expression, level of experience, education, socio-economic status,
+nationality, personal appearance, race, religion, or sexual identity
+and orientation.
 
-BizFlow is dedicated to maintaining an inclusive, respectful, and collaborative environment for all contributors, regardless of experience level. We strive to foster a culture where open-source development thrives through professionalism, mutual respect, and constructive engagement.
+We pledge to act and interact in ways that contribute to an open, welcoming,
+diverse, inclusive, and healthy community.
 
----
+## Our Standards
 
-***Unacceptable Behavior***
+Examples of behavior that contributes to a positive environment for our
+community include:
 
-The following behaviors will not be tolerated:
-- Harassment, discrimination, or bullying in any form.
-- Offensive or derogatory language.
-- Spam, self-promotion, or irrelevant content.
-- Plagiarism or misuse of intellectual property.
-- Disruptive or unprofessional conduct.
+* Demonstrating empathy and kindness toward other people
+* Being respectful of differing opinions, viewpoints, and experiences
+* Giving and gracefully accepting constructive feedback
+* Accepting responsibility and apologizing to those affected by our mistakes,
+  and learning from the experience
+* Focusing on what is best not just for us as individuals, but for the
+  overall community
 
----
+Examples of unacceptable behavior include:
 
-***Community Values***
+* The use of sexualized language or imagery, and sexual attention or
+  advances of any kind
+* Trolling, insulting or derogatory comments, and personal or political attacks
+* Public or private harassment
+* Publishing others' private information, such as a physical or email
+  address, without their explicit permission
+* Other conduct which could reasonably be considered inappropriate in a
+  professional setting
 
-We uphold the following principles:
-- Respect for all individuals, backgrounds, and perspectives.
-- Constructive and professional communication.
-- Encouragement of innovation and knowledge-sharing.
-- Mentorship and support for newcomers.
-- Fair recognition of contributions and collaboration.
+## Enforcement Responsibilities
 
----
+Community leaders are responsible for clarifying and enforcing our standards of
+acceptable behavior and will take appropriate and fair corrective action in
+response to any behavior that they deem inappropriate, threatening, offensive,
+or harmful.
 
-***Scope***
+Community leaders have the right and responsibility to remove, edit, or reject
+comments, commits, code, wiki edits, issues, and other contributions that are
+not aligned to this Code of Conduct, and will communicate reasons for moderation
+decisions when appropriate.
 
-This Code of Conduct applies to all BizFlow-related spaces, including:
-- GitHub repositories (issues, pull requests, discussions).
-- GSSoC’25 communication channels (Discord, email).
-- Social media platforms in project-related discussions.
-- Virtual or in-person events involving BizFlow.
+## Scope
 
----
+This Code of Conduct applies within all community spaces, and also applies when
+an individual is officially representing the community in public spaces.
+Examples of representing our community include using an official e-mail address,
+posting via an official social media account, or acting as an appointed
+representative at an online or offline event.
 
-***Reporting Violations***
+## Enforcement
 
-If you witness or face any violations, please contact:
-- **BizFlow mentors or project admins (via Discord/LinkedIn)**
-- **Maintainers (through GitHub or official channels)**
+Instances of abusive, harassing, or otherwise unacceptable behavior may be
+reported to the community leaders responsible for enforcement at
+adityadomle14@gmail.com.
+All complaints will be reviewed and investigated promptly and fairly.
 
-***All reports are handled with full confidentiality and reviewed seriousness.***
+All community leaders are obligated to respect the privacy and security of the
+reporter of any incident.
 
----
+## Enforcement Guidelines
 
-***Enforcement Actions***
+Community leaders will follow these Community Impact Guidelines in determining
+the consequences for any action they deem in violation of this Code of Conduct:
 
-Violations may result in:
-- **Warning:** A formal notice outlining the issue.
-- **Temporary Suspension:** Restricted access to project spaces.
-- **Permanent Removal:** Exclusion from future participation.
+### 1. Correction
 
----
+**Community Impact**: Use of inappropriate language or other behavior deemed
+unprofessional or unwelcome in the community.
 
-***Contributor Responsibilities***
+**Consequence**: A private, written warning from community leaders, providing
+clarity around the nature of the violation and an explanation of why the
+behavior was inappropriate. A public apology may be requested.
 
-By contributing to BizFlow, you agree to:
-- Engage respectfully in all interactions.
-- Provide proper attribution for referenced work.
-- Maintain focus on project-related discussions.
-- Assist fellow contributors with professionalism.
+### 2. Warning
 
----
+**Community Impact**: A violation through a single incident or series
+of actions.
 
-***BizFlow Vision***
+**Consequence**: A warning with consequences for continued behavior. No
+interaction with the people involved, including unsolicited interaction with
+those enforcing the Code of Conduct, for a specified period of time. This
+includes avoiding interactions in community spaces as well as external channels
+like social media. Violating these terms may lead to a temporary or
+permanent ban.
 
-BizFlow aims to be a leading open-source platform that promotes efficiency, innovation, and accessibility in business process automation. We believe that a strong, respectful community is essential to achieving this goal. Through collaborative effort and shared dedication, we can drive meaningful progress in open-source development.
+### 3. Temporary Ban
 
-***Attribution***
+**Community Impact**: A serious violation of community standards, including
+sustained inappropriate behavior.
 
-This Code of Conduct is adapted from the [Contributor Covenant (v3.0)](https://www.contributor-covenant.org/version/3/0/code_of_conduct/), tailored for ***BizFlow under the guidelines of GirlScript Summer of Code (GSSoC’25)***. Enforcement procedures are influenced by industry best practices, inspired by [Mozilla’s code of conduct enforcement ladder](https://github.com/mozilla/diversity) enforcement framework.
+**Consequence**: A temporary ban from any sort of interaction or public
+communication with the community for a specified period of time. No public or
+private interaction with the people involved, including unsolicited interaction
+with those enforcing the Code of Conduct, is allowed during this period.
+Violating these terms may lead to a permanent ban.
 
-📌 Original work License under Creative Commons Attribution 4.0 International [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+### 4. Permanent Ban
 
----
+**Community Impact**: Demonstrating a pattern of violation of community
+standards, including sustained inappropriate behavior,  harassment of an
+individual, or aggression toward or disparagement of classes of individuals.
 
-**Let’s build a professional, inclusive, and impactful open-source community together.**
+**Consequence**: A permanent ban from any sort of public interaction within
+the community.
+
+## Attribution
+
+This Code of Conduct is adapted from the [Contributor Covenant][homepage],
+version 2.0, available at
+https://www.contributor-covenant.org/version/2/0/code_of_conduct.html.
+
+Community Impact Guidelines were inspired by [Mozilla's code of conduct
+enforcement ladder](https://github.com/mozilla/diversity).
+
+[homepage]: https://www.contributor-covenant.org
+
+For answers to common questions about this code of conduct, see the FAQ at
+https://www.contributor-covenant.org/faq. Translations are available at
+https://www.contributor-covenant.org/translations.

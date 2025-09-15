@@ -1,0 +1,30 @@
+name: 📄 Documentation Update
+description: Improve BizFlow docs, README, or guides
+title: "[Docs] "
+labels: [documentation]
+body:
+  - type: dropdown
+    id: section
+    attributes:
+      label: 📖 Documentation Section
+      options:
+        - README
+        - Contributor Guide
+        - Code of Conduct
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: changes
+    attributes:
+      label: 📝 Suggested Changes
+      description: Describe your proposed improvements.
+      placeholder: "Clarify the Analytics setup section..."
+
+  - type: textarea
+    id: context
+    attributes:
+      label: 📝 Additional Context
+      description: Any extra context, screenshots, or references?
+      placeholder: "Attach images, links, or any other context here."

@@ -32,9 +32,7 @@ const NewsletterSection = () => {
     return regex.test(email)
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-
+  const handleSubmit = () => {
     if (!email.trim()) {
       setError('Please enter your email address.')
       return
@@ -58,6 +56,12 @@ const NewsletterSection = () => {
     setEmail('')
 
     setTimeout(() => setShowPopup(false), 4000)
+  }
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSubmit()
+    }
   }
 
   return (
@@ -88,121 +92,128 @@ const NewsletterSection = () => {
         </div>
       </div>
 
-      {/* Main Content */}
+      {/* Main Content Container */}
       <div className="relative max-w-6xl mx-auto">
-        <div className={`backdrop-blur-3xl bg-transparent p-8 md:p-16 shadow-2xl`}>
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
-            
-            {/* Left Content */}
-            <div className={`${isDarkMode ? 'text-white' : 'text-gray-800'} max-w-2xl text-center lg:text-left`}>
-              {/* Icon and badge */}
-              <div className="flex items-center justify-center lg:justify-start gap-3 mb-4 sm:mb-6">
-                <div className="p-2 sm:p-3 bg-gradient-to-r from-violet-500 to-purple-500 rounded-xl sm:rounded-2xl shadow-lg">
-                  <Mail className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-                </div>
-                <div className="px-3 py-1.5 sm:px-4 sm:py-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-400/30 rounded-full backdrop-blur-sm">
-                  <div className="flex items-center gap-1.5 sm:gap-2">
-                    <Sparkles className={`w-3 h-3 sm:w-4 sm:h-4 ${isDarkMode ? 'text-purple-300' : 'text-purple-400'}`} />
-                    <span className={`text-xs sm:text-sm font-medium ${isDarkMode ? 'text-purple-200' : 'text-purple-600'}`}>Newsletter</span>
-                  </div>
-                </div>
-              </div>
-
-              <h2 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 bg-gradient-to-r ${isDarkMode ? 'from-white via-purple-200 to-pink-200' : 'from-gray-900 via-purple-600 to-pink-600'} bg-clip-text text-transparent leading-tight`}>
-                Stay in the loop
-              </h2>
-              
-              <p className={`text-base sm:text-lg md:text-xl ${isDarkMode ? 'text-gray-300' : 'text-gray-600'} mb-6 sm:mb-8 leading-relaxed`}>
-                Get exclusive updates, premium recipes, and be the first to know about our 
-                <span className={`text-transparent bg-gradient-to-r ${isDarkMode ? 'from-purple-400 to-pink-400' : 'from-purple-600 to-pink-600'} bg-clip-text font-semibold`}> delicious offerings</span>
-              </p>
-
-              {/* Features list */}
-              <div className="flex flex-wrap gap-2 sm:gap-4 justify-center lg:justify-start">
-                {['🍕 Exclusive recipes', '⚡ Fast delivery', '🎯 Personalized offers'].map((feature, index) => (
-                  <div key={index} className={`flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 ${isDarkMode ? 'bg-white/5 border-white/10' : 'bg-gray-100/80 border-gray-200/50'} backdrop-blur-sm border rounded-full`}>
-                    <span className={`text-xs sm:text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>{feature}</span>
-                  </div>
-                ))}
+        
+        {/* Header Section - Separated */}
+        <div className="text-center mb-16">
+          {/* Icon and Badge */}
+          <div className="flex items-center justify-center flex-col gap-6 mb-8">
+            <div className="p-4 bg-gradient-to-r from-violet-500 to-purple-500 rounded-2xl shadow-lg">
+              <Mail className="w-8 h-8 text-white" />
+            </div>
+            <div className="px-6 py-3 bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-400/30 rounded-full backdrop-blur-sm">
+              <div className="flex items-center gap-2">
+                <Sparkles className={`w-5 h-5 ${isDarkMode ? 'text-purple-300' : 'text-purple-400'}`} />
+                <span className={`text-lg font-medium ${isDarkMode ? 'text-purple-200' : 'text-purple-600'}`}>Newsletter</span>
               </div>
             </div>
+          </div>
 
-            {/* Right Content - Email Form */}
-            <div className="w-full lg:w-auto lg:min-w-[400px]">
-              <div className="relative">
-                <div className="relative group">
-                  {/* Glowing border effect */}
-                  <div className="absolute -inset-1 bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 rounded-2xl blur-lg opacity-30 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
-                  
-                  <form onSubmit={handleSubmit} className={`relative flex flex-col sm:flex-row ${isDarkMode ? 'bg-white/10 border-white/20' : 'bg-white/80 border-gray-200/50'} backdrop-blur-xl border rounded-2xl p-2 shadow-2xl`}>
+          {/* Main Heading */}
+          <h2 className={`text-4xl lg:text-6xl font-bold mb-8 bg-gradient-to-r ${isDarkMode ? 'from-white via-purple-200 to-pink-200' : 'from-gray-900 via-purple-600 to-pink-600'} bg-clip-text text-transparent leading-tight`}>
+            Stay in the Loop
+          </h2>
+          
+          {/* Subtitle */}
+          <p className={`text-lg md:text-xl ${isDarkMode ? 'text-gray-300' : 'text-gray-600'} mb-10 leading-relaxed max-w-4xl mx-auto`}>
+            Get exclusive updates, premium recipes, and be the first to know about our 
+            <span className={`text-transparent bg-gradient-to-r ${isDarkMode ? 'from-purple-400 to-pink-400' : 'from-purple-600 to-pink-600'} bg-clip-text font-semibold`}> delicious offerings</span>
+          </p>
+
+          {/* Features list */}
+          <div className="flex flex-wrap gap-4 justify-center mb-12">
+            {['🍕 Exclusive recipes', '⚡ Fast delivery', '🎯 Personalized offers'].map((feature, index) => (
+              <div key={index} className={`flex items-center gap-2 px-6 py-3 ${isDarkMode ? 'bg-white/5 border-white/10' : 'bg-gray-100/80 border-gray-200/50'} backdrop-blur-sm border rounded-full`}>
+                <span className={`text-base ${isDarkMode ? 'text-gray-300' : 'text-gray-600'} font-medium`}>{feature}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Form Section - Separated and Centered */}
+        <div className="flex justify-center">
+          <div className="w-full max-w-2xl">
+            <div className="relative">
+              <div className="relative group">
+                {/* Glowing border effect */}
+                <div className="absolute -inset-1 rounded-2xl blur-lg opacity-30 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+                
+                {/* Email Form Container */}
+                <div className={`relative ${isDarkMode ? 'bg-white/10 border-white/20' : 'bg-white/90 border-gray-200/50'} backdrop-blur-xl border rounded-2xl p-3 shadow-2xl`}>
+                  <div className="flex flex-col sm:items-center sm:flex-row gap-3">
+                    {/* Email Input Container */}
                     <div className="relative flex-1">
+                      <div className="absolute left-6 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                        <Mail className={`w-5 h-5 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'} opacity-60`} />
+                      </div>
                       <input
                         type="email"
                         aria-label="Email address"
                         placeholder="Enter your email address"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className={`w-full px-6 py-4 bg-transparent ${isDarkMode ? 'text-white placeholder-gray-400' : 'text-gray-800 placeholder-gray-500'} focus:outline-none text-lg font-medium`}
+                        onKeyPress={handleKeyPress}
+                        className={`w-full pl-14 pr-6 py-5 bg-transparent 
+                          ${isDarkMode 
+                            ? 'text-white placeholder:text-white/60' 
+                            : 'text-gray-900 placeholder:text-gray-500'
+                          } 
+                          focus:outline-none 
+                          text-lg
+                          font-medium 
+                          rounded-xl`}
                       />
-                      <div className="absolute left-6 top-1/2 transform -translate-y-1/2 pointer-events-none opacity-30">
-                        <Mail className={`w-5 h-5 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`} />
-                      </div>
                     </div>
 
+                    {/* Subscribe Button */}
                     <button
-                      type="submit"
+                      type="button"
+                      onClick={handleSubmit}
                       onMouseEnter={() => setIsHovered(true)}
                       onMouseLeave={() => setIsHovered(false)}
-                      className="relative group/btn mt-3 sm:mt-0 px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-400 hover:to-pink-400 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-[0_0_30px_rgba(168,85,247,0.4)] flex items-center justify-center gap-3 text-lg overflow-hidden"
+                      className={`h-[60px] px-8 bg-gradient-to-r from-violet-500 to-fuchsia-500 hover:from-violet-600 hover:to-fuchsia-600
+                        rounded-xl text-white text-lg font-semibold
+                        flex items-center justify-center gap-3 whitespace-nowrap
+                        transform transition-all duration-200 cursor-pointer 
+                        ${isHovered ? 'scale-105 shadow-lg' : 'shadow-md'}
+                        hover:shadow-purple-500/25`}
                     >
-                      {/* Button background animation */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-500 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
-                      
-                      <span className="relative z-10 flex items-center gap-2">
-                        <Zap className="w-5 h-5" />
-                        Subscribe
-                      </span>
-                      
-                      <ArrowRight 
-                        className={`relative z-10 w-5 h-5 transition-all duration-300 ${
-                          isHovered ? 'translate-x-1 scale-110' : ''
-                        }`} 
-                      />
-                      
-                      {/* Ripple effect */}
-                      <div className="absolute inset-0 bg-white/20 rounded-xl scale-0 group-hover/btn:scale-100 transition-transform duration-500 ease-out"></div>
+                      <Zap className="w-5 h-5" />
+                      Subscribe Now
+                      <ArrowRight className={`w-5 h-5 transition-transform duration-200 ${isHovered ? 'translate-x-1' : ''}`} />
                     </button>
-                  </form>
-                </div>
-
-                {/* Messages */}
-                <div className="relative mt-4 min-h-[2rem]">
-                  {error && (
-                    <div className="absolute inset-x-0 flex items-center justify-center gap-2 bg-red-500/90 backdrop-blur-sm text-white px-6 py-3 rounded-xl shadow-lg border border-red-400/50 animate-in slide-in-from-top-2 duration-300">
-                      <AlertCircle className="w-5 h-5 flex-shrink-0" />
-                      <span className="font-medium">{error}</span>
-                    </div>
-                  )}
-
-                  {showPopup && !error && (
-                    <div className="absolute inset-x-0 flex items-center justify-center gap-2 bg-emerald-500/90 backdrop-blur-sm text-white px-6 py-3 rounded-xl shadow-lg border border-emerald-400/50 animate-in slide-in-from-top-2 duration-300">
-                      <CheckCircle className="w-5 h-5 flex-shrink-0" />
-                      <span className="font-medium">🎉 Welcome to our community!</span>
-                    </div>
-                  )}
+                  </div>
                 </div>
               </div>
 
-              {/* Trust indicators */}
-              <div className={`mt-6 flex items-center justify-center gap-6 text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+              {/* Error and Success Messages */}
+              <div className="relative mt-6 min-h-[3rem]">
+                {error && (
+                  <div className="absolute inset-x-0 flex items-center justify-center gap-3 bg-red-500/90 backdrop-blur-sm text-white px-6 py-4 rounded-xl shadow-lg border border-red-400/50 animate-in slide-in-from-top-2 duration-300">
+                    <AlertCircle className="w-5 h-5 flex-shrink-0" />
+                    <span className="font-medium text-base">{error}</span>
+                  </div>
+                )}
+
+                {showPopup && !error && (
+                  <div className="absolute inset-x-0 flex items-center justify-center gap-3 bg-emerald-500/90 backdrop-blur-sm text-white px-6 py-4 rounded-xl shadow-lg border border-emerald-400/50 animate-in slide-in-from-top-2 duration-300">
+                    <CheckCircle className="w-5 h-5 flex-shrink-0" />
+                    <span className="font-medium text-base">🎉 Welcome to our community!</span>
+                  </div>
+                )}
+              </div>
+
+              {/* Trust Indicators */}
+              <div className={`mt-8 flex items-center justify-center gap-8 text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                  <span>No spam, ever</span>
+                  <span className="font-medium">No spam, ever</span>
                 </div>
-                <div className={`w-px h-4 ${isDarkMode ? 'bg-gray-600' : 'bg-gray-400'}`}></div>
+                <div className={`w-px h-5 ${isDarkMode ? 'bg-gray-600' : 'bg-gray-400'}`}></div>
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
-                  <span>Unsubscribe anytime</span>
+                  <span className="font-medium">Unsubscribe anytime</span>
                 </div>
               </div>
             </div>

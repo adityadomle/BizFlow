@@ -92,14 +92,14 @@ const ScheduleSection = () => {
               transition={{ delay: 0.3 }}
               className="space-y-3"
             >
-              <h2 className={`text-3xl lg:text-4xl font-bold leading-tight ${
+              <h2 className={`relative text-3xl lg:text-4xl font-bold leading-tight inline-block ${
                 isDarkMode 
                   ? 'bg-gradient-to-r from-slate-200 via-blue-200 to-indigo-200 bg-clip-text text-transparent'
                   : 'bg-gradient-to-r from-slate-800 via-blue-800 to-indigo-800 bg-clip-text text-transparent'
               }`}>
                 Transform Your Business
                 <br />
-                <span className="relative">
+                <span className="bg-clip-text text-transparent">
                   With AI-Powered Scheduling
                   <motion.div
                     initial={{ scaleX: 0 }}
@@ -147,7 +147,7 @@ const ScheduleSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
               onClick={handleUpcomingFeature}
-              className="group relative inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              className="group relative inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-2xl shadow-lg hover:text-gray-300 hover:shadow-xl transition-all duration-300 hover:scale-105"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
             >

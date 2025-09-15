@@ -99,7 +99,7 @@ const ServicesSection = () => {
             variants={fadeIn('up', 0.9)}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="mt-8 bg-purple-200 dark:bg-purple-600 transition-all duration-300 ease-in-out text-black dark:text-black px-8 py-3 cursor-pointer rounded-full hover:bg-purple-300 dark:hover:bg-purple-700 hover:scale-105 hover:shadow-[0_0_15px_#e9d5ff] dark:hover:shadow-[0_0_18px_#7c3aed]"
+            className="mt-8 bg-purple-200 dark:bg-purple-600 transition-all duration-300 ease-in-out text-white dark:text-white px-8 py-3 cursor-pointer rounded-full hover:text-gray-300 hover:bg-purple-300 dark:hover:bg-purple-700 hover:scale-105 hover:shadow-[0_0_15px_#e9d5ff] dark:hover:shadow-[0_0_18px_#7c3aed]"
             onClick={handleUpcomingFeature}
           >
             Get started

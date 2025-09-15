@@ -201,7 +201,7 @@ const AboutUs = () => {
               className={`text-lg leading-relaxed ${
                 isDarkMode ? "text-gray-300" : "text-gray-700"
               }`}
-            >
+        
              <ul>
               <li>🔹BizFlow is a modern React-based business workflow dashboard designed to simplify and streamline organizational operations.</li>
               <li>🔹It enables teams to manage tasks efficiently, monitor key metrics, and organize workflows in a structured and user-friendly manner.</li>
@@ -210,7 +210,8 @@ const AboutUs = () => {
               <li>🔹BizFlow includes intelligent task management and collaborative features, empowering teams to work together effectively.</li>
               <li>🔹Its fully responsive design ensures a smooth experience across all devices, making it accessible anytime, anywhere.</li>
              </ul>
-             
+      
+           
             </p>
           </div>
        
@@ -257,6 +258,7 @@ const AboutUs = () => {
                   isDarkMode ? "text-gray-200" : "text-gray-700"
                 }`}
               >
+
                <ul>
                 <li>🚀 Simplify & make business workflows enjoyable</li>
                 <li>🛠️ Provide intuitive tools to focus on priorities</li>
@@ -264,6 +266,9 @@ const AboutUs = () => {
                 <li>🤝 Create a collaborative ecosystem</li>
                 <li>📊 Support data-driven decisions</li>
                </ul>
+
+               
+             
               </p>
             </div>
           </motion.div>
@@ -296,6 +301,7 @@ const AboutUs = () => {
                   isDarkMode ? "text-gray-200" : "text-gray-700"
                 }`}
               >
+
                 <ul>
                   <li>📈 Empower businesses for long-term growth</li>
                   <li>⚡ Smart workflow automation</li>
@@ -303,7 +309,8 @@ const AboutUs = () => {
                   <li>💡 Innovative collaboration tools</li>
                   <li>🤝 Teams innovate freely & stay aligned</li>
                   <li>🌍 Build an ecosystem where innovation thrives</li>
-                </ul>
+               
+         
               </p>
             </div>
           </motion.div>
