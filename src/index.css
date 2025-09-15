@@ -120,3 +120,14 @@ html, body {
 .dark .shadow-lg {
   box-shadow: 0 10px 15px -3px var(--shadow-color);
 }
+
+
+.highlight {
+  animation: pulseHighlight 1.5s ease;
+}
+
+@keyframes pulseHighlight {
+  0% { box-shadow: 0 0 0px rgba(99,102,241,0); }
+  50% { box-shadow: 0 0 20px rgba(99,102,241,0.7); }
+  100% { box-shadow: 0 0 0px rgba(99,102,241,0); }
+}

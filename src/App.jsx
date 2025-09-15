@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, Suspense, lazy } from "react";
 import "./App.css";
 import { useTheme } from "./context/ThemeContext";
 import { useLocation } from "react-router-dom";
@@ -6,28 +6,38 @@ import { useLocation } from "react-router-dom";
 // react-toastify
 import { ToastContainer } from "react-toastify";
 
-// Components
+// Essential components (loaded immediately)
 import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import CompanyLogo from "./components/CompanyLogo";
-import PurposeSection from "./components/PurposeSection";
-import FeaturesSection from "./components/FeaturesSection";
-import ScheduleSection from "./components/ScheduleSection";
-import MonitorSection from "./components/MonitorSection";
-import PricingSection from "./components/PricingSection";
-import ServicesSection from "./components/ServicesSection";
-import TestimonialsSection from "./components/TestimonialsSection";
-import NewsletterSection from "./components/NewsletterSection";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
-import NotFound from "./components/NotFound";
-import Contact from "./components/Contact";
-import FAQ from "./components/FAQ";
 
-// Pages
-import Partner from "./pages/Partner";
-import Contibutors from "./pages/Contibutors";
-import SupportCareer from "./pages/SupportCareer";
+// Lazy loaded components
+const Hero = lazy(() => import("./components/Hero"));
+const About = lazy(()=> import("./pages/About"))
+const CompanyLogo = lazy(() => import("./components/CompanyLogo"));
+const PurposeSection = lazy(() => import("./components/PurposeSection"));
+const FeaturesSection = lazy(() => import("./components/FeaturesSection"));
+const ScheduleSection = lazy(() => import("./components/ScheduleSection"));
+const MonitorSection = lazy(() => import("./components/MonitorSection"));
+const PricingSection = lazy(() => import("./components/PricingSection"));
+const ServicesSection = lazy(() => import("./components/ServicesSection"));
+const TestimonialsSection = lazy(() => import("./components/TestimonialsSection"));
+const NewsletterSection = lazy(() => import("./components/NewsletterSection"));
+const NotFound = lazy(() => import("./components/NotFound"));
+const Contact = lazy(() => import("./components/Contact"));
+const FAQ = lazy(() => import("./components/FAQ"));
+
+
+// Lazy loaded pages
+const Partner = lazy(() => import("./pages/Partner"));
+const Contibutors = lazy(() => import("./pages/Contibutors"));
+const SupportCareer = lazy(() => import("./pages/SupportCareer"));
+const PrivacyPolicyPage = lazy(() => import("./pages/PrivacyPolicyPage"));
+const CookiePolicyPage = lazy(() => import("./pages/CookiePolicyPage"));
+const TermsOfUsePage = lazy(() => import("./pages/TermsOfUsePage"));
+const ContributorGuide = lazy(() => import("./pages/ContributorGuide"));
+const LeaderBoard = lazy(() => import("./pages/LeaderBoard"));
+const HowItWorks = lazy(() => import("./pages/HowItWorks"));
 
 // Router
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -36,8 +46,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import useScrollTracking from "./utils/useScrollTracking";
 import useTimeTracking from "./utils/useTimeTracking";
 import { trackPageView } from "./utils/analytics";
-import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
-import TermsOfUsePage from "./pages/TermsOfUsePage";
+import Loader from "./components/Loader";
+
 
 // Hash Navigation component
 function HashNavigation() {
@@ -59,6 +69,37 @@ function HashNavigation() {
   return null;
 }
 
+// Home Page Component to reduce nesting
+function HomePage() {
+  return (
+    <>
+      <section id="home">
+        <Hero />
+      </section>
+      <section id="about">
+        <CompanyLogo />
+        <PurposeSection />
+        <FeaturesSection />
+      </section>
+      <section id="services">
+        <ScheduleSection />
+        <MonitorSection />
+        <PricingSection />
+        <ServicesSection />
+      </section>
+      <section id="testimonials">
+        <TestimonialsSection />
+      </section>
+      <section id="faq">
+        <FAQ />
+      </section>
+      <section id="newsletter">
+        <NewsletterSection />
+      </section>
+    </>
+  );
+}
+
 function AppContent() {
   const { isDarkMode } = useTheme();
   const location = useLocation();
@@ -67,9 +108,57 @@ function AppContent() {
   useScrollTracking();
   useTimeTracking();
 
-  // Track page views on route changes
   useEffect(() => {
     const currentPath = location.pathname;
+    let pageTitle = "BizFlow"; // default
+
+    switch (currentPath) {
+      case "/":
+        pageTitle = "Home | BizFlow";
+        break;
+      case "/partner":
+        pageTitle = "Partner | BizFlow";
+        break;
+      case "/about":
+        pageTitle = "About Us | BizFlow";
+        break;
+      case "/contact":
+        pageTitle = "Contact | BizFlow";
+        break;
+      case "/contributors":
+        pageTitle = "Contributors | BizFlow";
+        break;
+      case "/contributor-guide":
+        pageTitle = "Contributor Guide | BizFlow";
+        break;
+      case "/leaderboard":
+        pageTitle = "Leaderboard | BizFlow";
+        break;
+      case "/support-career":
+        pageTitle = "Support Career | BizFlow";
+        break;
+      case "/faqs":
+        pageTitle = "FAQs | BizFlow";
+        break;
+      case "/privacy-policy":
+        pageTitle = "Privacy Policy | BizFlow";
+        break;
+      case "/cookies":
+        pageTitle = "Cookie Policy | BizFlow";
+        break;
+      case "/terms-of-use":
+        pageTitle = "Terms of Use | BizFlow";
+        break;
+      case "/how-it-works":
+        pageTitle = "How it Works | BizFlow";
+        break;
+      default:
+        pageTitle = "Page Not Found | BizFlow";
+    }
+
+    document.title = pageTitle;
+
+    // also keep your analytics
     const pageName =
       currentPath === "/"
         ? "Home"
@@ -103,48 +192,26 @@ function AppContent() {
         {/* Hash Navigation Handler */}
         <HashNavigation />
 
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <section id="home">
-                  <Hero />
-                </section>
-                <section id="about">
-                  <CompanyLogo />
-                  <PurposeSection />
-                  <FeaturesSection />
-                </section>
-                <section id="services">
-                  <ScheduleSection />
-                  <MonitorSection />
-                  <PricingSection />
-                  <ServicesSection />
-                </section>
-                <section id="testimonials">
-                  <TestimonialsSection />
-                </section>
-                <section id="faq">
-                  <FAQ />
-                </section>
-                <section id="newsletter">
-                  <NewsletterSection />
-                </section>
-              </>
-            }
-          />
-          <Route path="/partner" element={<Partner />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/contributors" element={<Contibutors />} />
-          <Route path="/support-career" element={<SupportCareer />} />
+        {/* Single Suspense wrapper for all routes */}
+        <Suspense fallback={<Loader />}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/partner" element={<Partner />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/contributors" element={<Contibutors />} />
+            <Route path="/contributor-guide" element={<ContributorGuide />} />
+            <Route path="/leaderboard" element={<LeaderBoard />} />
 
-          <Route path="/faqs" element={<FAQ />} />
-
-          <Route path="*" element={<NotFound />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicyPage/>} />
-          <Route path="/terms-of-use" element={<TermsOfUsePage/>} />
-        </Routes>
+            <Route path="/support-career" element={<SupportCareer />} />
+            <Route path="/faqs" element={<FAQ />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+            <Route path="/cookies" element={<CookiePolicyPage />} />
+            <Route path="/terms-of-use" element={<TermsOfUsePage />} />
+            <Route path="/how-it-works" element={<HowItWorks />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
 
         {/* Toast container for messages */}
         <ToastContainer
@@ -160,7 +227,6 @@ function AppContent() {
 
         <Footer />
         <ScrollToTop />
-        
       </div>
     </main>
   );
