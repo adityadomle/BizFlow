@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { FaFacebookF, FaTwitter, FaLinkedinIn, FaGithub } from "react-icons/fa";
+import { FaFacebookF, FaLinkedinIn, FaGithub } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import { useTheme } from "../context/ThemeContext";
 
 // Enhanced Toast component with better animations
@@ -178,7 +179,7 @@ const Footer = () => {
     },
     {
       href: "https://x.com/domleaditya",
-      icon: <FaTwitter className="w-4 h-4" />,
+      icon: <FaXTwitter className="w-4 h-4" />,
       hover: "hover:bg-gradient-to-r from-blue-600 to-blue-500 hover:text-white hover:scale-110",
       name: "Twitter",
     },
