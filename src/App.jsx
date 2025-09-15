@@ -33,6 +33,7 @@ const Partner = lazy(() => import("./pages/Partner"));
 const Contibutors = lazy(() => import("./pages/Contibutors"));
 const SupportCareer = lazy(() => import("./pages/SupportCareer"));
 const PrivacyPolicyPage = lazy(() => import("./pages/PrivacyPolicyPage"));
+const CookiePolicyPage = lazy(() => import("./pages/CookiePolicyPage"));
 const TermsOfUsePage = lazy(() => import("./pages/TermsOfUsePage"));
 const ContributorGuide = lazy(() => import("./pages/ContributorGuide"));
 const LeaderBoard = lazy(() => import("./pages/LeaderBoard"));
@@ -142,6 +143,9 @@ function AppContent() {
       case "/privacy-policy":
         pageTitle = "Privacy Policy | BizFlow";
         break;
+      case "/cookies":
+        pageTitle = "Cookie Policy | BizFlow";
+        break;
       case "/terms-of-use":
         pageTitle = "Terms of Use | BizFlow";
         break;
@@ -202,6 +206,7 @@ function AppContent() {
             <Route path="/support-career" element={<SupportCareer />} />
             <Route path="/faqs" element={<FAQ />} />
             <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+            <Route path="/cookies" element={<CookiePolicyPage />} />
             <Route path="/terms-of-use" element={<TermsOfUsePage />} />
             <Route path="/how-it-works" element={<HowItWorks />} />
             <Route path="*" element={<NotFound />} />
