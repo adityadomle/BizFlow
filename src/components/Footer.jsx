@@ -89,7 +89,7 @@ const Footer = () => {
       { name: "Privacy Policy", href: "/privacy-policy" },
       { name: "How it Works", href: "/how-it-works" },
       { name: "Contact Us", href: "/contact" },
-      { name: "cookies", href: "/Cookies" },
+      { name: "Cookies", href: "/Cookies" },
     ],
     support: [
       { name: "FAQs", href: "/faqs" },
