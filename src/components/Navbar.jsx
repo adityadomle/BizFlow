@@ -398,7 +398,7 @@ const ModernNavbar = () => {
               `}
               aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
             >
-              <div className={`transition-transform duration-500 relative z-10 ${isDarkMode ? "rotate-0" : "rotate-180"}`}>
+              <div className={`transition-transform duration-500 relative z-10 ${isDarkMode ? "rotate-0" : "rotate-[360deg]"}`}>
                 {isDarkMode ? <Sun className="h-4 w-4 xl:h-5 xl:w-5" /> : <Moon className="h-4 w-4 xl:h-5 xl:w-5" />}
               </div>
               <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 to-orange-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
@@ -557,7 +557,7 @@ const ModernNavbar = () => {
                 }
               `}
             >
-              <div className={`transition-transform duration-500 ${isDarkMode ? "rotate-0" : "rotate-180"}`}>
+              <div className={`transition-transform duration-500 ${isDarkMode ? "rotate-0" : "rotate-[360deg]"}`}>
                 {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
               </div>
               <span className="font-semibold">
