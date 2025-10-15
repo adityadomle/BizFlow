@@ -253,26 +253,28 @@ const CookiePolicyPage = () => {
             learn more about cookie management in your browser settings.
           </motion.p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <motion.button
-              variants={fadeIn('up', 0.4)}
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-orange-600 text-white px-8 py-4 rounded-xl hover:bg-orange-700 transition-all duration-300 hover:shadow-lg hover:shadow-orange-100 font-medium"
-            >
-              Cookie Settings
-            </motion.button>
-            <motion.button
-              variants={fadeIn('up', 0.5)}
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              className={`px-8 py-4 rounded-xl transition-all duration-300 hover:shadow-lg font-medium border-2 ${
-                isDarkMode
-                  ? "border-gray-600 text-gray-300 hover:bg-gray-800 hover:border-gray-500"
-                  : "border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400"
-              }`}
-            >
-              Accept All Cookies
-            </motion.button>
+          <motion.button
+            variants={fadeIn('up', 0.8)}
+            whileHover={{ scale: 1.02, y: -2 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 15 }}
+            className="bg-orange-600 text-white px-8 py-4 rounded-xl hover:bg-orange-700 font-medium"
+          >
+            Cookie Settings
+          </motion.button>
+
+          <motion.button
+            variants={fadeIn('up', 0.8)}
+            whileHover={{ scale: 1.02, y: -2 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 18 }}
+            className={`px-8 py-4 rounded-xl transition-colors duration-300 hover:shadow-lg font-medium border-2 ${
+              isDarkMode
+                ? "border-gray-600 text-gray-300 hover:bg-gray-800 hover:border-gray-500"
+                : "border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400"
+            }`}
+          >
+            Accept All Cookies
+          </motion.button>
+
           </div>
         </motion.div>
       </div>
