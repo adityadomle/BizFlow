@@ -548,32 +548,35 @@ const AboutUs = () => {
             BizFlow is open-source and thrives on community contributions.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            {/* GitHub Button */}
             <a
               href="https://github.com/bizflow"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-gray-800 text-white px-6 py-3 rounded-lg hover:bg-gray-900 font-medium transition-all"
+              className="inline-flex items-center gap-2 bg-gray-800 text-white px-6 py-3 rounded-lg font-medium border border-gray-800 transform transition duration-300 hover:scale-[1.03] hover:shadow-lg"
             >
               <FiGithub className="w-5 h-5" />
               View on GitHub
             </a>
+
+            {/* Get in Touch Button */}
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all
-    bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500
-    text-white shadow-[0_0_15px_rgba(236,72,153,0.5)] hover:shadow-[0_0_25px_rgba(236,72,153,0.8)]
-    hover:scale-105"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium transform transition duration-300 hover:scale-[1.03]
+                bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500
+                text-white shadow-[0_0_15px_rgba(236,72,153,0.5)] hover:shadow-[0_0_25px_rgba(236,72,153,0.8)]"
             >
               <FiMessageCircle className="w-5 h-5" />
               Get in Touch
             </Link>
 
+            {/* Contribute Button */}
             <a
               href="/contributor-guide"
-              className={`inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all ${
+              className={`inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium border-2 transform transition duration-300 hover:scale-[1.03] hover:shadow-lg ${
                 isDarkMode
-                  ? "bg-slate-600 text-white hover:bg-slate-500"
-                  : "bg-gray-100 text-gray-800 hover:bg-gray-200"
+                  ? "bg-slate-600 text-white border-slate-600"
+                  : "bg-gray-100 text-gray-800 border-gray-100"
               }`}
             >
               <FiCode className="w-5 h-5" />
