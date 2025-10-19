@@ -414,24 +414,31 @@ const TermsOfUsePage = () => {
               variants={fadeIn('up', 0.4)}
               className="flex flex-col sm:flex-row gap-4 justify-center"
             >
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              {/* Contact Legal Team Button */}
               <motion.button
-                whileHover={{ scale: 1.05, y: -2 }}
+                whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-blue-600 text-white px-8 py-4 rounded-xl hover:bg-blue-700 transition-all duration-300 hover:shadow-lg hover:shadow-blue-100 font-medium"
+                transition={{ type: "spring", stiffness: 200, damping: 20 }} // slower spring
+                className="bg-blue-600 text-white px-8 py-4 rounded-xl font-medium hover:bg-blue-700 hover:shadow-lg"
               >
                 Contact Legal Team
               </motion.button>
+
+              {/* Download PDF Button */}
               <motion.button
-                whileHover={{ scale: 1.05, y: -2 }}
+                whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className={`px-8 py-4 rounded-xl font-medium transition-all duration-300 border-2 ${
+                transition={{ type: "spring", stiffness: 200, damping: 20 }} // slower spring
+                className={`px-8 py-4 rounded-xl font-medium border-2 ${
                   isDarkMode
-                    ? "border-gray-600 text-gray-300 hover:border-gray-500 hover:bg-gray-800"
-                    : "border-gray-300 text-gray-700 hover:border-gray-400 hover:bg-gray-50"
+                    ? "border-gray-600 text-gray-300 hover:border-gray-500 hover:bg-gray-800 hover:shadow-lg"
+                    : "border-gray-300 text-gray-700 hover:border-gray-400 hover:bg-gray-50 hover:shadow-lg"
                 }`}
               >
                 Download PDF
               </motion.button>
+            </div>
             </motion.div>
           </motion.div>
         </motion.div>
