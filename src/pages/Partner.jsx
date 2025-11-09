@@ -109,7 +109,7 @@ const Partner = () => {
   const [errors , setErrors] = useState({});
 
   const validateField = (name , value) => {
-    let message = ""
+    let message = "";
 
     if (name === "username") {
       if (value.length < 3) {
@@ -139,15 +139,10 @@ const Partner = () => {
   };
 
   useEffect(() => {
-    // Check if the browser supports this feature
     if ('scrollRestoration' in window.history) {
-      // Set scroll restoration to manual
       window.history.scrollRestoration = 'manual';
     }
-    // Scroll to the top of the page
     window.scrollTo(0, 0);
-
-    // Optional: Return a cleanup function to restore default behavior
     return () => {
       if ('scrollRestoration' in window.history) {
         window.history.scrollRestoration = 'auto';
@@ -165,29 +160,35 @@ const Partner = () => {
     validateField(name , value);
   };
 
-  // Handle form submit
+  // Handle form submit (fixed)
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    Object.entries(formData).forEach(([name , value]) =>
-    validateField(name , value)
-  );
+    // Build errors synchronously to avoid stale reads
+    const nextErrors = {};
+    if (formData.username.length < 3) nextErrors.username = "Username must be at least 3 characters.";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) nextErrors.email = "Please enter a valid email";
+    if (formData.company.length < 3) nextErrors.company = "Company name must be at least 3 characters.";
+    if (formData.message.length < 10) nextErrors.message = "Message should be at least 10 characters.";
 
-  if (Object.values(errors).some((msg) => msg)) {
-    return;
-  }
+    setErrors(nextErrors);
+
+    // Stop if any error exists
+    if (Object.values(nextErrors).some(Boolean)) {
+      return;
+    }
 
     setShowPopup(true);
 
-    // reset form after submit
+    // Reset with the SAME keys as in state (fixes name/username mismatch)
     setFormData({
-      name: "",
+      username: "",
       email: "",
       company: "",
       message: "",
     });
 
-    setTimeout(() => setShowPopup(false), 3000); // hide popup after 3s
+    setTimeout(() => setShowPopup(false), 3000);
   };
 
   const bounceHover = {
@@ -204,7 +205,6 @@ const Partner = () => {
     }
   };
   
-  // Reduced scale for a more subtle form card hover effect
   const bounceHoverCard = {
     whileHover: {
       scale: 1.04,
@@ -214,7 +214,6 @@ const Partner = () => {
   };
 
   return (
-    // REMOVED {...bounceHover} from this section
     <motion.section
       variants={containerVariants}
       initial="initial"
@@ -283,8 +282,7 @@ const Partner = () => {
             required
           />
           {errors.username && (
-        <p className="text-red-500 text-sm mt-1">{errors.username}</p>
-
+            <p className="text-red-500 text-sm mt-1">{errors.username}</p>
           )}
         </motion.div>
 
@@ -308,8 +306,8 @@ const Partner = () => {
               }`}
             required
           />
-          {errors.username && (
-        <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+          {errors.email && (
+            <p className="text-red-500 text-sm mt-1">{errors.email}</p>
           )}
         </motion.div>
 
@@ -333,9 +331,8 @@ const Partner = () => {
                 : "border-gray-300 bg-white/80 text-gray-800 placeholder-gray-500 focus:ring-blue-400"
               }`}
           />
-          {errors.username && (
-        <p className="text-red-500 text-sm mt-1">{errors.company}</p>
-
+          {errors.company && (
+            <p className="text-red-500 text-sm mt-1">{errors.company}</p>
           )}
         </motion.div>
 
@@ -359,9 +356,8 @@ const Partner = () => {
                 : "border-gray-300 bg-white/80 text-gray-800 placeholder-gray-500 focus:ring-indigo-400"
               }`}
           />
-          {errors.username && (
-        <p className="text-red-500 text-sm mt-1">{errors.message}</p>
-
+          {errors.message && (
+            <p className="text-red-500 text-sm mt-1">{errors.message}</p>
           )}
         </motion.div>
 
@@ -432,7 +428,7 @@ const Partner = () => {
           </motion.div>
           <h3 className="text-lg font-semibold mb-1">Email Us</h3>
           <p className="text-sm opacity-80 leading-relaxed">
-            contact@bizflow.com
+            <a href="mailto:contact@bizflow.com">contact@bizflow.com</a>
           </p>
         </motion.div>
 
@@ -483,15 +479,3 @@ const Partner = () => {
 };
 
 export default Partner;
-
-
-
-
-
-
-
-
-
-
-
-
